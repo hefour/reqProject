@@ -14,4 +14,16 @@ public class VectorImpl implements Vector {
         }
         return vectorList;
     }
+    public List<BigDecimal> makeVector(int n, String a) {
+        List<BigDecimal> vectorList = new ArrayList<>();
+        for(int k=0;k<n;k++) {
+            BigDecimal b = scalar.makeScalar(a);
+            vectorList.add(b);
+        }
+        return vectorList;
+    }
+    public List<BigDecimal> makeVector(List<BigDecimal> a) {
+        return new ArrayList<>(a);
+    }
+
 }
