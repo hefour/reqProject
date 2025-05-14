@@ -1,6 +1,7 @@
 package tensor;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class Factory {
 
@@ -14,9 +15,10 @@ public class Factory {
         System.out.println("벡터생성");
         return new VectorImpl();
     }
-    public static Matrix createMatrix(){
+    public static void createMatrix(){
         System.out.println("행렬생성");
-        return new MatrixImpl();
+        MatrixImpl testMatrix = new MatrixImpl("1, 2, 3, 4\n5, 6, 7, 8");
+        testMatrix.printMatrixList();
     }
 
 }
