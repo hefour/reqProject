@@ -36,8 +36,8 @@ public class MatrixImpl implements Matrix {
     }
 
     // 08. csv파일로부터 m x n 행렬 생성
-    MatrixImpl(String csvFile) {
-        String[] rowStrings = csvFile.strip().split("\\n");
+    MatrixImpl(String csvData) {
+        String[] rowStrings = csvData.strip().split("\\n");
 
         this.rows = rowStrings.length;
         this.cols = rowStrings[0].split(",").length;

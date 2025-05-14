@@ -15,10 +15,24 @@ public class Factory {
         System.out.println("벡터생성");
         return new VectorImpl();
     }
-    public static void createMatrix(){
-        System.out.println("행렬생성");
-        MatrixImpl testMatrix = new MatrixImpl("1, 2, 3, 4\n5, 6, 7, 8");
-        testMatrix.printMatrixList();
+
+    public static Matrix createMatrixByTypeNum(BigDecimal typeNum, int m, int n) {
+        return new MatrixImpl(typeNum, m, n);
     }
 
+    public static Matrix createMatrixRandom(int i, int j, int m, int n) {
+        return new MatrixImpl(i, j, m, n);
+    }
+
+    public static Matrix createMatrixByCSV(String csvData) {
+        return new MatrixImpl(csvData);
+    }
+
+    public static Matrix createMatrixByArray(int[][] arr) {
+        return new MatrixImpl(arr);
+    }
+
+    public static Matrix createUnitMatrix(int n) {
+        return new MatrixImpl(n);
+    }
 }
