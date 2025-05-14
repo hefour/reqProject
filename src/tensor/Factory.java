@@ -7,8 +7,8 @@ public class Factory {
     public static void createScalar(){
         System.out.println("스칼라생성");
         ScalarImpl test = new ScalarImpl();
-        BigDecimal ab = test.makeScalar(3,6);
-        System.out.println(ab);
+        BigDecimal randomScalarValue = test.makeScalar(3,6);
+        System.out.println(randomScalarValue);
     }
     public static Vector createVector(){
         System.out.println("벡터생성");
