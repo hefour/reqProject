@@ -3,15 +3,23 @@ import java.math.BigDecimal;
 import java.util.Random;
 
 public class ScalarImpl implements Scalar {
-
-    public BigDecimal makeScalar(String scalarStringValue){
-        return new BigDecimal(scalarStringValue);
+    private BigDecimal scalar;
+    ScalarImpl(String scalarStringValue){
+        scalar = new BigDecimal(scalarStringValue);
         //문자열 넣으면 NumberFormatException 발생
     }
-    public BigDecimal makeScalar(int minBound, int maxBound) {
-        return new BigDecimal(Math.random()*(maxBound-minBound)+minBound);
+    ScalarImpl(int minBound, int maxBound){
+     scalar = new BigDecimal(Math.random()*(maxBound-minBound)+minBound);
     }
+    ScalarImpl(){}
 
+    @Override
+    public void printScalar() {
+        System.out.println(scalar);
+    }
+    public BigDecimal getScalar() {
+        return scalar;
+    }
 }
 
 
