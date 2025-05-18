@@ -1,8 +1,18 @@
 package tensor;
 
-import java.math.BigDecimal;
-import java.util.List;
-
 public interface Vector {
-    void printVector(); // 출력용
+//11
+    Scalar get(int index);
+    void set(int index, Scalar value);
+
+//13
+    int size();
+
+//14
+    @Override
+    String toString();
+
+    @Override
+    boolean equals(Object obj);
+
 }

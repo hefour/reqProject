@@ -3,92 +3,184 @@ package tensor;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-public class MatrixImpl implements Matrix {
+class MatrixImpl implements Matrix {
     private int rows;
     private int cols;
-    private List<BigDecimal> matrixList = new ArrayList<>();      //행렬 자료구조 => ArrayList
+    private List<Scalar> matrixList;
 
-
-
-    // 06. 지정된 하나의 값을 모든 요소의 값으로 하는 m x n 행렬 생성
     MatrixImpl(BigDecimal typeNum, int m, int n) {
+        if (m < 0 || n < 0) {
+            throw new IllegalArgumentException("행렬의 차원(m, n)은 0 이상이어야 합니다.");
+        }
         this.rows = m;
         this.cols = n;
-        for  (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                matrixList.add(typeNum);
-            }
+        this.matrixList = new ArrayList<>(m * n);
+        String valueStr = typeNum.toPlainString();
+        for (int i = 0; i < m * n; i++) {
+            this.matrixList.add(new ScalarImpl(valueStr));
         }
     }
 
-    // 07. i 이상 j 미만의 무작위 값을 요소로 하는 m x n 행렬 생성
-    MatrixImpl(int i,int j,int m, int n) {
+    MatrixImpl(int minRandomVal, int maxRandomVal, int m, int n) {
+        if (m < 0 || n < 0) {
+            throw new IllegalArgumentException("행렬의 차원(m, n)은 0 이상이어야 합니다.");
+        }
         this.rows = m;
         this.cols = n;
-        for (int rowsLimit = 0; rowsLimit < rows; rowsLimit++) {
-            for (int colsLimit = 0; colsLimit < cols; colsLimit++) {
-                ScalarImpl tempt = new ScalarImpl(i,j);
-                matrixList.add(tempt.getScalar());
-            }
+        this.matrixList = new ArrayList<>(m * n);
+        for (int k = 0; k < m * n; k++) {
+            this.matrixList.add(new ScalarImpl(minRandomVal, maxRandomVal));
         }
     }
 
-    // 08. csv파일로부터 m x n 행렬 생성
     MatrixImpl(String csvData) {
-        String[] rowStrings = csvData.strip().split("\\n");
+        if (csvData == null) {
+            throw new IllegalArgumentException("CSV 데이터는 null일 수 없습니다.");
+        }
+        String data = csvData.strip();
+        if (data.isEmpty()) {
+            this.rows = 0;
+            this.cols = 0;
+            this.matrixList = new ArrayList<>(0);
+            return;
+        }
+        String[] rowsArr = data.split("\\n");
+        this.rows = rowsArr.length;
+        String[] firstCols = rowsArr[0].strip().split(",", -1);
+        this.cols = firstCols.length;
 
-        this.rows = rowStrings.length;
-        this.cols = rowStrings[0].split(",").length;
-
-        for (String row : rowStrings) {
-            System.out.println(row);
-            String[] colString = row.strip().split(",");
-            for (String numStr : colString) {
-                System.out.println(numStr.strip());
-                BigDecimal csvNum = BigDecimal.valueOf(Double.parseDouble(numStr.strip()));
-                System.out.println(csvNum);
-                matrixList.add(csvNum);
+        if (this.rows == 1 && this.cols == 1 && firstCols[0].isEmpty()) {
+            this.cols = 0;
+        }
+        this.matrixList = new ArrayList<>(this.rows * this.cols);
+        for (String rowStr : rowsArr) {
+            String[] colsArr = rowStr.strip().split(",", -1);
+            if (colsArr.length != this.cols) {
+                throw new IllegalArgumentException(
+                        "csv 데이터 열 개수가 일치하지 않습니다. 기대: " + this.cols + ", 실제: " + colsArr.length
+                );
             }
-            System.out.println("매트릭스 체크" + matrixList);
+            if (this.cols == 0) continue;
+            for (String num : colsArr) {
+                this.matrixList.add(new ScalarImpl(num.strip()));
+            }
+        }
+        if (this.matrixList.size() != this.rows * this.cols) {
+            throw new IllegalArgumentException(
+                    "csv 데이터 크기가 일치하지 않습니다. 기대 크기: " + (this.rows * this.cols) + ", 실제 크기: " + this.matrixList.size()
+            );
         }
     }
 
-    // 09. 2차원 배열로부터 m x n 행렬 생성
-    MatrixImpl(int[][] typeArr){
-        this.rows = typeArr.length;
-        this.cols = typeArr[0].length;
-        for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < cols; col++) {
-                matrixList.add(BigDecimal.valueOf(typeArr[row][col]));
+    MatrixImpl(int[][] arr) {
+        if (arr == null) {
+            throw new IllegalArgumentException("입력 배열은 null일 수 없습니다.");
+        }
+        if (arr.length == 0) {
+            this.rows = 0;
+            this.cols = 0;
+            this.matrixList = new ArrayList<>(0);
+            return;
+        }
+        this.rows = arr.length;
+        this.cols = (arr[0] == null) ? 0 : arr[0].length;
+        this.matrixList = new ArrayList<>(rows * cols);
+        for (int i = 0; i < rows; i++) {
+            if (arr[i] == null || arr[i].length != cols) {
+                throw new IllegalArgumentException("행별 열 개수가 일치해야 합니다.");
+            }
+            for (int j = 0; j < cols; j++) {
+                this.matrixList.add(new ScalarImpl(String.valueOf(arr[i][j])));
             }
         }
     }
 
-    // 10. 단위 행렬 생성
-    MatrixImpl(int n){
+    MatrixImpl(int n) {
+        if (n < 0) {
+            throw new IllegalArgumentException("단위 행렬의 크기(n)는 0 이상이어야 합니다.");
+        }
         this.rows = n;
         this.cols = n;
-        for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < cols; col++) {
-                if (row == col) {
-                    matrixList.add(BigDecimal.valueOf(1));
-                }
-                else {
-                    matrixList.add(BigDecimal.valueOf(0));
-                }
+        this.matrixList = new ArrayList<>(n * n);
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                this.matrixList.add(new ScalarImpl(i == j ? "1" : "0"));
             }
         }
     }
 
-    //출력용 메서드
-    public void printMatrixList() {
-        for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < cols; col++) {
-                int index = row * cols + col;
-                System.out.print(matrixList.get(index) + "  ");
-            }
-            System.out.println();
+    @Override
+    public Scalar get(int rowIndex, int colIndex) {
+        if (rowIndex < 0 || rowIndex >= rows || colIndex < 0 || colIndex >= cols) {
+            throw new IndexOutOfBoundsException(
+                    "인덱스 범위를 벗어났습니다: (" + rowIndex + ", " + colIndex + ")"
+            );
         }
+        if (rows == 0 || cols == 0) {
+            throw new IndexOutOfBoundsException("비어 있는 행렬에서 요소를 가져올 수 없습니다.");
+        }
+        return matrixList.get(rowIndex * cols + colIndex);
+    }
+
+    @Override
+    public void set(int rowIndex, int colIndex, Scalar value) {
+        if (rowIndex < 0 || rowIndex >= rows || colIndex < 0 || colIndex >= cols) {
+            throw new IndexOutOfBoundsException(
+                    "인덱스 범위를 벗어났습니다: (" + rowIndex + ", " + colIndex + ")"
+            );
+        }
+        if (value == null) {
+            throw new IllegalArgumentException("설정할 값은 null일 수 없습니다.");
+        }
+        if (rows == 0 || cols == 0) {
+            throw new IndexOutOfBoundsException("비어 있는 행렬에 값을 설정할 수 없습니다.");
+        }
+        matrixList.set(rowIndex * cols + colIndex, value);
+    }
+
+    @Override
+    public int getRowCount() {
+        return rows;
+    }
+
+    @Override
+    public int getColumnCount() {
+        return cols;
+    }
+
+    @Override
+    public String toString() {
+        if (rows == 0 && cols == 0) {
+            return "[[]]";
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for (int i = 0; i < rows; i++) {
+            if (i > 0) sb.append(",\n ");
+            sb.append("[");
+            for (int j = 0; j < cols; j++) {
+                sb.append(get(i, j).toString());
+                if (j < cols - 1) sb.append(", ");
+            }
+            sb.append("]");
+        }
+        sb.append("]");
+        return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof MatrixImpl)) return false;
+        MatrixImpl other = (MatrixImpl) obj;
+        if (rows != other.rows || cols != other.cols) return false;
+        return Objects.equals(matrixList, other.matrixList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(rows, cols, matrixList);
     }
 }
