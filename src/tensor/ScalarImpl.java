@@ -17,7 +17,9 @@ class ScalarImpl implements Scalar {
         double randomValue = minBound + (ThreadLocalRandom.current().nextDouble() * (maxBound - minBound));
         this.scalar = BigDecimal.valueOf(randomValue);
     }
-
+    ScalarImpl(double testValue) {
+        this.scalar = BigDecimal.valueOf(testValue);
+    }
     @Override
     public String getValue() {
         return scalar.toPlainString();
@@ -52,7 +54,15 @@ class ScalarImpl implements Scalar {
         return Objects.hash(scalar.stripTrailingZeros());
     }
 
-    BigDecimal getBigDecimalValue() {
+    @Override
+    public void plusScalar(Scalar scalar) {
+        this.scalar=this.scalar.add(scalar.getBigDecimalValue());
+    }
+    public void multiplyScalar(Scalar scalar) {
+        this.scalar=this.scalar.multiply(scalar.getBigDecimalValue());
+    }
+// BigDecimal을 많이 쓸거같아서 인터페이스에 추가하고 public으로 수정했습니다. -장준하
+    public BigDecimal getBigDecimalValue() {
         return scalar;
     }
 }
