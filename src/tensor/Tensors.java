@@ -1,7 +1,8 @@
 package tensor;
 import tensor.Scalar;
+import tensor.Matrix;
 public class Tensors {
-    public static void validateScalar(Scalar scalar, String input) {
+    public static void validateScalar(Scalar scalar, double input) {
         ScalarImpl expectedScalar = new ScalarImpl(input);
         System.out.println("연산 결과 값은 "+scalar+"입니다.");
         if(expectedScalar.equals(scalar))
@@ -19,5 +20,34 @@ public class Tensors {
     public static void validateMatrix(Matrix matrix) {
 
     }
+
+    public static void printMatrix(Matrix matrix) {
+        System.out.println("Tensors.printMatrix 호출됨. Matrix 값:");
+        if (matrix != null) {
+            System.out.println(matrix.toString()); // Matrix 인터페이스의 toString() 호출
+        } else {
+            System.out.println("null");
+        }
+    }
+
+    public static void validateMatrix(Matrix matrix, String expectedStateDescription) {
+        System.out.println("Tensors.validateMatrix 호출됨.");
+        System.out.println("검증 대상 Matrix:\n" + (matrix != null ? matrix.toString() : "null"));
+        System.out.println("기대 상태 설명: " + expectedStateDescription);
+
+    }
+
+    public static Matrix add(Matrix m1, Matrix m2) {
+        System.out.println("Tensors.add(Matrix, Matrix) 정적 메소드 호출됨.");
+        return null;
+    }
+
+    public static Matrix multiply(Matrix m1, Matrix m2) {
+        System.out.println("Tensors.multiply(Matrix, Matrix) 정적 메소드 호출됨.");
+        return null;
+    }
+
+
+
 
 }
