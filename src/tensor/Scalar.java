@@ -1,6 +1,33 @@
 package tensor;
+
 import java.math.BigDecimal;
+
 public interface Scalar {
-    BigDecimal makeScalar(int i, int j); // 1번
-    BigDecimal makeScalar(String s); // 2번
+    //12
+    String getValue();
+    void setValue(String value);
+
+    //14
+    @Override
+    String toString();
+
+    //15
+    @Override
+    boolean equals(Object obj);
+    //18
+    void plusScalar(Scalar scalar);
+    //19
+    void multiplyScalar(Scalar scalar);
+    //24
+    static Scalar plusTwoScalars(Scalar scalar1, Scalar scalar2){
+        return new ScalarImpl(scalar1.getBigDecimalValue().add(scalar2.getBigDecimalValue()).toPlainString());
+    };
+    //25
+    static Scalar multiplyTwoScalars(Scalar scalar1, Scalar scalar2){
+        return new ScalarImpl(scalar1.getBigDecimalValue().multiply(scalar2.getBigDecimalValue()).toPlainString());
+    };
+
+    void printScalar();
+    BigDecimal getBigDecimalValue();
+
 }
