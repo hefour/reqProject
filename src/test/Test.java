@@ -40,15 +40,27 @@ public class Test {
         System.out.println("기존 스칼라 : "+stringScalar.toString());
         System.out.println("더한 스칼라 : "+testScalar.toString());
         stringScalar.plusScalar(testScalar);
-        Tensors.validateScalar(stringScalar,7);
+        Tensors.validateScalar(stringScalar,"7");
         System.out.println();
 
         System.out.println("19. 스칼라는 다른 스칼라와 곱셈이 가능하다.");
         System.out.println("기존 스칼라 : "+stringScalar.toString());
         System.out.println("곱한 스칼라 : "+testScalar.toString());
         stringScalar.multiplyScalar(testScalar);
-        Tensors.validateScalar(stringScalar,7*2);
+        Tensors.validateScalar(stringScalar,"14");
 
+        System.out.println("24. 전달받은 두 스칼라의 덧셈이 가능하다. ");
+
+        System.out.println("스칼라 1 : "+stringScalar.toString());
+        System.out.println("스칼라 2 : "+testScalar.toString());
+        Scalar resultScalar=Scalar.plusTwoScalars(stringScalar,testScalar);
+        Tensors.validateScalar(resultScalar,"16");
+
+        System.out.println("25. 전달받은 두 스칼라의 곱셈이 가능하다. ");
+        System.out.println("스칼라 1 : "+stringScalar.toString());
+        System.out.println("스칼라 2 : "+testScalar.toString());
+        resultScalar=Scalar.multiplyTwoScalars(stringScalar,testScalar);
+        Tensors.validateScalar(resultScalar,"28");
 
 
 

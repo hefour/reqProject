@@ -1,6 +1,7 @@
 package tensor;
 
 import java.math.BigDecimal;
+import java.security.SecureClassLoader;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -65,4 +66,6 @@ class ScalarImpl implements Scalar {
     public BigDecimal getBigDecimalValue() {
         return scalar;
     }
+
+
 }

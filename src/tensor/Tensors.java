@@ -1,7 +1,7 @@
 package tensor;
 import tensor.Scalar;
 public class Tensors {
-    public static void validateScalar(Scalar scalar, double input) {
+    public static void validateScalar(Scalar scalar, String input) {
         ScalarImpl expectedScalar = new ScalarImpl(input);
         System.out.println("연산 결과 값은 "+scalar+"입니다.");
         if(expectedScalar.equals(scalar))
