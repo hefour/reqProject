@@ -21,7 +21,7 @@ public class Factory {
         return new VectorImpl(dimension, minBound, maxBound);
     }
 
-    public static Vector createVectorByArray(List<BigDecimal> initialValueList) {
+    public static Vector createVectorByArray(BigDecimal[] initialValueList) {
         return new VectorImpl(initialValueList);
     }
 
