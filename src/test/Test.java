@@ -163,7 +163,7 @@ public class Test {
 
         // 09
         System.out.println("09. 2차원 배열로부터 mxn 행렬을 생성할 수 있다.");
-        int[][] arrayData = {{1, 0}, {0, 1}};
+        Scalar[][] arrayData = {{stringScalar, stringScalar}, {stringScalar, stringScalar}};
         Tensors.printMatrix(createMatrixByArray(arrayData));
         System.out.println();
 
@@ -173,7 +173,7 @@ public class Test {
         System.out.println();
 
 
-        Matrix testMatrix = createMatrixByArray(new int[][]{{1, 2}, {3, 4}});
+        Matrix testMatrix = createMatrixByArray(new Scalar[][]{{stringScalar, stringScalar}, {stringScalar, stringScalar}});
         System.out.println("테스트용 행렬");
         Tensors.printMatrix(testMatrix);
         System.out.println();
@@ -203,8 +203,8 @@ public class Test {
 
         // 15
         System.out.println("15. 행렬 객체의 동등성 판단을 할 수 있다.");
-        Matrix equalMatrix = createMatrixByArray(new int[][]{{99, 2}, {3, 4}}); // testMatrix와 동일
-        Matrix falseMatrix = createMatrixByArray(new int[][]{{1, 0}, {0, 1}});
+        Matrix equalMatrix = createMatrixByArray(new Scalar[][]{{stringScalar, stringScalar}, {stringScalar, stringScalar}}); // testMatrix와 동일
+        Matrix falseMatrix = createMatrixByArray(new Scalar[][]{{randomScalar, stringScalar}, {stringScalar, stringScalar}});
 
         System.out.println("비교 행렬 1 (testMatrix):");
         Tensors.printMatrix(testMatrix);
@@ -220,7 +220,7 @@ public class Test {
         System.out.println();
 
        //22,23연산
-        Matrix matrixOps = createMatrixByArray(new int[][]{{1, 1}, {1, 1}});
+        Matrix matrixOps = createMatrixByArray(new Scalar[][]{{stringScalar, randomScalar}, {stringScalar, randomScalar}});
 
         // 22
         System.out.println("22. 행렬은 다른 행렬과 덧셈이 가능하다.");
@@ -229,7 +229,7 @@ public class Test {
         System.out.println("덧셈 행렬 :");
         Tensors.printMatrix(matrixOps);
         System.out.println("덧셈 후 testMatrix :");
-        Matrix test2Matrix = createMatrixByArray(new int[][]{{100, 3}, {4, 5}});
+        Matrix test2Matrix = createMatrixByArray(new Scalar[][]{{randomScalar, stringScalar}, {stringScalar, randomScalar}});
         Tensors.printMatrix(test2Matrix);
         System.out.println();
 

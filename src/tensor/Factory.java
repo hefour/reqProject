@@ -37,7 +37,7 @@ public class Factory {
         return new MatrixImpl(csvData);
     }
 
-    public static Matrix createMatrixByArray(int[][] arr) {
+    public static Matrix createMatrixByArray(Scalar[][] arr) {
         return new MatrixImpl(arr);
     }
 

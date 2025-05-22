@@ -74,7 +74,7 @@ class MatrixImpl implements Matrix {
         }
     }
 
-    MatrixImpl(int[][] arr) {
+    MatrixImpl(Scalar[][] arr) {
         if (arr == null) {
             throw new IllegalArgumentException("입력 배열은 null일 수 없습니다.");
         }
