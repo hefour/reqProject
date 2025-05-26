@@ -193,19 +193,6 @@ public class Test {
         stringScalar.multiplyScalar(testScalar);
         Tensors.validateScalar(stringScalar, "50");
 
-        System.out.println("24. 전달받은 두 스칼라의 덧셈이 가능하다. ");
-
-        System.out.println("스칼라 1 : " + stringScalar.toString());
-        System.out.println("스칼라 2 : " + testScalar.toString());
-        Scalar resultScalar = Scalar.plusTwoScalars(stringScalar, testScalar);
-        Tensors.validateScalar(resultScalar, "55");
-
-        System.out.println("25. 전달받은 두 스칼라의 곱셈이 가능하다. ");
-        System.out.println("스칼라 1 : " + stringScalar.toString());
-        System.out.println("스칼라 2 : " + testScalar.toString());
-        resultScalar = Scalar.multiplyTwoScalars(stringScalar, testScalar);
-        Tensors.validateScalar(resultScalar, "250");
-
         System.out.println("20. 벡터는 다른 벡터와 덧셈이 가능하다.(길이가 같을 때)");
         Vector addVector = stringVector.add(cloneVector);
         System.out.println("03 벡터와 17 벡터의 합은 "+ addVector.toString() + " 입니다.");
@@ -215,29 +202,6 @@ public class Test {
         Vector multiplyVector = stringVector.multiply(stringScalar);
         System.out.println(stringVector + "벡터에 " + stringScalar + " 을 곱한 벡터는 " + multiplyVector.toString());
         System.out.println();
-
-        System.out.println("26. 전달받은 두 벡터의 덧셈이 가능하다.(길이가 같을 때)");
-        Vector highAddVector = Vector.addTwoVector(stringVector, cloneVector);
-        System.out.println("03 벡터와 17 벡터의 합은 " + highAddVector.toString() + " 입니다.");
-        System.out.println();
-
-        System.out.println("27. 전달받은 스칼라와 벡터의 곱셈이 가능하다.(벡터의 모든 요소에 스칼라를 곱한다)");
-        Vector highMultiplyVector = Vector.multiplyScalar(stringVector, stringScalar);
-        System.out.println("03 벡터와 01 스칼라의 곱은 " + highMultiplyVector.toString() + " 입니다.");
-
-
-        System.out.println("30. n-차원 벡터 객체는 자신으로부터 nx1 행렬을 생성하여 반환할 수 있다.");
-        Matrix VectorToColumnMatrix = stringVector.toColumnMatrix();
-        System.out.println("벡터를 nx1으로 변형한 행렬은 " + VectorToColumnMatrix + "입니다.");
-        System.out.println();
-
-        System.out.println("31. n-차원 벡터 객체는 자신으로부터 1xn 행렬을 생성하여 반환할 수 있다.");
-        Matrix VectorToRowMatrix = stringVector.toRowMatrix();
-        System.out.println("벡터를 nx1으로 변형한 행렬은 " + VectorToRowMatrix + "입니다.");
-        System.out.println();
-
-
-
 
         //22,23연산
         Matrix matrixOps = createMatrixByArray(new Scalar[][]{{stringScalar, randomScalar}, {stringScalar, randomScalar}});
@@ -263,6 +227,27 @@ public class Test {
         Tensors.printMatrix(testMatrix);
         System.out.println();
 
+        System.out.println("24. 전달받은 두 스칼라의 덧셈이 가능하다. ");
+
+        System.out.println("스칼라 1 : " + stringScalar.toString());
+        System.out.println("스칼라 2 : " + testScalar.toString());
+        Scalar resultScalar = Scalar.plusTwoScalars(stringScalar, testScalar);
+        Tensors.validateScalar(resultScalar, "55");
+
+        System.out.println("25. 전달받은 두 스칼라의 곱셈이 가능하다. ");
+        System.out.println("스칼라 1 : " + stringScalar.toString());
+        System.out.println("스칼라 2 : " + testScalar.toString());
+        resultScalar = Scalar.multiplyTwoScalars(stringScalar, testScalar);
+        Tensors.validateScalar(resultScalar, "250");
+
+        System.out.println("26. 전달받은 두 벡터의 덧셈이 가능하다.(길이가 같을 때)");
+        Vector highAddVector = Vector.addTwoVector(stringVector, cloneVector);
+        System.out.println("03 벡터와 17 벡터의 합은 " + highAddVector.toString() + " 입니다.");
+        System.out.println();
+
+        System.out.println("27. 전달받은 스칼라와 벡터의 곱셈이 가능하다.(벡터의 모든 요소에 스칼라를 곱한다)");
+        Vector highMultiplyVector = Vector.multiplyScalar(stringVector, stringScalar);
+        System.out.println("03 벡터와 01 스칼라의 곱은 " + highMultiplyVector.toString() + " 입니다.");
 
         // 28
         System.out.println("28. 전달받은 두 행렬의 덧셈이 가능하다.");
@@ -275,6 +260,19 @@ public class Test {
         System.out.println("호출 결과 (null 더미 객체):");
         Tensors.printMatrix(Tensors.multiply(testMatrix, matrixOps));
         System.out.println();
+
+        System.out.println("30. n-차원 벡터 객체는 자신으로부터 nx1 행렬을 생성하여 반환할 수 있다.");
+        Matrix VectorToColumnMatrix = stringVector.toColumnMatrix();
+        System.out.println("벡터를 nx1으로 변형한 행렬은 " + VectorToColumnMatrix + "입니다.");
+        System.out.println();
+
+        System.out.println("31. n-차원 벡터 객체는 자신으로부터 1xn 행렬을 생성하여 반환할 수 있다.");
+        Matrix VectorToRowMatrix = stringVector.toRowMatrix();
+        System.out.println("벡터를 nx1으로 변형한 행렬은 " + VectorToRowMatrix + "입니다.");
+        System.out.println();
+
+
+
     }
 
 
