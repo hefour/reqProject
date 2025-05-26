@@ -192,6 +192,7 @@ class MatrixImpl implements Matrix {
                 copyScalar[i][j]=matrixList.get(i);
             }
         }
-        return new MatrixImpl(copyScalar);
+
+
+        return null;
     }
-}

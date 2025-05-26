@@ -270,7 +270,105 @@ public class Test {
         Matrix VectorToRowMatrix = stringVector.toRowMatrix();
         System.out.println("벡터를 nx1으로 변형한 행렬은 " + VectorToRowMatrix + "입니다.");
         System.out.println();
+        Vector vectorForMatrixConv = createVectorByString(3, "7");
+        System.out.println("30. 벡터는 자신으로부터 nx1 행렬을 생성하여 반환할 수 있다.");
+        Matrix matrixColVector = vectorForMatrixConv.toColumnMatrix();
+        System.out.println("  -> " + vectorForMatrixConv + " -> nx1 행렬:"); Tensors.printMatrix(matrixColVector);
+        System.out.println();
 
+        System.out.println("31. 벡터는 자신으로부터 1xn 행렬을 생성하여 반환할 수 있다.");
+        Matrix matrixRowVector = vectorForMatrixConv.toRowMatrix();
+        System.out.println("  -> " + vectorForMatrixConv + " -> 1xn 행렬:"); Tensors.printMatrix(matrixRowVector);
+        System.out.println();
+
+
+// 테스트용 생성
+        Scalar s0 = createScalarByString("0");
+        Scalar s1 = createScalarByString("1");
+        Scalar s2 = createScalarByString("2");
+        Scalar s3 = createScalarByString("3");
+        Scalar s5 = createScalarByString("5");
+
+        Matrix squareMatrix = createMatrixByArray(new Scalar[][]{{s1, s2}, {s0, s5}});
+        Matrix nonSquareMatrix = createMatrixByCSV("1,0\n0,1\n0,0");
+        Matrix upperTriMatrix = createMatrixByArray(new Scalar[][]{{s1, s2, s5}, {s0, s1, s2}, {s0, s0, s1}});
+        Matrix lowerTriMatrix = createMatrixByArray(new Scalar[][]{{s1, s0, s0}, {s2, s1, s0}, {s5, s2, s1}});
+        Matrix identityTestMatrix = createUnitMatrix(3);
+        Matrix zeroTestMatrix = createMatrixByTypeNum(new BigDecimal("0"), 2, 2);
+
+        System.out.println("40. 정사각 행렬 판별");
+        System.out.println("  -> squareMatrix (2x2)는 정사각 행렬인가? " + squareMatrix.isSquare());
+        System.out.println("  -> nonSquareMatrix (3x2)는 정사각 행렬인가? " + nonSquareMatrix.isSquare());
+        System.out.println();
+
+        System.out.println("41. 상삼각 행렬 판별");
+        System.out.println("  -> upperTriMatrix는 상삼각 행렬인가? " + upperTriMatrix.isUpperTriangular());
+        System.out.println("  -> lowerTriMatrix는 상삼각 행렬인가? " + lowerTriMatrix.isUpperTriangular());
+        System.out.println("  -> squareMatrix는 상삼각 행렬인가? " + squareMatrix.isUpperTriangular());
+        System.out.println();
+
+        System.out.println("42. 하삼각 행렬 판별");
+        System.out.println("  -> lowerTriMatrix는 하삼각 행렬인가? " + lowerTriMatrix.isLowerTriangular());
+        System.out.println("  -> upperTriMatrix는 하삼각 행렬인가? " + upperTriMatrix.isLowerTriangular());
+        System.out.println("  -> squareMatrix는 하삼각 행렬인가? " + squareMatrix.isLowerTriangular());
+        System.out.println();
+
+        System.out.println("43. 단위 행렬 판별");
+        System.out.println("  -> identityTestMatrix는 단위 행렬인가? " + identityTestMatrix.isIdentity());
+        System.out.println("  -> squareMatrix는 단위 행렬인가? " + squareMatrix.isIdentity());
+        System.out.println();
+
+        System.out.println("44. 영 행렬 판별");
+        System.out.println("  -> zeroTestMatrix는 영 행렬인가? " + zeroTestMatrix.isZero());
+        System.out.println("  -> identityTestMatrix는 영 행렬인가? " + identityTestMatrix.isZero());
+        System.out.println();
+
+        Matrix matrixForOps = createMatrixByCSV("11,12,13\n14,15,16\n17,18,19");
+        System.out.println("--- 다음 연산을 위한 원본 행렬 (matrixForOps):");
+        Tensors.printMatrix(matrixForOps);
+        System.out.println();
+
+        System.out.println("45. 행 교환");
+        Matrix matrixa = matrixForOps.clone();
+        System.out.println("  -> 교환 전 (0행과 2행 교환):"); Tensors.printMatrix(matrixa);
+        matrixa.swapRows(0, 2);
+        System.out.println("  -> 교환 후 결과:"); Tensors.printMatrix(matrixa);
+        System.out.println();
+
+        System.out.println("46. 열 교환");
+        Matrix matrixb = matrixForOps.clone();
+        System.out.println("  -> 교환 전 (0열과 1열 교환):"); Tensors.printMatrix(matrixb);
+        matrixb.swapColumns(0, 1);
+        System.out.println("  -> 교환 후 결과:"); Tensors.printMatrix(matrixb);
+        System.out.println();
+
+        System.out.println("47. 특정 행에 스칼라 곱");
+        Matrix matrixc = matrixForOps.clone();
+        System.out.println("  -> 연산 전 (1행에 스칼라 \"" + s2 + "\" 곱):"); Tensors.printMatrix(matrixc);
+        matrixc.scaleRow(1, s2);
+        System.out.println("  -> 연산 후 결과:"); Tensors.printMatrix(matrixc);
+        System.out.println();
+
+        System.out.println("48. 특정 열에 스칼라 곱");
+        Matrix matrixd = matrixForOps.clone();
+        System.out.println("  -> 연산 전 (2열에 스칼라 \"" + s3 + "\" 곱):"); Tensors.printMatrix(matrixd);
+        matrixd.scaleColumn(2, s3);
+        System.out.println("  -> 연산 후 결과:"); Tensors.printMatrix(matrixd);
+        System.out.println();
+
+        System.out.println("49. 특정 행에 다른 행의 상수배를 더하기");
+        Matrix matrixe = matrixForOps.clone();
+        System.out.println("  -> 연산 전 (2행 += 0행 * \"" + s2 + "\"):"); Tensors.printMatrix(matrixe);
+        matrixe.addRowMultiple(2, 0, s2);
+        System.out.println("  -> 연산 후 결과:"); Tensors.printMatrix(matrixe);
+        System.out.println();
+
+        System.out.println("50. 특정 열에 다른 열의 상수배를 더하기");
+        Matrix matrixf = matrixForOps.clone();
+        System.out.println("  -> 연산 전 (0열 += 1열 * \"" + s3 + "\"):"); Tensors.printMatrix(matrixf);
+        matrixf.addColumnMultiple(0, 1, s3);
+        System.out.println("  -> 연산 후 결과:"); Tensors.printMatrix(matrixf);
+        System.out.println();
 
 
     }
