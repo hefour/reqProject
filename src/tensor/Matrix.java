@@ -18,5 +18,12 @@ public interface Matrix {
 
     //17
     Matrix clone();
-
+    //32
+    static Matrix PasteToWidth(Matrix matrix1, Matrix matrix2){
+        return null;
+    };
+    //33
+    static Matrix PasteToHeight(Matrix matrix1, Matrix matrix2){
+        return null;
+    }
 }

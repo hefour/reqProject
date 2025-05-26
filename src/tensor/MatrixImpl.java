@@ -194,4 +194,13 @@ class MatrixImpl implements Matrix {
         }
         return new MatrixImpl(copyScalar);
     }
+    //32
+    public Matrix widthPaste(Matrix matrix) {
+        return this;
+    }
+    //33
+    public Matrix heightPaste(Matrix matrix) {
+        return this;
+    }
+
 }
