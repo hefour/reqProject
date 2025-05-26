@@ -185,14 +185,25 @@ class MatrixImpl implements Matrix {
     }
 
     @Override
-    public Matrix clone(){
-        Scalar[][] copyScalar=new Scalar[rows][cols];
+    public Matrix clone() {
+        Scalar[][] copyScalar = new Scalar[rows][cols];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                copyScalar[i][j]=matrixList.get(i);
+                copyScalar[i][j] = matrixList.get(i);
             }
         }
-
-
         return null;
+    }
+    public Matrix widthPaste(Matrix matrix) {
+        return this;
+    }
+    public Matrix heightPaste(Matrix matrix) {
+        return this;
+    }
+    public Vector rowVector(Matrix matrix) {
+        return null;
+    }
+    public Vector colVector(Matrix matrix) {
+        return null;
+    }
     }

@@ -1,5 +1,6 @@
 package test;
 import java.math.BigDecimal;
+import java.security.spec.RSAOtherPrimeInfo;
 
 import tensor.*;
 
@@ -281,6 +282,35 @@ public class Test {
         System.out.println("  -> " + vectorForMatrixConv + " -> 1xn 행렬:"); Tensors.printMatrix(matrixRowVector);
         System.out.println();
 
+        System.out.println("32. 행렬은 다른 행렬과 가로로 합쳐질 수 있다.");
+        Matrix tmatrix=createUnitMatrix(3);
+        Matrix t2Matrix=createUnitMatrix(3);
+        System.out.println("기존 행렬 : "+ tmatrix);
+        System.out.println("추가할 행렬 : "+ t2Matrix);
+        Matrix resMatrix=tmatrix.widthPaste(t2Matrix);
+        System.out.println("합쳐진 행렬 : "+ resMatrix);
+        System.out.println();
+
+        System.out.println("33. 행렬은 다른 행렬과 세로로 합쳐질 수 있다.");
+        System.out.println();
+
+        System.out.println("34. 행렬은 특정 행을 벡터 형태로 추출해 줄 수 있다.");
+        System.out.println();
+
+        System.out.println("35. 행렬은 특정 열을 벡터 형태로 추출해 줄 수 있다");
+        System.out.println();
+
+        System.out.println("36. 행렬은 특정 범위의 부분 행렬을 추출해 줄 수 있다.");
+        System.out.println();
+
+        System.out.println("37. 행렬은 특정 범위의 부분 행렬을 추출해 줄 수 있다.");
+        System.out.println();
+
+        System.out.println("38. 행렬은 전치행렬을 구현해 줄 수 있다.");
+        System.out.println();
+
+        System.out.println("39. 행렬은 대각 요소의 합을 구해줄 수 있다.");
+        System.out.println();
 
 // 테스트용 생성
         Scalar s0 = createScalarByString("0");
