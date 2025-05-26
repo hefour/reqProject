@@ -5,7 +5,7 @@ import java.security.SecureClassLoader;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
-class ScalarImpl implements Scalar {
+class ScalarImpl implements Scalar,Comparable<Scalar>{
     private BigDecimal scalar;
 
     ScalarImpl(String scalarStringValue) {
@@ -41,7 +41,6 @@ class ScalarImpl implements Scalar {
     public String toString() {
         return scalar.toPlainString();
     }
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
@@ -49,16 +48,25 @@ class ScalarImpl implements Scalar {
         ScalarImpl other = (ScalarImpl) obj;
         return scalar.compareTo(other.scalar) == 0;
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(scalar.stripTrailingZeros());
     }
-
     @Override
     public void plusScalar(Scalar scalar) {
         this.scalar=this.scalar.add(scalar.getBigDecimalValue());
     }
+    //16번
+    @Override
+    public int compareTo(Scalar other) {
+        return this.scalar.compareTo(other.getBigDecimalValue());
+    }
+    //17번
+    @Override
+    public Scalar clone(){
+        return new ScalarImpl(this.getValue());
+    }
+
     public void multiplyScalar(Scalar scalar) {
         this.scalar=this.scalar.multiply(scalar.getBigDecimalValue());
     }

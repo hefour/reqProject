@@ -2,6 +2,7 @@ package tensor;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,8 +17,8 @@ public class VectorImpl implements Vector {
         }
         this.vectorList = new ArrayList<>(dimension);
         ScalarImpl prototype = new ScalarImpl(valueString);
-        BigDecimal base = prototype.getBigDecimalValue();
         for (int i = 0; i < dimension; i++) {
+            BigDecimal base = prototype.getBigDecimalValue();
             vectorList.add(base);
         }
     }
@@ -35,20 +36,19 @@ public class VectorImpl implements Vector {
         }
     }
 
-
-    VectorImpl(List<BigDecimal> initialValueList) {
-        if (initialValueList == null) {
-            throw new IllegalArgumentException("입력 리스트는 null일 수 없습니다.");
+    public VectorImpl(BigDecimal[] initialValueArray) {
+        if (initialValueArray == null) {
+            throw new IllegalArgumentException("입력 배열은 null일 수 없습니다.");
         }
-        // 요소 복사
-        this.vectorList = new ArrayList<>(initialValueList);
-        for (BigDecimal bd : vectorList) {
+
+        this.vectorList = new ArrayList<>();
+        for (BigDecimal bd : initialValueArray) {
             if (bd == null) {
-                throw new IllegalArgumentException("입력 리스트에 null 요소가 포함될 수 없습니다.");
+                throw new IllegalArgumentException("입력 배열에 null 요소가 포함될 수 없습니다.");
             }
+            this.vectorList.add(bd);
         }
     }
-
     @Override
     public Scalar get(int index) {
         if (index < 0 || index >= vectorList.size()) {
@@ -114,4 +114,47 @@ public class VectorImpl implements Vector {
         }
         System.out.println();
     }
+
+    @Override
+    public Vector add(Vector other) {
+        if (this.size() != other.size()) {
+            throw new IllegalArgumentException("두 벡터의 길이가 다릅니다.");
+        }
+
+        BigDecimal[] result = new BigDecimal[this.size()];
+        for (int i = 0; i < this.size(); i++) {
+            BigDecimal a = new BigDecimal(this.get(i).getValue());
+            BigDecimal b = new BigDecimal(other.get(i).getValue());
+            result[i] = a.add(b);
+        }
+        return new VectorImpl(result);
+    }
+
+    @Override
+    public Vector multiply(Scalar scalar){
+        return this;
+    }
+    @Override
+    public Vector clone(){
+        return new VectorImpl(vectorList.toArray(new BigDecimal[vectorList.size()]));
+    }
+
+    @Override
+    public Matrix toColumnMatrix() {
+        Scalar[][] data = new Scalar[this.size()][1];
+        for (int i = 0; i < this.size(); i++) {
+            data[i][0] = this.get(i);
+        }
+        return new MatrixImpl(data);
+    }
+
+    @Override
+    public Matrix toRowMatrix() {
+        Scalar[][] data = new Scalar[1][this.size()];
+        for (int i = 0; i < this.size(); i++) {
+            data[0][i] = this.get(i);
+        }
+        return new MatrixImpl(data);
+    }
+
 }

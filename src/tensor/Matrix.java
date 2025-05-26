@@ -16,4 +16,7 @@ public interface Matrix {
     @Override
     boolean equals(Object obj);
 
+    //17
+    Matrix clone();
+
 }

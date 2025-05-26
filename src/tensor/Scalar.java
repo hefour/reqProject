@@ -14,6 +14,11 @@ public interface Scalar {
     //15
     @Override
     boolean equals(Object obj);
+    //16
+    int compareTo(Scalar other);
+    //17
+    Scalar clone();
+
     //18
     void plusScalar(Scalar scalar);
     //19
@@ -26,6 +31,7 @@ public interface Scalar {
     static Scalar multiplyTwoScalars(Scalar scalar1, Scalar scalar2){
         return new ScalarImpl(scalar1.getBigDecimalValue().multiply(scalar2.getBigDecimalValue()).toPlainString());
     };
+
 
     void printScalar();
     BigDecimal getBigDecimalValue();

@@ -74,7 +74,7 @@ class MatrixImpl implements Matrix {
         }
     }
 
-    MatrixImpl(int[][] arr) {
+    MatrixImpl(Scalar[][] arr) {
         if (arr == null) {
             throw new IllegalArgumentException("입력 배열은 null일 수 없습니다.");
         }
@@ -182,5 +182,16 @@ class MatrixImpl implements Matrix {
     @Override
     public int hashCode() {
         return Objects.hash(rows, cols, matrixList);
+    }
+
+    @Override
+    public Matrix clone(){
+        Scalar[][] copyScalar=new Scalar[rows][cols];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                copyScalar[i][j]=matrixList.get(i);
+            }
+        }
+        return new MatrixImpl(copyScalar);
     }
 }

@@ -15,4 +15,21 @@ public interface Vector {
     @Override
     boolean equals(Object obj);
 
+    //17
+    Vector clone();
+
+    Vector add(Vector other);
+
+    Vector multiply(Scalar scalar);
+
+    static Vector addTwoVector(Vector one, Vector other){
+        return one.add(other);
+    }
+    static Vector multiplyScalar(Vector vector, Scalar scalar){
+        return vector.multiply(scalar);
+    }
+
+    Matrix toColumnMatrix();
+
+    Matrix toRowMatrix();
 }
