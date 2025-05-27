@@ -282,34 +282,75 @@ public class Test {
         System.out.println("  -> " + vectorForMatrixConv + " -> 1xn 행렬:"); Tensors.printMatrix(matrixRowVector);
         System.out.println();
 
-        System.out.println("32. 행렬은 다른 행렬과 가로로 합쳐질 수 있다.");
-        Matrix tmatrix=createUnitMatrix(3);
+        //행렬 생성
+        Matrix tMatrix=createUnitMatrix(3);
         Matrix t2Matrix=createUnitMatrix(3);
-        System.out.println("기존 행렬 : "+ tmatrix);
-        System.out.println("추가할 행렬 : "+ t2Matrix);
-        Matrix resMatrix=tmatrix.widthPaste(t2Matrix);
-        System.out.println("합쳐진 행렬 : "+ resMatrix);
+        Matrix t3Matrix=createUnitMatrix(3);
+        System.out.println("32. 행렬은 다른 행렬과 가로로 합쳐질 수 있다.");
+        System.out.println("기존 행렬 : \n"+ tMatrix);
+        System.out.println("추가할 행렬 : \n"+ t2Matrix);
+        System.out.println("합쳐진 행렬 : \n"+ tMatrix.widthPaste(t2Matrix));
+        tMatrix=createUnitMatrix(3);
+        System.out.println();
+        System.out.println("32-1. 디폴트 static 메소드 호출");
+        System.out.println("행렬 1 : \n"+ tMatrix);
+        System.out.println("행렬 2 : \n"+ t2Matrix);
+        Matrix resMatrix=Tensors.combineWidth(tMatrix, t2Matrix);
+        System.out.println("합쳐진 행렬 : \n"+resMatrix);
         System.out.println();
 
         System.out.println("33. 행렬은 다른 행렬과 세로로 합쳐질 수 있다.");
+        System.out.println("기존 행렬 : \n"+ t2Matrix);
+        System.out.println("추가할 행렬 : \n"+ t3Matrix);
+        System.out.println("합쳐진 행렬 : \n" + t2Matrix.heightPaste(t3Matrix));
+        t2Matrix=createUnitMatrix(3);
+        System.out.println();
+        System.out.println("33-1. 디폴트 static 메소드 호출");
+        System.out.println("행렬 1 : \n"+ t2Matrix);
+        System.out.println("행렬 2 : \n"+ t3Matrix);
+        resMatrix=Tensors.combineHeight(tMatrix, t2Matrix);
+        System.out.println("합쳐진 행렬 : \n"+resMatrix);
         System.out.println();
 
         System.out.println("34. 행렬은 특정 행을 벡터 형태로 추출해 줄 수 있다.");
+        System.out.println("기존 행렬 : \n"+ tMatrix);
+        System.out.println("추출할 행 : 1");
+        Vector resVec=tMatrix.rowVector(1);
+        System.out.println("추출한 벡터 : \n"+resVec);
         System.out.println();
 
         System.out.println("35. 행렬은 특정 열을 벡터 형태로 추출해 줄 수 있다");
+        System.out.println("기존 행렬 : \n"+ tMatrix);
+        System.out.println("추출할 열 : 1");
+        resVec=tMatrix.colVector(1);
+        System.out.println("추출한 벡터 : \n"+resVec);
         System.out.println();
 
         System.out.println("36. 행렬은 특정 범위의 부분 행렬을 추출해 줄 수 있다.");
+        System.out.println("기존 행렬 : \n"+ tMatrix);
+        System.out.println("시작 행 인덱스 : 1 , 끝 행 인덱스 : 2");
+        System.out.println("시작 열 인덱스 : 1 , 끝 열 인덱스 : 2");
+        resMatrix=tMatrix.getSubMatrix(1,2,1,2);
+        System.out.println("추출한 행렬 : \n"+resMatrix);
         System.out.println();
 
         System.out.println("37. 행렬은 특정 범위의 부분 행렬을 추출해 줄 수 있다.");
+        System.out.println("기존 행렬 : \n"+ tMatrix);
+        System.out.println("지정 행 : 1 , 지정 열 : 1");
+        resMatrix=tMatrix.getMinor(1,1);
+        System.out.println("추출한 행렬 : \n"+resMatrix);
         System.out.println();
 
         System.out.println("38. 행렬은 전치행렬을 구현해 줄 수 있다.");
+        System.out.println("기존 행렬 : \n"+ tMatrix);
+        resMatrix=tMatrix.transpose();
+        System.out.println("전치 행렬 : \n"+ resMatrix);
         System.out.println();
 
         System.out.println("39. 행렬은 대각 요소의 합을 구해줄 수 있다.");
+        System.out.println("기존 행렬 : \n"+ tMatrix);
+        Scalar resScalar=tMatrix.trace();
+        System.out.println("대각 요소의 합 : \n"+ resScalar);
         System.out.println();
 
 // 테스트용 생성

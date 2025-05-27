@@ -200,10 +200,22 @@ class MatrixImpl implements Matrix {
     public Matrix heightPaste(Matrix matrix) {
         return this;
     }
-    public Vector rowVector(Matrix matrix) {
+    public Vector rowVector(int rowIndex) {
         return null;
     }
-    public Vector colVector(Matrix matrix) {
+    public Vector colVector(int colIndex) {
         return null;
     }
+    public Matrix getSubMatrix(int beginRow, int endRow, int beginCol, int endCol){
+        return null;
     }
+    public Matrix getMinor(int rowIndex, int colIndex){
+        return null;
+    }
+    public Matrix transpose(){
+        return null;
+    }
+    public Scalar trace(){
+        return null;
+    };
+}

@@ -57,7 +57,12 @@ public class Tensors {
         System.out.println("Tensors.multiply(Matrix, Matrix) 정적 메소드 호출됨.");
         return null;
     }
-
+    public static Matrix combineWidth(Matrix m1, Matrix m2) {
+        return Matrix.pasteToWidth(m1,m2);
+    }
+    public static Matrix combineHeight(Matrix m1, Matrix m2) {
+        return Matrix.pasteToHeight(m1,m2);
+    }
 
 
 

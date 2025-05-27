@@ -22,10 +22,10 @@ public interface Matrix {
     Matrix clone();
 
     // 22. 행렬 덧셈 (Non-Static)
-    //void add(Matrix other);
+    void add(Matrix other);
 
     // 23. 행렬 곱셈 (Non-Static)
-    //void multiply(Matrix other);
+    void multiply(Matrix other);
 
     // 28. 두 행렬 덧셈 (Static)
     static Matrix add(Matrix m1, Matrix m2) {
@@ -52,22 +52,22 @@ public interface Matrix {
     Matrix heightPaste(Matrix matrix);
 
     // 34. 특정 행 벡터로 추출
-    Vector rowVector(Matrix matrix);
+    Vector rowVector(int rowIndex);
 
     // 35. 특정 열 벡터로 추출
-    Vector colVector(Matrix matrix);
+    Vector colVector(int colIndex);
 
     // 36. 특정 범위의 부분 행렬 추출
-    Matrix getSubMatrix(int startRow, int endRow, int startCol, int endCol);
+    Matrix getSubMatrix(int beginRow, int endRow, int beginCol, int endCol);
 
     // 37. minor 행렬 추출
     Matrix getMinor(int rowIndex, int colIndex);
 
     // 38. 전치 행렬 생성
-    Matrix transpose(Matrix matrix);
+    Matrix transpose();
 
     // 39. 대각요소의 합
-    Scalar trace(Matrix matrix);
+    Scalar trace();
 
     // 40. 정사각 행렬 판별
     boolean isSquare();
