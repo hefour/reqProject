@@ -5,8 +5,8 @@ import java.math.BigDecimal;
 
 public interface Scalar {
     //12
-    String getValue();
-    void setValue(String value);
+    String get();
+    void set(String value);
 
     //14
     @Override
@@ -21,11 +21,11 @@ public interface Scalar {
     Scalar clone();
 
     //18
-    void plusScalar(Scalar scalar);
+    void add(Scalar scalar);
     //19
-    void multiplyScalar(Scalar scalar);
+    void multiply(Scalar scalar);
     //24
-    static Scalar plusTwoScalars(Scalar scalar1, Scalar scalar2){
+    static Scalar addTwoScalars(Scalar scalar1, Scalar scalar2){
         return new ScalarImpl(scalar1.getBigDecimalValue().add(scalar2.getBigDecimalValue()).toPlainString());
     };
     //25

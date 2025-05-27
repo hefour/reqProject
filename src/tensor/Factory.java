@@ -25,8 +25,8 @@ public class Factory {
         return new VectorImpl(initialValueList);
     }
 
-    public static Matrix createMatrixByTypeNum(BigDecimal typeNum, int m, int n) {
-        return new MatrixImpl(typeNum, m, n);
+    public static Matrix createMatrixByTypeNum(String stringValue, int m, int n) {
+        return new MatrixImpl(stringValue, m, n);
     }
 
     public static Matrix createMatrixRandom(int minRandomVal, int maxRandomVal, int m, int n) {

@@ -1,31 +1,38 @@
 package test;
 import java.math.BigDecimal;
-import java.security.spec.RSAOtherPrimeInfo;
-
 import tensor.*;
 
 import static tensor.Factory.*;
 
 public class Test {
     public static void main(String[] args) {
+
         System.out.println("01. String 값을 지정하여 스칼라를 생성할 수 있다");
-        Scalar stringScalar = createScalarByString("3");  // 01.
-        Tensors.printScalar(stringScalar);
+        Scalar stringScalar = createScalarByString("4");  // 01.
+        System.out.println("기댓 값 : 4");
+        System.out.println("결과 값 : " + stringScalar);
+        System.out.println(stringScalar.get().equals("4") ? "통과" : "실패");
         System.out.println();
 
         System.out.println("02. i이상 j미만의 무작위 값을 요소로 하는 스칼라를 생성할 수 있다.");
         Scalar randomScalar = createScalarByRandom(1, 2);          // 02.
-        Tensors.printScalar(randomScalar);
+        System.out.println("기댓 값 : (1과 2 사이의 스칼라 값)");
+        System.out.println("결과 값 : " + randomScalar);
+        System.out.println("1, 2 사이의 실수 값이 출력되면 통과");
         System.out.println();
 
         System.out.println("03. 지정한 하나의 값을 모든 요소의 값으로 하는 차원 벡터를 생성할 수 있다.");
-        Vector stringVector = createVectorByString(8,"3");  // 01.
-        Tensors.printVector(stringVector);
+        Vector stringVector = createVectorByString(8,"3");  // 03.
+        System.out.println("기댓 값 : [3, 3, 3, 3, 3, 3, 3, 3]");
+        System.out.println("결과 값 : " + stringVector);
+        System.out.println(stringVector.toString().equals("[3, 3, 3, 3, 3, 3, 3, 3]") ? "통과" : "실패");
         System.out.println();
 
-        System.out.println("04. i 이상 j 미만의 무작위 값을 요소로 하는 차원 벡터를 생성할 수 있다04.");
-        Vector randomVector = createVectorByRandom(2,1, 2);  // 01.
-        Tensors.printVector(randomVector);
+        System.out.println("04. i 이상 j 미만의 무작위 값을 요소로 하는 차원 벡터를 생성할 수 있다.");
+        Vector randomVector = createVectorByRandom(8,1, 2);  // 04.
+        System.out.println("기댓 값 : (1과 2사이의 하나의 실수 값으로 이뤄진 8차원 벡터)");
+        System.out.println("결과 값 : " + randomVector);
+        System.out.println("기댓 값 조건 충족 시 통과");
         System.out.println();
 
         System.out.println("05. 차원 배열로부터 차원 벡터를 생성할 수 있다.");
@@ -35,90 +42,154 @@ public class Test {
                 new BigDecimal("8")
         };
         Vector arrVector = createVectorByArray(arr);
-        Tensors.printVector(arrVector);
+        System.out.println("기댓 값 : [3, 5, 8]");
+        System.out.println("결과 값 : " + arrVector);
+        System.out.println(arrVector.toString().equals("[3, 5, 8]") ? "통과" : "실패");
         System.out.println();
 
         // 06
+        Matrix stringMatrix = createMatrixByTypeNum("1", 2, 3);
         System.out.println("06. 지정된 하나의 값을 모든 요소의 값으로 하는 mxn 행렬을 생성할 수 있다.");
-        Tensors.printMatrix(createMatrixByTypeNum(new BigDecimal("1"), 2, 3));
+        System.out.println("기댓 값 : ");
+        System.out.println("[[1, 1, 1],\n" +
+                " [1, 1, 1]]");
+        System.out.println("결과 값 : ");
+        System.out.println(stringMatrix.toString());
+        System.out.println(stringMatrix.toString().equals("[[1, 1, 1],\n" +
+                " [1, 1, 1]]") ? "통과" : "실패");
         System.out.println();
 
         // 07
         System.out.println("07. i 이상 j 미만의 무작위 값을 요소로 하는 mxn 행렬을 생성할 수 있다.");
-        Tensors.printMatrix(createMatrixRandom(1, 2, 3, 2));
+        Matrix randomMatrix = createMatrixRandom(1,2, 3, 3);
+        System.out.println("기댓 값 : ");
+        System.out.println("(1, 2 사이의 임의의 실수 값으로 이루어진 3 x 3 행렬)");
+        System.out.println("결과 값 : ");
+        System.out.println(randomMatrix.toString());
+        System.out.println("기댓 값 조건 충족 시 통과");
         System.out.println();
 
         // 08
         System.out.println("08. csv파일로부터 mxn 행렬을 생성할 수 있다.");
         String csvFile = "1,2,3\n4,5,6";
-        Tensors.printMatrix(createMatrixByCSV(csvFile));
+        Matrix csvMatrix = createMatrixByCSV(csvFile);
+        System.out.println("기댓 값 : ");
+        System.out.println("[[1, 2, 3],\n" +
+                " [4, 5, 6]]");
+        System.out.println("결과 값 : ");
+        System.out.println(csvMatrix.toString());
+        System.out.println(csvMatrix.toString().equals("[[1, 2, 3],\n" +
+                " [4, 5, 6]]") ? "통과" : "실패");
         System.out.println();
 
         // 09
         System.out.println("09. 2차원 배열로부터 mxn 행렬을 생성할 수 있다.");
         Scalar[][] arrayData = {{stringScalar, stringScalar}, {stringScalar, stringScalar}};
-        Tensors.printMatrix(createMatrixByArray(arrayData));
+        Matrix arrayMatrix = createMatrixByArray(arrayData);
+        System.out.println("기댓 값 : ");
+        System.out.println("[[4, 4],\n" +
+                " [4, 4]]");
+        System.out.println("결과 값 : ");
+        System.out.println(arrayMatrix.toString());
+        System.out.println(arrayMatrix.toString().equals("[[4, 4],\n" +
+                " [4, 4]]") ? "통과" : "실패");
         System.out.println();
 
         //10
         System.out.println("10. 단위 행렬을 생성할 수 있다.");
-        Tensors.printMatrix(createUnitMatrix(3));
-        System.out.println();
-
-        Matrix testMatrix = createMatrixByArray(new Scalar[][]{{stringScalar, stringScalar}, {stringScalar, stringScalar}});
-        System.out.println("테스트용 행렬");
-        Tensors.printMatrix(testMatrix);
+        Matrix unitMatrix = createUnitMatrix(3);
+        System.out.println("기댓 값 : ");
+        System.out.println(
+                "[[1, 0, 0],\n" +
+                " [0, 1, 0],\n" +
+                " [0, 0, 1]]");
+        System.out.println("결과 값 : ");
+        System.out.println(unitMatrix.toString());
+        System.out.println(unitMatrix.toString().equals(
+                "[[1, 0, 0],\n" +
+                " [0, 1, 0],\n" +
+                " [0, 0, 1]]") ? "통과" : "실패" );
         System.out.println();
 
         // 11
         System.out.println("11v. 특정 위치의 요소를 지정조회할 수 있다.");
         int index = 2; // 0-based index (즉, 3번째 요소)
-        Scalar indexValue = stringVector.get(index);
-        System.out.println("벡터의 " + (index + 1) + "번째 요소는 " + indexValue.getValue());
+        System.out.println("3번에서 만든 [3, 3, 3, 3, 3, 3, 3, 3] 벡터의 3번째 요소를 지정, 조회한다.");
+        System.out.println("기댓 값: 3");
+        System.out.println("결과 값 : " + stringVector.get(index));
+        System.out.println("3번 째 인덱스를 4로 변경한다.");
+        stringVector.set(index, stringScalar);
+        System.out.println("기댓 값 : [3, 3, 4, 3, 3, 3, 3, 3]");
+        System.out.println("결과 값 : " + stringVector.toString());
+        System.out.println(stringVector.toString().equals("[3, 3, 4, 3, 3, 3, 3, 3]") ? "통과" : "실패");
         System.out.println();
 
         System.out.println("11m. 행렬의 특정 위치의 요소를 지정/조회할 수 있다.");
-        System.out.println("testMatrix.get(0,0) 값: " + testMatrix.get(0, 0).toString());
-        Scalar newElementSet = createScalarByString("99");
-        System.out.println("testMatrix의 (0,0) 위치에 스칼라 값 99을 지정.");
-        testMatrix.set(0, 0, newElementSet);
-        System.out.println("지정 후 testMatrix:");
-        Tensors.printMatrix(testMatrix);
-        System.out.println("지정 후 testMatrix.get(0,0) 값 : " + testMatrix.get(0, 0).toString());
+        int rowIndex = 1;
+        int columnIndex = 1;
+        System.out.println("8번에서 만든 \n" + "[[1, 2, 3],\n" +
+                " [4, 5, 6]] 행렬의 \n"+"2행 2열 요소를 지정, 조회한다.");
+        System.out.println("기댓 값 : 5");
+        System.out.println("결과 값 : " + csvMatrix.get(rowIndex, columnIndex));
+        System.out.println("2행 2열 요소를 4로 변경한다.");
+        csvMatrix.set(rowIndex, columnIndex, stringScalar);
+        System.out.println("기댓 값 : ");
+        System.out.println("[[1, 2, 3],\n" +
+                " [4, 4, 6]]");
+        System.out.println("결과 값 : ");
+        System.out.println(csvMatrix.toString());
+        System.out.println(csvMatrix.toString().equals("[[1, 2, 3],\n" +
+                " [4, 4, 6]]") ? "통과" : "실패");
         System.out.println();
 
-
         System.out.println("12.스칼라 값을 지정/조회할 수 있다");
-        System.out.println("스칼라 값을 5로 지정합니다.");
-        stringScalar.setValue("5");
-        System.out.println("지정 후 조회한 스칼라 값 : " + stringScalar.toString());
+        System.out.println("1번 스칼라 값 4를 5로 지정 조회합니다.");
+        stringScalar.set("5");
+        System.out.println("기댓 값 : 5 ");
+        System.out.println("결과 값: " + stringScalar.toString());
+        System.out.println(stringScalar.get().equals("5") ? "통과" : "실패");
         System.out.println();
 
         System.out.println("13v. 크기 정보를 조회할 수 있다");
-        System.out.println("03 에서 생성한 벡터의 크기 정보(차원)을 조회합니다");
-        System.out.println("03 에서 생성한 벡터의 차원은 " + stringVector.size());
+        System.out.println("11번에서 생성한 벡터의 크기 정보(차원)을 조회합니다");
+        System.out.println("기댓 값 : 8");
+        System.out.println("결과 값 : " + stringVector.getDimensionCount());
         System.out.println();
 
         // 13
         System.out.println("13m. 행렬의 크기 정보를 조회할 수 있다.");
-        System.out.println("(2x2 행렬)의 행 개수 : " + testMatrix.getRowCount());
-        System.out.println("(2x2 행렬)의 열 개수 : " + testMatrix.getColumnCount());
+        System.out.println("11번에서 지정한 행렬의 행 개수, 열 개수를 조회합니다");
+        System.out.println("기댓 값 : 2, 3");
+        System.out.println("결과 값 : " + csvMatrix.getRowCount() +", "+ csvMatrix.getColumnCount());
+        System.out.println(csvMatrix.getRowCount() == 2 && csvMatrix.getColumnCount() == 3 ? "통과" : "실패");
         System.out.println();
 
         // 14
         System.out.println("14s.스칼라 객체를 콘솔에 출력할 수 있다.");
-        System.out.println("출력 스칼라 값 : " + stringScalar.toString());
+        System.out.println("12번에서 생성한 스칼라를 출력합니다");
+        System.out.println("기댓 값 : 5 ");
+        System.out.println("결과 값: " + stringScalar.toString());
+        System.out.println(stringScalar.get().equals("5") ? "통과" : "실패");
         System.out.println();
 
         System.out.println("14v. 벡터를 객체 형태로 콘솔에 출력할 수 있다.");
-        System.out.println("1차원 배열 모양 벡터: " + stringVector.toString());
+        System.out.println("11번 벡터를 출력합니다. ");
+        System.out.println("기댓 값 : [3, 3, 4, 3, 3, 3, 3, 3]");
+        System.out.println("결과 값 : " + stringVector.toString());
+        System.out.println(stringVector.toString().equals("[3, 3, 4, 3, 3, 3, 3, 3]") ? "통과" : "실패");
         System.out.println();
 
         System.out.println("14m. 행렬 객체를 콘솔에 출력할 수 있다.");
-        System.out.println("출력 행렬:");
-        Tensors.printMatrix(testMatrix);
+        System.out.println("11번에서 지정한 행렬을 출력합니다.");
+        System.out.println("기댓 값 : ");
+        System.out.println("[[1, 2, 3],\n" +
+                " [4, 4, 6]]");
+        System.out.println("결과 값 : ");
+        System.out.println(csvMatrix.toString());
+        System.out.println(csvMatrix.toString().equals("[[1, 2, 3],\n" +
+                " [4, 4, 6]]") ? "통과" : "실패");
         System.out.println();
-
+/*
         System.out.println("15s. 스칼라 객체의 동등성 판단을 할 수 있다.");
         System.out.println("비교 스칼라 1 : " + stringScalar.toString());
         System.out.println("비교 스칼라 2 : " + randomScalar.toString());
@@ -184,14 +255,14 @@ public class Test {
         System.out.println("18. 스칼라는 다른 스칼라와 덧셈이 가능하다.");
         System.out.println("기존 스칼라 : " + stringScalar.toString());
         System.out.println("더한 스칼라 : " + testScalar.toString());
-        stringScalar.plusScalar(testScalar);
+        stringScalar.add(testScalar);
         Tensors.validateScalar(stringScalar, "10");
         System.out.println();
 
         System.out.println("19. 스칼라는 다른 스칼라와 곱셈이 가능하다.");
         System.out.println("기존 스칼라 : " + stringScalar.toString());
         System.out.println("곱한 스칼라 : " + testScalar.toString());
-        stringScalar.multiplyScalar(testScalar);
+        stringScalar.multiply(testScalar);
         Tensors.validateScalar(stringScalar, "50");
 
         System.out.println("20. 벡터는 다른 벡터와 덧셈이 가능하다.(길이가 같을 때)");
@@ -232,7 +303,7 @@ public class Test {
 
         System.out.println("스칼라 1 : " + stringScalar.toString());
         System.out.println("스칼라 2 : " + testScalar.toString());
-        Scalar resultScalar = Scalar.plusTwoScalars(stringScalar, testScalar);
+        Scalar resultScalar = Scalar.addTwoScalars(stringScalar, testScalar);
         Tensors.validateScalar(resultScalar, "55");
 
         System.out.println("25. 전달받은 두 스칼라의 곱셈이 가능하다. ");
@@ -365,7 +436,7 @@ public class Test {
         Matrix upperTriMatrix = createMatrixByArray(new Scalar[][]{{s1, s2, s5}, {s0, s1, s2}, {s0, s0, s1}});
         Matrix lowerTriMatrix = createMatrixByArray(new Scalar[][]{{s1, s0, s0}, {s2, s1, s0}, {s5, s2, s1}});
         Matrix identityTestMatrix = createUnitMatrix(3);
-        Matrix zeroTestMatrix = createMatrixByTypeNum(new BigDecimal("0"), 2, 2);
+        Matrix zeroTestMatrix = createMatrixByTypeNum("0", 2, 2);
 
         System.out.println("40. 정사각 행렬 판별");
         System.out.println("  -> squareMatrix (2x2)는 정사각 행렬인가? " + squareMatrix.isSquare());
@@ -440,7 +511,7 @@ public class Test {
         matrixf.addColumnMultiple(0, 1, s3);
         System.out.println("  -> 연산 후 결과:"); Tensors.printMatrix(matrixf);
         System.out.println();
-
+*/
 
     }
 

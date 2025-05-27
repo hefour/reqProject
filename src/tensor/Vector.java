@@ -6,7 +6,7 @@ public interface Vector {
     void set(int index, Scalar value);
 
     //13
-    int size();
+    int getDimensionCount();
 
     //14
     @Override

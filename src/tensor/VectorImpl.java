@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 
-public class VectorImpl implements Vector {
+class VectorImpl implements Vector {
 
     private final List<BigDecimal> vectorList;
 
@@ -71,13 +71,13 @@ public class VectorImpl implements Vector {
         if (value instanceof ScalarImpl) {
             bd = ((ScalarImpl) value).getBigDecimalValue();
         } else {
-            bd = new BigDecimal(value.getValue());
+            bd = new BigDecimal(value.get());
         }
         vectorList.set(index, bd);
     }
 
     @Override
-    public int size() {
+    public int getDimensionCount() {
         return vectorList.size();
     }
 
@@ -117,14 +117,14 @@ public class VectorImpl implements Vector {
 
     @Override
     public Vector add(Vector other) {
-        if (this.size() != other.size()) {
+        if (this.getDimensionCount() != other.getDimensionCount()) {
             throw new IllegalArgumentException("두 벡터의 길이가 다릅니다.");
         }
 
-        BigDecimal[] result = new BigDecimal[this.size()];
-        for (int i = 0; i < this.size(); i++) {
-            BigDecimal a = new BigDecimal(this.get(i).getValue());
-            BigDecimal b = new BigDecimal(other.get(i).getValue());
+        BigDecimal[] result = new BigDecimal[this.getDimensionCount()];
+        for (int i = 0; i < this.getDimensionCount(); i++) {
+            BigDecimal a = new BigDecimal(this.get(i).get());
+            BigDecimal b = new BigDecimal(other.get(i).get());
             result[i] = a.add(b);
         }
         return new VectorImpl(result);
@@ -141,8 +141,8 @@ public class VectorImpl implements Vector {
 
     @Override
     public Matrix toColumnMatrix() {
-        Scalar[][] data = new Scalar[this.size()][1];
-        for (int i = 0; i < this.size(); i++) {
+        Scalar[][] data = new Scalar[this.getDimensionCount()][1];
+        for (int i = 0; i < this.getDimensionCount(); i++) {
             data[i][0] = this.get(i);
         }
         return new MatrixImpl(data);
@@ -150,8 +150,8 @@ public class VectorImpl implements Vector {
 
     @Override
     public Matrix toRowMatrix() {
-        Scalar[][] data = new Scalar[1][this.size()];
-        for (int i = 0; i < this.size(); i++) {
+        Scalar[][] data = new Scalar[1][this.getDimensionCount()];
+        for (int i = 0; i < this.getDimensionCount(); i++) {
             data[0][i] = this.get(i);
         }
         return new MatrixImpl(data);

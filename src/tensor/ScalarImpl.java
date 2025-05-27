@@ -18,16 +18,14 @@ class ScalarImpl implements Scalar,Comparable<Scalar>{
         double randomValue = minBound + (ThreadLocalRandom.current().nextDouble() * (maxBound - minBound));
         this.scalar = BigDecimal.valueOf(randomValue);
     }
-    ScalarImpl(double testValue) {
-        this.scalar = BigDecimal.valueOf(testValue);
-    }
+
     @Override
-    public String getValue() {
+    public String get() {
         return scalar.toPlainString();
     }
 
     @Override
-    public void setValue(String stringValue) {
+    public void set(String stringValue) {
         //예외 처리 필요
         this.scalar = new BigDecimal(stringValue);
     }
@@ -52,10 +50,12 @@ class ScalarImpl implements Scalar,Comparable<Scalar>{
     public int hashCode() {
         return Objects.hash(scalar.stripTrailingZeros());
     }
+
     @Override
-    public void plusScalar(Scalar scalar) {
+    public void add(Scalar scalar) {
         this.scalar=this.scalar.add(scalar.getBigDecimalValue());
     }
+
     //16번
     @Override
     public int compareTo(Scalar other) {
@@ -64,10 +64,10 @@ class ScalarImpl implements Scalar,Comparable<Scalar>{
     //17번
     @Override
     public Scalar clone(){
-        return new ScalarImpl(this.getValue());
+        return new ScalarImpl(this.get());
     }
 
-    public void multiplyScalar(Scalar scalar) {
+    public void multiply(Scalar scalar) {
         this.scalar=this.scalar.multiply(scalar.getBigDecimalValue());
     }
     // BigDecimal을 많이 쓸거같아서 인터페이스에 추가하고 public으로 수정했습니다. -장준하

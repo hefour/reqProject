@@ -10,16 +10,15 @@ class MatrixImpl implements Matrix {
     private int cols;
     private List<Scalar> matrixList;
 
-    MatrixImpl(BigDecimal typeNum, int m, int n) {
+    MatrixImpl(String stringValue, int m, int n) {
         if (m < 0 || n < 0) {
             throw new IllegalArgumentException("행렬의 차원(m, n)은 0 이상이어야 합니다.");
         }
         this.rows = m;
         this.cols = n;
         this.matrixList = new ArrayList<>(m * n);
-        String valueStr = typeNum.toPlainString();
         for (int i = 0; i < m * n; i++) {
-            this.matrixList.add(new ScalarImpl(valueStr));
+            this.matrixList.add(new ScalarImpl(stringValue));
         }
     }
 
@@ -194,6 +193,17 @@ class MatrixImpl implements Matrix {
         }
         return null;
     }
+
+    @Override
+    public void add(Matrix other) {
+
+    }
+
+    @Override
+    public void multiply(Matrix other) {
+
+    }
+
     public Matrix widthPaste(Matrix matrix) {
         return this;
     }
@@ -217,5 +227,62 @@ class MatrixImpl implements Matrix {
     }
     public Scalar trace(){
         return null;
-    };
+    }
+
+    @Override
+    public boolean isSquare() {
+        return false;
+    }
+
+    @Override
+    public boolean isUpperTriangular() {
+        return false;
+    }
+
+    @Override
+    public boolean isLowerTriangular() {
+        return false;
+    }
+
+    @Override
+    public boolean isIdentity() {
+        return false;
+    }
+
+    @Override
+    public boolean isZero() {
+        return false;
+    }
+
+    @Override
+    public void swapRows(int row1, int row2) {
+
+    }
+
+    @Override
+    public void swapColumns(int col1, int col2) {
+
+    }
+
+    @Override
+    public void scaleRow(int rowIndex, Scalar scalar) {
+
+    }
+
+    @Override
+    public void scaleColumn(int colIndex, Scalar scalar) {
+
+    }
+
+    @Override
+    public void addRowMultiple(int targetRow, int sourceRow, Scalar scalar) {
+
+    }
+
+    @Override
+    public void addColumnMultiple(int targetCol, int sourceCol, Scalar scalar) {
+
+    }
+
+    ;
 }
