@@ -189,10 +189,11 @@ public class Test {
         System.out.println(csvMatrix.toString().equals("[[1, 2, 3],\n" +
                 " [4, 4, 6]]") ? "통과" : "실패");
         System.out.println();
-/*
+
         System.out.println("15s. 스칼라 객체의 동등성 판단을 할 수 있다.");
         System.out.println("비교 스칼라 1 : " + stringScalar.toString());
-        System.out.println("비교 스칼라 2 : " + randomScalar.toString());
+        Scalar compareScalar = createScalarByString("1");
+        System.out.println("비교 스칼라 2 : " + compareScalar.toString());
         System.out.println(stringScalar.equals(randomScalar) ? "두 객체는 동등합니다!" : "두 객체는 동등하지 않습니다.");
         System.out.println();
 
@@ -204,23 +205,25 @@ public class Test {
             System.out.println("두 벡터는 동등하지 않습니다.");
         }
         System.out.println();
+
+
         System.out.println("15m. 행렬 객체의 동등성 판단을 할 수 있다.");
-        Matrix equalMatrix = createMatrixByArray(new Scalar[][]{{stringScalar, stringScalar}, {stringScalar, stringScalar}}); // testMatrix와 동일
-        Matrix falseMatrix = createMatrixByArray(new Scalar[][]{{randomScalar, stringScalar}, {stringScalar, stringScalar}});
+        Matrix equalMatrix = createMatrixByArray(new Scalar[][]{{compareScalar, compareScalar, compareScalar}, {compareScalar, compareScalar, compareScalar}}); // testMatrix와 동일
+        Matrix falseMatrix = createMatrixByArray(new Scalar[][]{{compareScalar, stringScalar, compareScalar}, {compareScalar, compareScalar, compareScalar}});
 
-        System.out.println("비교 행렬 1 (testMatrix):");
-        Tensors.printMatrix(testMatrix);
-        System.out.println("비교 행렬 2 (equalMatrix):");
-        Tensors.printMatrix(equalMatrix);
-        System.out.println(testMatrix.equals(equalMatrix) ? "일치" : "불일치");
-
-        System.out.println("비교 행렬 1 (testMatrix):");
-        Tensors.printMatrix(testMatrix);
-        System.out.println("비교 행렬 2 (falseMatrix):");
-        Tensors.printMatrix(falseMatrix);
-        System.out.println(testMatrix.equals(falseMatrix) ? "일치" : "불일치");
+        System.out.println("비교 행렬 1 : " );
+        System.out.println(stringMatrix.toString());
+        System.out.println("비교 행렬 2 : ");
+        System.out.println(equalMatrix.toString());
+        System.out.println(stringMatrix.equals(equalMatrix) ? "일치" : "불일치");
         System.out.println();
 
+        System.out.println("비교 행렬 1 : " );
+        System.out.println(stringMatrix.toString());
+        System.out.println("비교 행렬 2 : ");
+        System.out.println(falseMatrix.toString());
+        System.out.println(stringMatrix.equals(falseMatrix) ? "일치" : "불일치");
+        System.out.println();
 
 
         System.out.println("16. 스칼라의 경우 값의 대소비교를 할 수 있다.");
@@ -233,106 +236,160 @@ public class Test {
             case 1 -> System.out.println("기존 스칼라가 입력 스칼라보다 큽니다.");
         }
         System.out.println();
+
+
         System.out.println("17s. 스칼라 객체 복제를 할 수 있다.");
         System.out.println("기존 스칼라 객체 : "+stringScalar);
         testScalar = stringScalar.clone();
         System.out.println("복제된 스칼라 객체 : "+testScalar);
         System.out.println();
+
         System.out.println("17v. 벡터 객체 복제를 할 수 있다.");
         Vector oneVector=createVectorByString(8,"1");
         System.out.println("기존 벡터 객체 : "+oneVector);
         Vector cloneVector = oneVector.clone();
         System.out.println("복제된 벡터 객체 : "+cloneVector);
+        System.out.println(cloneVector.equals(oneVector) ? "통과" : "실패");
         System.out.println();
+
         System.out.println("17m. 행렬 객체 복제를 할 수 있다.");
-        Matrix oneMatrix=createUnitMatrix(1);
-        System.out.println("기존 행렬 객체 : "+oneMatrix);
-        Matrix twoMatrix = oneMatrix.clone();
-        System.out.println("복제된 행렬 객체 : "+twoMatrix);
+        System.out.println("기존 행렬 객체 : " + csvMatrix);
+        Matrix cloneMatrix = csvMatrix.clone();
+        System.out.println("복제된 행렬 객체 : " + cloneMatrix);
+        System.out.println(csvMatrix.equals(cloneMatrix) ? "통과" : "실패");
         System.out.println();
 
 
         System.out.println("18. 스칼라는 다른 스칼라와 덧셈이 가능하다.");
-        System.out.println("기존 스칼라 : " + stringScalar.toString());
-        System.out.println("더한 스칼라 : " + testScalar.toString());
-        stringScalar.add(testScalar);
-        Tensors.validateScalar(stringScalar, "10");
+        Scalar addMultiplyScalar = createScalarByString("5");
+        System.out.println("기존 스칼라 : " + addMultiplyScalar.toString());
+        System.out.println("더할 스칼라 : " + testScalar.toString());
+        addMultiplyScalar.add(testScalar);
+        System.out.println("기댓 값 : 10 ");
+        System.out.println("결과 값 : " + addMultiplyScalar.toString());
+        System.out.println(addMultiplyScalar.toString().equals("10") ? "통과" : "실패");
         System.out.println();
 
         System.out.println("19. 스칼라는 다른 스칼라와 곱셈이 가능하다.");
-        System.out.println("기존 스칼라 : " + stringScalar.toString());
-        System.out.println("곱한 스칼라 : " + testScalar.toString());
-        stringScalar.multiply(testScalar);
-        Tensors.validateScalar(stringScalar, "50");
+        System.out.println("기존 스칼라 : " + addMultiplyScalar.toString());
+        System.out.println("곱할 스칼라 : " + testScalar.toString());
+        addMultiplyScalar.multiply(testScalar);
+        System.out.println("기댓 값 : 50");
+        System.out.println("결과 값 : " + addMultiplyScalar.toString());
+        System.out.println(addMultiplyScalar.toString().equals("50") ? "통과" : "실패");
+        System.out.println();
+
 
         System.out.println("20. 벡터는 다른 벡터와 덧셈이 가능하다.(길이가 같을 때)");
-        Vector addVector = stringVector.add(cloneVector);
-        System.out.println("03 벡터와 17 벡터의 합은 "+ addVector.toString() + " 입니다.");
+        Vector addMultiplyScalarVector = createVectorByString(8,"2");
+        System.out.println("기존 벡터 : " + addMultiplyScalarVector.toString());
+        System.out.println("더할 벡터 : " + cloneVector.toString());
+        addMultiplyScalarVector.add(cloneVector);
+        System.out.println("기댓 값 : [3, 3, 3, 3, 3, 3, 3, 3]");
+        System.out.println("결과 값 : " + addMultiplyScalarVector.toString());
+        System.out.println(addMultiplyScalarVector.toString().equals("[3, 3, 3, 3, 3, 3, 3, 3") ? "통과" : "실패");
         System.out.println();
 
         System.out.println("21. 벡터는 다른 스칼라와 곱셈이 가능하다 (모든 요소에 곱)");
-        Vector multiplyVector = stringVector.multiply(stringScalar);
-        System.out.println(stringVector + "벡터에 " + stringScalar + " 을 곱한 벡터는 " + multiplyVector.toString());
+        System.out.println("기존 벡터 : " + addMultiplyScalarVector.toString());
+        System.out.println("곱할 스칼라 : " + testScalar.toString());
+        addMultiplyScalarVector.multiply(testScalar);
+        System.out.println("기댓 값 : [15, 15, 15, 15, 15, 15, 15, 15]");
+        System.out.println("결과 값 : " + addMultiplyScalarVector.toString());
+        System.out.println(addMultiplyScalarVector.toString().equals("[15, 15, 15, 15, 15, 15, 15, 15]") ? "통과" : "실패");
         System.out.println();
 
         //22,23연산
-        Matrix matrixOps = createMatrixByArray(new Scalar[][]{{stringScalar, randomScalar}, {stringScalar, randomScalar}});
 
         // 22
         System.out.println("22. 행렬은 다른 행렬과 덧셈이 가능하다.");
+        Matrix addMultiplyMatrix = createMatrixByCSV("1,2,3\n4,5,6");
         System.out.println("기존 행렬 :");
-        Tensors.printMatrix(testMatrix);
+        System.out.println(addMultiplyMatrix.toString());
         System.out.println("덧셈 행렬 :");
-        Tensors.printMatrix(matrixOps);
-        System.out.println("덧셈 후 testMatrix :");
-        Matrix test2Matrix = createMatrixByArray(new Scalar[][]{{randomScalar, stringScalar}, {stringScalar, randomScalar}});
-        Tensors.printMatrix(test2Matrix);
+        System.out.println(falseMatrix.toString());
+        addMultiplyMatrix.add(falseMatrix);
+        System.out.println("기댓 값 : ");
+        System.out.println("[[2, 6, 2],\n" +
+                " [2, 2, 2]]");
+        System.out.println("결과 값 : ");
+        System.out.println(addMultiplyMatrix.toString());
+        System.out.println(addMultiplyMatrix.toString().equals("[[]]") ? "통과" : "실패");
+
         System.out.println();
 
         // 23
         System.out.println("23. 행렬은 다른 행렬과 곱셈이 가능하다.");
         System.out.println("기존 행렬 :");
-        Tensors.printMatrix(testMatrix);
-        System.out.println("곱할 행렬 :");
-        Tensors.printMatrix(matrixOps);
-        System.out.println("곱셈 후 행렬 :");
-        Tensors.printMatrix(testMatrix);
+        System.out.println(addMultiplyMatrix.toString());
+        System.out.println("곱셈 행렬 :");
+        System.out.println(falseMatrix.toString());
+        addMultiplyMatrix.multiply(falseMatrix);
+        System.out.println("기댓 값 : ");
+        System.out.println("[[2, 6, 2],\n" +
+                " [2, 2, 2]]");
+        System.out.println("결과 값 : ");
+        System.out.println(addMultiplyMatrix.toString());
+        System.out.println(addMultiplyMatrix.toString().equals("[]") ? "통과" : "실패");
+
         System.out.println();
 
         System.out.println("24. 전달받은 두 스칼라의 덧셈이 가능하다. ");
 
         System.out.println("스칼라 1 : " + stringScalar.toString());
         System.out.println("스칼라 2 : " + testScalar.toString());
-        Scalar resultScalar = Scalar.addTwoScalars(stringScalar, testScalar);
-        Tensors.validateScalar(resultScalar, "55");
+        Scalar resultAddScalar = Tensors.addScalarByScalar(stringScalar, testScalar);
+        System.out.println("기댓 값 : 10");
+        System.out.println("결과 값 : " + resultAddScalar.toString());
+        System.out.println(resultAddScalar.toString().equals("10") ? "통과" : "실패");
+        System.out.println();
 
         System.out.println("25. 전달받은 두 스칼라의 곱셈이 가능하다. ");
         System.out.println("스칼라 1 : " + stringScalar.toString());
         System.out.println("스칼라 2 : " + testScalar.toString());
-        resultScalar = Scalar.multiplyTwoScalars(stringScalar, testScalar);
-        Tensors.validateScalar(resultScalar, "250");
+        Scalar resultMultiplyScalar = Tensors.multiplyScalrByScalar(stringScalar, testScalar);
+        System.out.println("기댓 값 : 25 ");
+        System.out.println("결과 값 : " + resultMultiplyScalar.toString());
+        System.out.println(resultMultiplyScalar.toString().equals("25") ? "통과" : "실패");
+        System.out.println();
 
         System.out.println("26. 전달받은 두 벡터의 덧셈이 가능하다.(길이가 같을 때)");
-        Vector highAddVector = Vector.addTwoVector(stringVector, cloneVector);
-        System.out.println("03 벡터와 17 벡터의 합은 " + highAddVector.toString() + " 입니다.");
+        System.out.println("벡터 1 : " + stringVector.toString());
+        System.out.println("벡터 2 : " + cloneVector.toString());
+        System.out.println("기댓 값 : ");
+        Vector resultAddVector = Tensors.addVectorByVector(stringVector, cloneVector);
+        System.out.println("결과 값 : " + resultAddVector.toString());
         System.out.println();
 
         System.out.println("27. 전달받은 스칼라와 벡터의 곱셈이 가능하다.(벡터의 모든 요소에 스칼라를 곱한다)");
-        Vector highMultiplyVector = Vector.multiplyScalar(stringVector, stringScalar);
-        System.out.println("03 벡터와 01 스칼라의 곱은 " + highMultiplyVector.toString() + " 입니다.");
+        System.out.println("벡터 1 : " + stringVector.toString());
+        System.out.println("벡터 2 : " + stringVector.toString());
+        System.out.println("기댓 값 : ");
+        Vector resultMultiplyVectorByScalar = Tensors.multiplyVectorByScalar(stringVector, stringScalar);
+        System.out.println("결과 값 : " + resultMultiplyVectorByScalar.toString());
 
         // 28
         System.out.println("28. 전달받은 두 행렬의 덧셈이 가능하다.");
-        System.out.println("호출 결과 (null 더미 객체):");
-        Tensors.printMatrix(Tensors.add(testMatrix, matrixOps));
+        Matrix test1Matrix = createMatrixByCSV("2,3\n4,5");
+        Matrix test2Matrix = createMatrixByCSV("1,2\n5,6");
+        System.out.println("행렬 1 : " + test1Matrix.toString());
+        System.out.println("행렬 2 : " + test2Matrix.toString());
+        System.out.println("기댓 값 : ");
+        Matrix resultAddMatrix = Tensors.addMatrixByMatrix(test1Matrix, test2Matrix);
+        System.out.println("결과 값 : ");
+        System.out.println(resultAddMatrix.toString());
         System.out.println();
 
         // 29
         System.out.println("29. 전달받은 두 행렬의 곱셈이 가능하다.");
-        System.out.println("호출 결과 (null 더미 객체):");
-        Tensors.printMatrix(Tensors.multiply(testMatrix, matrixOps));
+        System.out.println("행렬 1 : " + test1Matrix.toString());
+        System.out.println("행렬 2 : " + test2Matrix.toString());
+        System.out.println("기댓 값 : ");
+        Matrix resultMultiplyMatrix = Tensors.addMatrixByMatrix(test1Matrix, test2Matrix);
+        System.out.println("결과 값 : ");
+        System.out.println(resultMultiplyMatrix.toString());
         System.out.println();
-
+/*
         System.out.println("30. n-차원 벡터 객체는 자신으로부터 nx1 행렬을 생성하여 반환할 수 있다.");
         Matrix VectorToColumnMatrix = stringVector.toColumnMatrix();
         System.out.println("벡터를 nx1으로 변형한 행렬은 " + VectorToColumnMatrix + "입니다.");
