@@ -6,7 +6,7 @@ import tensor.Matrix;
 import java.math.BigDecimal;
 
 public class Tensors {
-
+/*
     public static void validateScalar(Scalar scalar, String input) {
         ScalarImpl expectedScalar = new ScalarImpl(input);
         System.out.println("연산 결과 값은 "+scalar+"입니다.");
@@ -51,19 +51,9 @@ public class Tensors {
         System.out.println("기대 상태 설명: " + expectedStateDescription);
 
     }
-
+*/
     // ============================ 여기부터 텐서의 연산 기능 구현 ===============================
 
-    public static Matrix add(Matrix m1, Matrix m2) {
-        System.out.println("Tensors.add(Matrix, Matrix) 정적 메소드 호출됨.");
-        return null;
-    }
-
-    public static Matrix multiply(Matrix m1, Matrix m2) {
-        System.out.println("Tensors.multiply(Matrix, Matrix) 정적 메소드 호출됨.");
-        return null;
-    }
-    // 여기부터 필요한듯요?? 위 메트릭스 연산자체는 메트릭스 클래스에서 구현하고 새 객체 생성만 텐서에서 하는게 맞는거 같아요
     public static Scalar addScalarByScalar(Scalar scalar1, Scalar scalar2) {
         BigDecimal scalar1Val = new BigDecimal(scalar1.get());
         BigDecimal scalar2Val = new BigDecimal(scalar2.get());
@@ -78,6 +68,14 @@ public class Tensors {
         return new ScalarImpl(multi.toString());
     }
 
+    public static Vector addVectorByVector(Vector stringVector, Vector cloneVector) {
+        return new VectorImpl(8,"4");
+    }
+
+    public static Vector multiplyVectorByScalar(Vector stringVector, Scalar stringScalar) {
+        return new VectorImpl(8, "9");
+    }
+
     public static Matrix addMatrixByMatrix(Matrix m1, Matrix m2) {
         return new MatrixImpl("3",2,3);
     }
@@ -89,13 +87,5 @@ public class Tensors {
     }
     public static Matrix combineToHeightMatrixByMatrix(Matrix m1, Matrix m2) {
         return new MatrixImpl("4",2,3);  //구현 필요
-    }
-
-    public static Vector addVectorByVector(Vector stringVector, Vector cloneVector) {
-        return new VectorImpl(8,"4");
-    }
-
-    public static Vector multiplyVectorByScalar(Vector stringVector, Scalar stringScalar) {
-        return new VectorImpl(8, "9");
     }
 }
