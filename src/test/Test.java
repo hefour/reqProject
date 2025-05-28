@@ -375,8 +375,8 @@ public class Test {
         System.out.println("28. 전달받은 두 행렬의 덧셈이 가능하다.");
         Matrix test1Matrix = createMatrixByCSV("2,3\n4,5");
         Matrix test2Matrix = createMatrixByCSV("1,2\n5,6");
-        System.out.println("행렬 1 : " + test1Matrix.toString());
-        System.out.println("행렬 2 : " + test2Matrix.toString());
+        System.out.println("행렬 1 : \n" + test1Matrix.toString());
+        System.out.println("행렬 2 : \n" + test2Matrix.toString());
         System.out.println("기댓 값 : ");
         Matrix resultAddMatrix = Tensors.addMatrixByMatrix(test1Matrix, test2Matrix);
         System.out.println("결과 값 : ");
@@ -386,8 +386,8 @@ public class Test {
 
         // 29
         System.out.println("29. 전달받은 두 행렬의 곱셈이 가능하다.");
-        System.out.println("행렬 1 : " + test1Matrix.toString());
-        System.out.println("행렬 2 : " + test2Matrix.toString());
+        System.out.println("행렬 1 : \n" + test1Matrix.toString());
+        System.out.println("행렬 2 : \n" + test2Matrix.toString());
         System.out.println("기댓 값 : ");
         Matrix resultMultiplyMatrix = Tensors.multiplyMatrixByMatrix(test1Matrix, test2Matrix);
         System.out.println("결과 값 : ");
