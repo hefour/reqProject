@@ -359,6 +359,7 @@ public class Test {
         System.out.println("기댓 값 : ");
         Vector resultAddVector = Tensors.addVectorByVector(stringVector, cloneVector);
         System.out.println("결과 값 : " + resultAddVector.toString());
+        System.out.println(resultAddVector.toString().equals("[]") ? "통과" : "실패");
         System.out.println();
 
         System.out.println("27. 전달받은 스칼라와 벡터의 곱셈이 가능하다.(벡터의 모든 요소에 스칼라를 곱한다)");
@@ -367,6 +368,8 @@ public class Test {
         System.out.println("기댓 값 : ");
         Vector resultMultiplyVectorByScalar = Tensors.multiplyVectorByScalar(stringVector, stringScalar);
         System.out.println("결과 값 : " + resultMultiplyVectorByScalar.toString());
+        System.out.println(resultMultiplyVectorByScalar.toString().equals("[]") ? "통과" : "실패");
+        System.out.println();
 
         // 28
         System.out.println("28. 전달받은 두 행렬의 덧셈이 가능하다.");
@@ -378,6 +381,7 @@ public class Test {
         Matrix resultAddMatrix = Tensors.addMatrixByMatrix(test1Matrix, test2Matrix);
         System.out.println("결과 값 : ");
         System.out.println(resultAddMatrix.toString());
+        System.out.println(resultAddMatrix.toString().equals("[]") ? "통과" : "실패");
         System.out.println();
 
         // 29
@@ -385,100 +389,121 @@ public class Test {
         System.out.println("행렬 1 : " + test1Matrix.toString());
         System.out.println("행렬 2 : " + test2Matrix.toString());
         System.out.println("기댓 값 : ");
-        Matrix resultMultiplyMatrix = Tensors.addMatrixByMatrix(test1Matrix, test2Matrix);
+        Matrix resultMultiplyMatrix = Tensors.multiplyMatrixByMatrix(test1Matrix, test2Matrix);
         System.out.println("결과 값 : ");
         System.out.println(resultMultiplyMatrix.toString());
+        System.out.println(resultMultiplyMatrix.toString().equals("[]") ? "통과" : "실패");
         System.out.println();
-/*
+
         System.out.println("30. n-차원 벡터 객체는 자신으로부터 nx1 행렬을 생성하여 반환할 수 있다.");
+        System.out.println("반환할 벡터 : " + stringVector.toString());
         Matrix VectorToColumnMatrix = stringVector.toColumnMatrix();
-        System.out.println("벡터를 nx1으로 변형한 행렬은 " + VectorToColumnMatrix + "입니다.");
+        System.out.println("기댓 값 : []");
+        System.out.println("벡터를 nx1으로 변형한 행렬(결과 값) : ");
+        System.out.println(VectorToColumnMatrix);
+        System.out.println(VectorToColumnMatrix.toString().equals("[]") ? "통과" : "실패");
         System.out.println();
 
         System.out.println("31. n-차원 벡터 객체는 자신으로부터 1xn 행렬을 생성하여 반환할 수 있다.");
+        System.out.println("반환할 벡터 : " + stringVector.toString());
         Matrix VectorToRowMatrix = stringVector.toRowMatrix();
-        System.out.println("벡터를 nx1으로 변형한 행렬은 " + VectorToRowMatrix + "입니다.");
-        System.out.println();
-        Vector vectorForMatrixConv = createVectorByString(3, "7");
-        System.out.println("30. 벡터는 자신으로부터 nx1 행렬을 생성하여 반환할 수 있다.");
-        Matrix matrixColVector = vectorForMatrixConv.toColumnMatrix();
-        System.out.println("  -> " + vectorForMatrixConv + " -> nx1 행렬:"); Tensors.printMatrix(matrixColVector);
-        System.out.println();
-
-        System.out.println("31. 벡터는 자신으로부터 1xn 행렬을 생성하여 반환할 수 있다.");
-        Matrix matrixRowVector = vectorForMatrixConv.toRowMatrix();
-        System.out.println("  -> " + vectorForMatrixConv + " -> 1xn 행렬:"); Tensors.printMatrix(matrixRowVector);
+        System.out.println("기댓 값 : []");
+        System.out.println("벡터를 nx1으로 변형한 행렬(결과 값) : " + VectorToRowMatrix);
+        System.out.println(VectorToRowMatrix.toString().equals("[]") ? "통과" : "실패");
         System.out.println();
 
         //행렬 생성
         Matrix tMatrix=createUnitMatrix(3);
         Matrix t2Matrix=createUnitMatrix(3);
         Matrix t3Matrix=createUnitMatrix(3);
+
         System.out.println("32. 행렬은 다른 행렬과 가로로 합쳐질 수 있다.");
         System.out.println("기존 행렬 : \n"+ tMatrix);
         System.out.println("추가할 행렬 : \n"+ t2Matrix);
-        System.out.println("합쳐진 행렬 : \n"+ tMatrix.widthPaste(t2Matrix));
-        tMatrix=createUnitMatrix(3);
+        System.out.println("기댓 값 : []");
+        System.out.println("합쳐진 행렬(결과 값) : \n"+ tMatrix.widthPaste(t2Matrix));
+        System.out.println(tMatrix.toString().equals("[]") ? "통과" : "실패");
+        tMatrix=createUnitMatrix(3); //다음 연산을 위해 초기화
         System.out.println();
+
         System.out.println("32-1. 디폴트 static 메소드 호출");
         System.out.println("행렬 1 : \n"+ tMatrix);
         System.out.println("행렬 2 : \n"+ t2Matrix);
-        Matrix resMatrix=Tensors.combineWidth(tMatrix, t2Matrix);
-        System.out.println("합쳐진 행렬 : \n"+resMatrix);
+        System.out.println("기댓 값 : []");
+        Matrix widthMatrix = Tensors.combineToWidthtMatrixByMatrix(tMatrix, t2Matrix);
+        System.out.println("합쳐진 행렬(결과 값) : \n"+ widthMatrix);
+        System.out.println(widthMatrix.toString().equals("[]") ? "통과" : "실패");
         System.out.println();
 
         System.out.println("33. 행렬은 다른 행렬과 세로로 합쳐질 수 있다.");
-        System.out.println("기존 행렬 : \n"+ t2Matrix);
-        System.out.println("추가할 행렬 : \n"+ t3Matrix);
-        System.out.println("합쳐진 행렬 : \n" + t2Matrix.heightPaste(t3Matrix));
-        t2Matrix=createUnitMatrix(3);
+        System.out.println("기존 행렬 : \n"+ tMatrix);
+        System.out.println("추가할 행렬 : \n"+ t2Matrix);
+        System.out.println("기댓 값 : []");
+        System.out.println("합쳐진 행렬(결과 값) : \n" + t2Matrix.heightPaste(t3Matrix));
+        System.out.println(t2Matrix.toString().equals("[]") ? "통과" : "실패");
+        t2Matrix=createUnitMatrix(3);   //다음 연산을 위해 초기화
         System.out.println();
+
         System.out.println("33-1. 디폴트 static 메소드 호출");
-        System.out.println("행렬 1 : \n"+ t2Matrix);
-        System.out.println("행렬 2 : \n"+ t3Matrix);
-        resMatrix=Tensors.combineHeight(tMatrix, t2Matrix);
-        System.out.println("합쳐진 행렬 : \n"+resMatrix);
+        System.out.println("기존 행렬 : \n"+ tMatrix);
+        System.out.println("추가할 행렬 : \n"+ t2Matrix);
+        Matrix heightMatrix = Tensors.combineToHeightMatrixByMatrix(tMatrix, t2Matrix);
+        System.out.println("기댓 값 : []");
+        System.out.println("합쳐진 행렬(결과 값) : \n" + heightMatrix);
+        System.out.println(heightMatrix.toString().equals("[]") ? "통과" : "실패");
         System.out.println();
 
         System.out.println("34. 행렬은 특정 행을 벡터 형태로 추출해 줄 수 있다.");
         System.out.println("기존 행렬 : \n"+ tMatrix);
         System.out.println("추출할 행 : 1");
-        Vector resVec=tMatrix.rowVector(1);
-        System.out.println("추출한 벡터 : \n"+resVec);
+        Vector rowVec=tMatrix.rowVector(1);
+        System.out.println("기댓 값 : []");
+        System.out.println("추출한 벡터(결과 값) : \n"+rowVec);
+        System.out.println(rowVec.toString().equals("[]") ? "통과" : "실패");
         System.out.println();
 
         System.out.println("35. 행렬은 특정 열을 벡터 형태로 추출해 줄 수 있다");
         System.out.println("기존 행렬 : \n"+ tMatrix);
         System.out.println("추출할 열 : 1");
-        resVec=tMatrix.colVector(1);
-        System.out.println("추출한 벡터 : \n"+resVec);
+        Vector colVec = tMatrix.colVector(1);
+        System.out.println("기댓 값 : []");
+        System.out.println("추출한 벡터(결과 값) : \n"+ colVec);
+        System.out.println(colVec.toString().equals("[]") ? "통과" : "실패");
         System.out.println();
 
-        System.out.println("36. 행렬은 특정 범위의 부분 행렬을 추출해 줄 수 있다.");
+        System.out.println("36. 행렬은 시작 행과 끝 행 인덱스로 특정 범위의 부분 행렬을 추출해 줄 수 있다.");
         System.out.println("기존 행렬 : \n"+ tMatrix);
         System.out.println("시작 행 인덱스 : 1 , 끝 행 인덱스 : 2");
         System.out.println("시작 열 인덱스 : 1 , 끝 열 인덱스 : 2");
-        resMatrix=tMatrix.getSubMatrix(1,2,1,2);
-        System.out.println("추출한 행렬 : \n"+resMatrix);
+        Matrix absMatrix=tMatrix.getSubMatrix(1,2,1,2);
+        System.out.println("기댓 값 : []");
+        System.out.println("추출한 행렬(결과 값) : \n" + absMatrix);
+        System.out.println(absMatrix.toString().equals("[]") ? "통과" : "실패");
         System.out.println();
 
-        System.out.println("37. 행렬은 특정 범위의 부분 행렬을 추출해 줄 수 있다.");
+        System.out.println("37. 행렬은 지정 행 제외, 특정 범위의 부분 행렬을 추출해 줄 수 있다.");
         System.out.println("기존 행렬 : \n"+ tMatrix);
         System.out.println("지정 행 : 1 , 지정 열 : 1");
-        resMatrix=tMatrix.getMinor(1,1);
-        System.out.println("추출한 행렬 : \n"+resMatrix);
+        Matrix absOtherMatrix=tMatrix.getMinor(1,1);
+        System.out.println("기댓 값 : []");
+        System.out.println("추출한 행렬(결과 값) : \n"+ absOtherMatrix);
+        System.out.println(absOtherMatrix.toString().equals("[]") ? "통과" : "실패");
         System.out.println();
 
         System.out.println("38. 행렬은 전치행렬을 구현해 줄 수 있다.");
         System.out.println("기존 행렬 : \n"+ tMatrix);
-        resMatrix=tMatrix.transpose();
-        System.out.println("전치 행렬 : \n"+ resMatrix);
+        Matrix transposedMatrix = tMatrix.transpose();
+        System.out.println("기댓 값 : []");
+        System.out.println("전치 행렬(결과 값) : \n"+ transposedMatrix);
+        System.out.println(transposedMatrix.toString().equals("[]") ? "통과" : "실패");
         System.out.println();
 
         System.out.println("39. 행렬은 대각 요소의 합을 구해줄 수 있다.");
         System.out.println("기존 행렬 : \n"+ tMatrix);
-        Scalar resScalar=tMatrix.trace();
-        System.out.println("대각 요소의 합 : \n"+ resScalar);
+        Scalar oppositeScalar=tMatrix.trace();
+        System.out.println("기댓 값 : []");
+        System.out.println("대각 요소의 합(결과 값) : \n"+ oppositeScalar);
+        System.out.println(oppositeScalar.toString().equals("[]") ? "통과" : "실패");
         System.out.println();
 
 // 테스트용 생성
@@ -487,7 +512,6 @@ public class Test {
         Scalar s2 = createScalarByString("2");
         Scalar s3 = createScalarByString("3");
         Scalar s5 = createScalarByString("5");
-
         Matrix squareMatrix = createMatrixByArray(new Scalar[][]{{s1, s2}, {s0, s5}});
         Matrix nonSquareMatrix = createMatrixByCSV("1,0\n0,1\n0,0");
         Matrix upperTriMatrix = createMatrixByArray(new Scalar[][]{{s1, s2, s5}, {s0, s1, s2}, {s0, s0, s1}});
@@ -523,58 +547,98 @@ public class Test {
         System.out.println();
 
         Matrix matrixForOps = createMatrixByCSV("11,12,13\n14,15,16\n17,18,19");
-        System.out.println("--- 다음 연산을 위한 원본 행렬 (matrixForOps):");
-        Tensors.printMatrix(matrixForOps);
-        System.out.println();
 
         System.out.println("45. 행 교환");
-        Matrix matrixa = matrixForOps.clone();
-        System.out.println("  -> 교환 전 (0행과 2행 교환):"); Tensors.printMatrix(matrixa);
-        matrixa.swapRows(0, 2);
-        System.out.println("  -> 교환 후 결과:"); Tensors.printMatrix(matrixa);
+        Matrix aMatrixForOps = matrixForOps.clone();
+        System.out.println("교환 전 (0행과 2행 교환): \n" + aMatrixForOps);
+        aMatrixForOps.swapRows(0, 2);
+        System.out.println("기댓 값 : []");
+        System.out.println("교환 후(결과 값): \n" + aMatrixForOps);
+        System.out.println(aMatrixForOps.toString().equals("[]") ? "통과" : "실패");
         System.out.println();
 
         System.out.println("46. 열 교환");
-        Matrix matrixb = matrixForOps.clone();
-        System.out.println("  -> 교환 전 (0열과 1열 교환):"); Tensors.printMatrix(matrixb);
-        matrixb.swapColumns(0, 1);
-        System.out.println("  -> 교환 후 결과:"); Tensors.printMatrix(matrixb);
+        Matrix bMatrixForOps = matrixForOps.clone();
+        System.out.println("교환 전 (0열과 1열 교환): \n" + bMatrixForOps);
+        bMatrixForOps.swapColumns(0, 1);
+        System.out.println("기댓 값 : []");
+        System.out.println("교환 후 (결과 값) : \n" + bMatrixForOps);
+        System.out.println(bMatrixForOps.toString().equals("[]") ? "통과" : "실패");
         System.out.println();
 
         System.out.println("47. 특정 행에 스칼라 곱");
-        Matrix matrixc = matrixForOps.clone();
-        System.out.println("  -> 연산 전 (1행에 스칼라 \"" + s2 + "\" 곱):"); Tensors.printMatrix(matrixc);
-        matrixc.scaleRow(1, s2);
-        System.out.println("  -> 연산 후 결과:"); Tensors.printMatrix(matrixc);
+        Matrix cMatrixForOps = matrixForOps.clone();
+        System.out.println("연산 전 (1행에 스칼라 \"" + s2 + "\" 곱): \n" + cMatrixForOps);
+        cMatrixForOps.scaleRow(1, s2);
+        System.out.println("기댓 값 : []");
+        System.out.println("연산 후 (결과 값) : \n" + cMatrixForOps);
+        System.out.println(cMatrixForOps.toString().equals("[]") ? "통과" : "실패");
         System.out.println();
 
         System.out.println("48. 특정 열에 스칼라 곱");
-        Matrix matrixd = matrixForOps.clone();
-        System.out.println("  -> 연산 전 (2열에 스칼라 \"" + s3 + "\" 곱):"); Tensors.printMatrix(matrixd);
-        matrixd.scaleColumn(2, s3);
-        System.out.println("  -> 연산 후 결과:"); Tensors.printMatrix(matrixd);
+        Matrix dMatrixForOps = matrixForOps.clone();
+        System.out.println("연산 전 (2열에 스칼라 \"" + s3 + "\" 곱) : \n" + dMatrixForOps);
+        dMatrixForOps.scaleColumn(2, s3);
+        System.out.println("기댓 값 : []");
+        System.out.println("연산 후 (결과 값) : \n" + dMatrixForOps);
+        System.out.println(dMatrixForOps.toString().equals("[]") ? "통과" : "실패");
         System.out.println();
 
         System.out.println("49. 특정 행에 다른 행의 상수배를 더하기");
-        Matrix matrixe = matrixForOps.clone();
-        System.out.println("  -> 연산 전 (2행 += 0행 * \"" + s2 + "\"):"); Tensors.printMatrix(matrixe);
-        matrixe.addRowMultiple(2, 0, s2);
-        System.out.println("  -> 연산 후 결과:"); Tensors.printMatrix(matrixe);
+        Matrix eMatrixForOps = matrixForOps.clone();
+        System.out.println("연산 전 (2행 += 0행 * \"" + s2 + "\") : \n" + eMatrixForOps);
+        eMatrixForOps.addRowMultiple(2, 0, s2);
+        System.out.println("기댓 값 : []");
+        System.out.println("연산 후 (결과 값) : \n" + eMatrixForOps);
+        System.out.println(eMatrixForOps.toString().equals("[]") ? "통과" : "실패");
         System.out.println();
 
         System.out.println("50. 특정 열에 다른 열의 상수배를 더하기");
-        Matrix matrixf = matrixForOps.clone();
-        System.out.println("  -> 연산 전 (0열 += 1열 * \"" + s3 + "\"):"); Tensors.printMatrix(matrixf);
-        matrixf.addColumnMultiple(0, 1, s3);
-        System.out.println("  -> 연산 후 결과:"); Tensors.printMatrix(matrixf);
+        Matrix fMatrixForOps = matrixForOps.clone();
+        System.out.println("연산 전 (0열 += 1열 * \"" + s3 + "\") : \n" + fMatrixForOps);
+        fMatrixForOps.addColumnMultiple(0, 1, s3);
+        System.out.println("기댓 값 : []");
+        System.out.println("연산 후 (결과 값) : \n" + fMatrixForOps);
+        System.out.println(fMatrixForOps.toString().equals("[]") ? "통과" : "실패");
         System.out.println();
-*/
 
+        System.out.println("51. 행렬을 RREF 형태로 변환하기");
+        Matrix rrefMatrix = matrixForOps.clone();
+        System.out.println("연산 전 행렬: \n" + rrefMatrix);
+        Matrix resultRREF = rrefMatrix.getRREF();
+        System.out.println("기댓 값 : []");
+        System.out.println("연산 후 (결과 값) : \n" + resultRREF);
+        System.out.println(resultRREF.toString().equals("[]") ? "통과" : "실패");
+        System.out.println();
+
+        System.out.println("52. 행렬인지 여부 판별");
+        System.out.println("유효한 행렬: \n" + resultRREF);
+        System.out.println("기댓 값 : true");
+        System.out.println("판별 결과 : " + resultRREF.isRREF());
+        System.out.println( (resultRREF.isRREF()) ? "통과" : "실패");
+        System.out.println();
+
+        System.out.println("유효하지 않은 행렬: \n" + matrixForOps);
+        System.out.println("기댓 값 : false");
+        System.out.println("판별 결과 : " + matrixForOps.isRREF());
+        System.out.println( !(resultRREF.isRREF()) ? "통과" : "실패");
+        System.out.println();
+
+        System.out.println("53. 자신의 행렬식 구하기");
+        System.out.println("입력 행렬: \n" + matrixForOps);
+        System.out.println("기댓 값 : -1.0");  // 예: 직접 계산한 determinant 값
+        System.out.println("결과 값 : " + matrixForOps.determinant());
+        System.out.println(matrixForOps.determinant().equals("-1.0") ? "통과" : "실패");
+        System.out.println();
+
+        System.out.println("54. 자신의 역행렬 구하기");
+        String invFile = "1,2\n5,6";
+        Matrix invMatrix = createMatrixByCSV(invFile);
+        System.out.println("입력 행렬: \n" + invMatrix);
+        Matrix resultInverse = invMatrix.inverse();
+        System.out.println("기댓 값 : \n []"  );
+        System.out.println("연산 후 (결과 값) : \n" + resultInverse);
+        System.out.println(resultInverse.toString().equals("[]") ? "통과" : "실패");
+        System.out.println();
     }
-
-
-
-
-
-
 }

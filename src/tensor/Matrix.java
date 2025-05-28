@@ -27,28 +27,10 @@ public interface Matrix {
     // 23. 행렬 곱셈 (Non-Static)
     void multiply(Matrix other);
 
-    // 28. 두 행렬 덧셈 (Static)
-    static Matrix add(Matrix m1, Matrix m2) {
-        System.out.println("// 28. 정적 행렬 덧셈 호출됨 (구현 필요)");
-        return null; // 최종 구현 필요
-    }
-
-    // 29. 두 행렬 곱셈 (Static)
-    static Matrix multiply(Matrix m1, Matrix m2) {
-        System.out.println("// 29. 정적 행렬 곱셈 호출됨 (구현 필요)");
-        return null; // 최종 구현 필요
-    }
-
     // 32. 가로로 행렬 합치기
-    static Matrix pasteToWidth(Matrix matrix1, Matrix matrix2) {
-        return null;
-    }
     Matrix widthPaste(Matrix matrix);
 
     // 33. 세로로 행렬 합치기
-    static Matrix pasteToHeight(Matrix matrix1, Matrix matrix2){
-        return null;
-    }
     Matrix heightPaste(Matrix matrix);
 
     // 34. 특정 행 벡터로 추출
@@ -102,5 +84,15 @@ public interface Matrix {
     // 50. 열에 다른 열의 배수 더하기
     void addColumnMultiple(int targetCol, int sourceCol, Scalar scalar);
 
+    // 51. RREF 행렬 반환하기
+    Matrix getRREF();
 
+    // 52. RREF 판별하기
+    boolean isRREF();
+
+    // 53. 행렬식 구하기
+    String determinant();
+
+    // 54. 역행렬 구하기
+    Matrix inverse();
 }

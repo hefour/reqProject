@@ -191,7 +191,7 @@ class MatrixImpl implements Matrix {
                 copyScalar[i][j] = matrixList.get(i);
             }
         }
-        return null;
+        return this;
     }
 
     @Override
@@ -211,22 +211,20 @@ class MatrixImpl implements Matrix {
         return this;
     }
     public Vector rowVector(int rowIndex) {
-        return null;
+        return new VectorImpl(3,"2");
     }
-    public Vector colVector(int colIndex) {
-        return null;
-    }
+    public Vector colVector(int colIndex) {return new VectorImpl(3,"2"); }
     public Matrix getSubMatrix(int beginRow, int endRow, int beginCol, int endCol){
-        return null;
+        return this;
     }
     public Matrix getMinor(int rowIndex, int colIndex){
-        return null;
+        return this;
     }
     public Matrix transpose(){
-        return null;
+        return this;
     }
     public Scalar trace(){
-        return null;
+        return new ScalarImpl("3");
     }
 
     @Override
@@ -256,32 +254,52 @@ class MatrixImpl implements Matrix {
 
     @Override
     public void swapRows(int row1, int row2) {
-
+        System.out.println("두 행을 스왑함");
     }
 
     @Override
     public void swapColumns(int col1, int col2) {
-
+        System.out.println("두 열을 스왑함");
     }
 
     @Override
     public void scaleRow(int rowIndex, Scalar scalar) {
-
+        System.out.println("한 행에 스칼라 곱함");
     }
 
     @Override
     public void scaleColumn(int colIndex, Scalar scalar) {
-
+        System.out.println("한 열에 스칼라 곱함");
     }
 
     @Override
     public void addRowMultiple(int targetRow, int sourceRow, Scalar scalar) {
-
+        System.out.println("한 행에 스칼라 더하기");
     }
 
     @Override
     public void addColumnMultiple(int targetCol, int sourceCol, Scalar scalar) {
+        System.out.println("한 열에 스칼라 더하기");
+    }
 
+    @Override
+    public Matrix getRREF() {
+        return this;
+    }
+
+    @Override
+    public boolean isRREF() {
+        return false;
+    }
+
+    @Override
+    public String determinant() {
+        return "";
+    }
+
+    @Override
+    public Matrix inverse() {
+        return this;
     }
 
     ;
