@@ -23,5 +23,7 @@ public interface Scalar {
     void add(Scalar scalar);
     //19
     void multiply(Scalar scalar);
+
+    BigDecimal getBigDecimalValue();
     //24
 }

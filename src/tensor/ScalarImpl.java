@@ -28,12 +28,6 @@ class ScalarImpl implements Scalar,Comparable<Scalar>{
         //예외 처리 필요
         this.scalar = new BigDecimal(stringValue);
     }
-
-    @Override
-    public void printScalar() {
-        System.out.println(scalar.toPlainString());
-    }
-
     @Override
     public String toString() {
         return scalar.toPlainString();
