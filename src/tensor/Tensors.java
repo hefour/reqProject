@@ -6,86 +6,36 @@ import tensor.Matrix;
 import java.math.BigDecimal;
 
 public class Tensors {
-/*
-    public static void validateScalar(Scalar scalar, String input) {
-        ScalarImpl expectedScalar = new ScalarImpl(input);
-        System.out.println("연산 결과 값은 "+scalar+"입니다.");
-        if(expectedScalar.equals(scalar))
-            System.out.println("비교 결과 true!");
-        else
-            System.out.println("비교 결과 false...");
-    }
-    public static void printScalar(Scalar scalar) {
-        System.out.println("현재 생성된 스칼라는 "+scalar.toString()+"입니다. ");
-
-    }
-    public static void validateVector(Vector vector,String input) {
-        Vector expectedVector = new VectorImpl(vector.getDimensionCount(), input);
-        System.out.println("연산 결과 값은 "+ vector+"입니다.");
-        if(expectedVector.equals(vector))
-            System.out.println("비교 결과 true!");
-        else
-            System.out.println("비교 결과 false...");
-
-    }
-
-    public static void printVector(Vector vector) {
-        System.out.println("현재 생성된 백터는 " +vector.toString() + "입니다. ");
-    }
-    public static void validateMatrix(Matrix matrix) {
-
-    }
-
-    public static void printMatrix(Matrix matrix) {
-        System.out.println("Tensors.printMatrix 호출됨. Matrix 값:");
-        if (matrix != null) {
-            System.out.println(matrix.toString()); // Matrix 인터페이스의 toString() 호출
-        } else {
-            System.out.println("null");
-        }
-    }
-
-    public static void validateMatrix(Matrix matrix, String expectedStateDescription) {
-        System.out.println("Tensors.validateMatrix 호출됨.");
-        System.out.println("검증 대상 Matrix:\n" + (matrix != null ? matrix.toString() : "null"));
-        System.out.println("기대 상태 설명: " + expectedStateDescription);
-
-    }
-*/
-    // ============================ 여기부터 텐서의 연산 기능 구현 ===============================
 
     public static Scalar addScalarByScalar(Scalar scalar1, Scalar scalar2) {
-        BigDecimal scalar1Val = new BigDecimal(scalar1.get());
-        BigDecimal scalar2Val = new BigDecimal(scalar2.get());
-        BigDecimal sum = scalar1Val.add(scalar2Val);
-        return new ScalarImpl(sum.toString()); // 또는 sum.toString()도 가능    }
+        return new ScalarImpl("1");         //더미 값
     }
 
     public static Scalar multiplyScalrByScalar(Scalar scalar1, Scalar scalar2) {
-        BigDecimal scalar1Val = new BigDecimal(scalar1.get());
-        BigDecimal scalar2Val = new BigDecimal(scalar2.get());
-        BigDecimal multi = scalar1Val.multiply(scalar2Val);
-        return new ScalarImpl(multi.toString());
+        return new ScalarImpl("4");         //더미 값
     }
 
     public static Vector addVectorByVector(Vector stringVector, Vector cloneVector) {
-        return new VectorImpl(8,"4");
+        return new VectorImpl(8,"4");  //더미 값
     }
 
     public static Vector multiplyVectorByScalar(Vector stringVector, Scalar stringScalar) {
-        return new VectorImpl(8, "9");
+        return new VectorImpl(8, "9");  //더미 값
     }
 
     public static Matrix addMatrixByMatrix(Matrix m1, Matrix m2) {
-        return new MatrixImpl("3",2,3);
+        return new MatrixImpl("3",2,3);   //더미 값
     }
+
     public static Matrix multiplyMatrixByMatrix(Matrix m1, Matrix m2) {
-        return new MatrixImpl("8",2,3);
+        return new MatrixImpl("8",2,3);   //더미 값
     }
+
     public static Matrix combineToWidthtMatrixByMatrix(Matrix m1, Matrix m2) {
-        return new MatrixImpl("3",2,3);    //구현 필요
+        return new MatrixImpl("3",2,3);   //더미 값
     }
+
     public static Matrix combineToHeightMatrixByMatrix(Matrix m1, Matrix m2) {
-        return new MatrixImpl("4",2,3);  //구현 필요
+        return new MatrixImpl("4",2,3);   //더미 값
     }
 }

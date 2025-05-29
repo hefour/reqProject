@@ -1,6 +1,5 @@
 package tensor;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -46,17 +45,17 @@ class MatrixImpl implements Matrix {
             return;
         }
         String[] rowsArr = data.split("\\n");
-        this.rows = rowsArr.length;
-        String[] firstCols = rowsArr[0].strip().split(",", -1);
-        this.cols = firstCols.length;
+            this.rows = rowsArr.length;
+            String[] firstCols = rowsArr[0].strip().split(",", -1);
+            this.cols = firstCols.length;
 
-        if (this.rows == 1 && this.cols == 1 && firstCols[0].isEmpty()) {
-            this.cols = 0;
-        }
-        this.matrixList = new ArrayList<>(this.rows * this.cols);
-        for (String rowStr : rowsArr) {
-            String[] colsArr = rowStr.strip().split(",", -1);
-            if (colsArr.length != this.cols) {
+            if (this.rows == 1 && this.cols == 1 && firstCols[0].isEmpty()) {
+                this.cols = 0;
+            }
+            this.matrixList = new ArrayList<>(this.rows * this.cols);
+            for (String rowStr : rowsArr) {
+                String[] colsArr = rowStr.strip().split(",", -1);
+                if (colsArr.length != this.cols) {
                 throw new IllegalArgumentException(
                         "csv 데이터 열 개수가 일치하지 않습니다. 기대: " + this.cols + ", 실제: " + colsArr.length
                 );
@@ -195,14 +194,10 @@ class MatrixImpl implements Matrix {
     }
 
     @Override
-    public void add(Matrix other) {
-
-    }
+    public void add(Matrix other) {}
 
     @Override
-    public void multiply(Matrix other) {
-
-    }
+    public void multiply(Matrix other) {}
 
     public Matrix widthPaste(Matrix matrix) {
         return this;
