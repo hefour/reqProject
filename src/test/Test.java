@@ -176,6 +176,7 @@ public class Test {
         System.out.println(stringScalar.get().equals("5") ? "통과" : "실패");
         System.out.println();
 
+        // 14
         System.out.println("14v. 벡터를 객체 형태로 콘솔에 출력할 수 있다.");
         System.out.println("11번 벡터를 출력합니다. ");
         System.out.println("기댓 값 : [3, 3, 3, 4, 3, 3, 3, 3]");
@@ -183,6 +184,7 @@ public class Test {
         System.out.println(stringVector.toString().equals("[3, 3, 3, 4, 3, 3, 3, 3]") ? "통과" : "실패");
         System.out.println();
 
+        // 14
         System.out.println("14m. 행렬 객체를 콘솔에 출력할 수 있다.");
         System.out.println("11번에서 지정한 행렬을 출력합니다.");
         System.out.println("기댓 값 : ");
@@ -194,6 +196,7 @@ public class Test {
                 " [1, 1, 1]]") ? "통과" : "실패");
         System.out.println();
 
+        // 15
         System.out.println("15s. 스칼라 객체의 동등성 판단을 할 수 있다.");
         System.out.println("비교 스칼라 1 : " + stringScalar.toString());
         Scalar compareScalar = createScalarByString("5");
@@ -201,6 +204,7 @@ public class Test {
         System.out.println(stringScalar.equals(compareScalar) ? "두 객체는 동등합니다!" : "두 객체는 동등하지 않습니다.");
         System.out.println();
 
+        // 15
         System.out.println("15v. 객체의 동등성 판단을 할 수 있다.");
         System.out.println(stringVector + "와 " + randomVector + "을 비교합니다.");
         if (stringVector.equals(randomVector)) {
@@ -211,6 +215,7 @@ public class Test {
         System.out.println();
 
 
+        // 15
         System.out.println("15m. 행렬 객체의 동등성 판단을 할 수 있다.");
         Scalar equalScalar = createScalarByString("1");
         Matrix equalMatrix = createMatrixByArray(new Scalar[][]{{equalScalar, equalScalar, equalScalar}, {equalScalar, equalScalar, equalScalar}}); // testMatrix와 동일
@@ -230,7 +235,7 @@ public class Test {
         System.out.println(stringMatrix.equals(falseMatrix) ? "일치" : "불일치");
         System.out.println();
 
-
+        // 16
         System.out.println("16. 스칼라의 경우 값의 대소비교를 할 수 있다.");
         Scalar testScalar = createScalarByString("2");
         System.out.println("기존 스칼라 : "+stringScalar);
@@ -242,7 +247,7 @@ public class Test {
         }
         System.out.println();
 
-
+        // 17
         System.out.println("17s. 스칼라 객체 복제를 할 수 있다.");
         System.out.println("기존 스칼라 객체 : "+stringScalar);
         Scalar cloneScalar = stringScalar.clone();
@@ -250,6 +255,7 @@ public class Test {
         System.out.println(stringScalar.equals(cloneScalar) ? "통과" : "실패");
         System.out.println();
 
+        // 17
         System.out.println("17v. 벡터 객체 복제를 할 수 있다.");
         Vector oneVector=createVectorByString(8,"1");
         System.out.println("기존 벡터 객체 : "+oneVector);
@@ -258,6 +264,7 @@ public class Test {
         System.out.println(cloneVector.equals(oneVector) ? "통과" : "실패");
         System.out.println();
 
+        // 17
         System.out.println("17m. 행렬 객체 복제를 할 수 있다.");
         System.out.println("기존 행렬 객체 : \n" + csvMatrix);
         Matrix cloneMatrix = csvMatrix.clone();
@@ -265,7 +272,7 @@ public class Test {
         System.out.println(csvMatrix.equals(cloneMatrix) ? "통과" : "실패");
         System.out.println();
 
-
+        // 18
         System.out.println("18. 스칼라는 다른 스칼라와 덧셈이 가능하다.");
         Scalar addMultiplyScalar = createScalarByString("5");
         System.out.println("기존 스칼라 : " + addMultiplyScalar.toString());
@@ -276,6 +283,7 @@ public class Test {
         System.out.println(addMultiplyScalar.toString().equals("7") ? "통과" : "실패");
         System.out.println();
 
+        // 19
         System.out.println("19. 스칼라는 다른 스칼라와 곱셈이 가능하다.");
         System.out.println("기존 스칼라 : " + addMultiplyScalar.toString());
         System.out.println("곱할 스칼라 : " + testScalar.toString());
@@ -285,7 +293,7 @@ public class Test {
         System.out.println(addMultiplyScalar.toString().equals("14") ? "통과" : "실패");
         System.out.println();
 
-
+        // 20
         System.out.println("20. 벡터는 다른 벡터와 덧셈이 가능하다.(길이가 같을 때)");
         Vector addMultiplyScalarVector = createVectorByString(8,"2");
         System.out.println("기존 벡터 : " + addMultiplyScalarVector.toString());
@@ -296,6 +304,7 @@ public class Test {
         System.out.println(addMultiplyScalarVector.toString().equals("[3, 3, 3, 3, 3, 3, 3, 3") ? "통과" : "실패");
         System.out.println();
 
+        // 21
         System.out.println("21. 벡터는 다른 스칼라와 곱셈이 가능하다 (모든 요소에 곱)");
         System.out.println("기존 벡터 : " + addMultiplyScalarVector.toString());
         System.out.println("곱할 스칼라 : " + testScalar.toString());
@@ -304,8 +313,6 @@ public class Test {
         System.out.println("결과 값 : " + addMultiplyScalarVector.toString());
         System.out.println(addMultiplyScalarVector.toString().equals("[4, 4, 4, 4, 4, 4, 4, 4]") ? "통과" : "실패");
         System.out.println();
-
-        //22,23연산
 
         // 22
         System.out.println("22. 행렬은 다른 행렬과 덧셈이 가능하다.");
@@ -347,25 +354,30 @@ public class Test {
         System.out.println("24. 전달받은 두 스칼라의 덧셈이 가능하다(새로운 객체). ");
         System.out.println("스칼라 1 : " + stringScalar.toString());
         System.out.println("스칼라 2 : " + testScalar.toString());
+        // 24번의 스칼라 + 스칼라 메서드
         Scalar resultAddScalar = Tensors.addScalarByScalar(stringScalar, testScalar);
         System.out.println("기댓 값 : 7");
         System.out.println("결과 값 : " + resultAddScalar.toString());
         System.out.println(resultAddScalar.toString().equals("7") ? "통과" : "실패");
         System.out.println();
 
+        // 25
         System.out.println("25. 전달받은 두 스칼라의 곱셈이 가능하다(새로운 객체). ");
         System.out.println("스칼라 1 : " + stringScalar.toString());
         System.out.println("스칼라 2 : " + testScalar.toString());
+        // 25번의 스칼라 x 스칼라 메서드
         Scalar resultMultiplyScalar = Tensors.multiplyScalrByScalar(stringScalar, testScalar);
         System.out.println("기댓 값 : 10 ");
         System.out.println("결과 값 : " + resultMultiplyScalar.toString());
         System.out.println(resultMultiplyScalar.toString().equals("10") ? "통과" : "실패");
         System.out.println();
 
+        // 26
         System.out.println("26. 전달받은 두 벡터의 덧셈이 가능하다.(길이가 같을 때)");
         System.out.println("벡터 1 : " + stringVector.toString());
         System.out.println("벡터 2 : " + cloneVector.toString());
         System.out.println("기댓 값 : [4, 4, 4, 4, 4, 4, 4, 4]");
+        // 26번의 벡터 + 벡터 메서드
         Vector resultAddVector = Tensors.addVectorByVector(stringVector, cloneVector);
         System.out.println("결과 값 : " + resultAddVector.toString());
         System.out.println(resultAddVector.toString().equals("[4, 4, 4, 4, 4, 4, 4, 4]") ? "통과" : "실패");
@@ -376,6 +388,7 @@ public class Test {
         System.out.println("벡터 1 : " + stringVector.toString());
         System.out.println("스칼라 1 : " + stringScalar.toString());
         System.out.println("기댓 값 : [15, 15, 15, 15, 15, 15, 15, 15]");
+        // 27번의 벡터 x 스칼라 메서드
         Vector resultMultiplyVectorByScalar = Tensors.multiplyVectorByScalar(stringVector, stringScalar);
         System.out.println("결과 값 : " + resultMultiplyVectorByScalar.toString());
         System.out.println(resultMultiplyVectorByScalar.toString().equals("[15, 15, 15, 15, 15, 15, 15, 15]") ? "통과" : "실패");
@@ -388,6 +401,7 @@ public class Test {
         System.out.println("행렬 1 : \n" + test1Matrix.toString());
         System.out.println("행렬 2 : \n" + test2Matrix.toString());
         System.out.println("기댓 값 :\n [[3, 4],\n" + " [10, 11]]");
+        // 28번의 행렬 + 행렬 메서드
         Matrix resultAddMatrix = Tensors.addMatrixByMatrix(test1Matrix, test2Matrix);
         System.out.println("결과 값 : ");
         System.out.println(resultAddMatrix.toString());
@@ -400,6 +414,7 @@ public class Test {
         System.out.println("행렬 2 : \n" + test2Matrix.toString());
         System.out.println("기댓 값 : [[11,20],\n" +
                 " [22, 37]]");
+        // 29번의 행렬 x 행렬 메서드
         Matrix resultMultiplyMatrix = Tensors.multiplyMatrixByMatrix(test1Matrix, test2Matrix);
         System.out.println("결과 값 : ");
         System.out.println(resultMultiplyMatrix.toString());
@@ -407,6 +422,7 @@ public class Test {
                 " [22, 37]]") ? "통과" : "실패");
         System.out.println();
 
+        // 30
         System.out.println("30. n-차원 벡터 객체는 자신으로부터 nx1 행렬을 생성하여 반환할 수 있다.");
         System.out.println("반환할 벡터 : " + stringVector.toString());
         Matrix VectorToColumnMatrix = stringVector.toColumnMatrix();
@@ -430,6 +446,7 @@ public class Test {
                 " [3]]") ? "통과" : "실패");
         System.out.println();
 
+        // 31
         System.out.println("31. n-차원 벡터 객체는 자신으로부터 1xn 행렬을 생성하여 반환할 수 있다.");
         System.out.println("반환할 벡터 : " + stringVector.toString());
         Matrix VectorToRowMatrix = stringVector.toRowMatrix();
@@ -443,6 +460,7 @@ public class Test {
         Matrix t2Matrix=createUnitMatrix(2);
         Matrix t3Matrix=createUnitMatrix(2);
 
+        // 32
         System.out.println("32. 행렬은 다른 행렬과 가로로 합쳐질 수 있다.");
         System.out.println("기존 행렬 : \n"+ tMatrix);
         System.out.println("추가할 행렬 : \n"+ t2Matrix);
@@ -459,12 +477,14 @@ public class Test {
         System.out.println("행렬 2 : \n"+ t2Matrix);
         System.out.println("기댓 값 : [[1, 0, 1, 0],\n" +
                 " [0, 1, 0, 1]]");
+        // 32번의 행렬 결합 메서드 (가로)
         Matrix widthMatrix = Tensors.combineToWidthtMatrixByMatrix(tMatrix, t2Matrix);
         System.out.println("합쳐진 행렬(결과 값) : \n"+ widthMatrix);
         System.out.println(widthMatrix.toString().equals("[[1, 0, 1, 0],\n" +
                 " [0, 1, 0, 1]]") ? "통과" : "실패");
         System.out.println();
 
+        // 33
         System.out.println("33. 행렬은 다른 행렬과 세로로 합쳐질 수 있다.");
         System.out.println("기존 행렬 : \n"+ tMatrix);
         System.out.println("추가할 행렬 : \n"+ t2Matrix);
@@ -481,6 +501,7 @@ public class Test {
         System.out.println("33-1. 디폴트 static 메소드 호출");
         System.out.println("기존 행렬 : \n"+ tMatrix);
         System.out.println("추가할 행렬 : \n"+ t2Matrix);
+        // 33-1 두 행렬 결합 메서드 (세로)
         Matrix heightMatrix = Tensors.combineToHeightMatrixByMatrix(tMatrix, t2Matrix);
         System.out.println("기댓 값 : \n[[1, 0],\n" +
                 " [0, 1],\n" +
@@ -494,6 +515,8 @@ public class Test {
         System.out.println();
 
         Matrix test3Matrix = createMatrixByCSV("3,5\n2,3");
+
+        // 34
         System.out.println("34. 행렬은 특정 행을 벡터 형태로 추출해 줄 수 있다.");
         System.out.println("기존 행렬 : \n"+ test3Matrix);
         System.out.println("추출할 행 : 1");
@@ -503,6 +526,7 @@ public class Test {
         System.out.println(rowVec.toString().equals("[3, 5]") ? "통과" : "실패");
         System.out.println();
 
+        // 35
         System.out.println("35. 행렬은 특정 열을 벡터 형태로 추출해 줄 수 있다");
         Matrix test4Matrix = createMatrixByCSV("3,5\n2,3");
         System.out.println("기존 행렬 : \n"+ test4Matrix);
@@ -513,6 +537,7 @@ public class Test {
         System.out.println(colVec.toString().equals("[3, 2]") ? "통과" : "실패");
         System.out.println();
 
+        // 36
         System.out.println("36. 행렬은 시작 행과 끝 행 인덱스로 특정 범위의 부분 행렬을 추출해 줄 수 있다.");
         Matrix test5Matrix = createMatrixByCSV(
                 "3,7,1,0\n" +
@@ -529,6 +554,7 @@ public class Test {
         System.out.println(absMatrix.toString().equals("[[7, 1]\n [9, 4]]") ? "통과" : "실패");
         System.out.println();
 
+        // 37
         System.out.println("37. 행렬은 지정 행 제외, 특정 범위의 부분 행렬을 추출해 줄 수 있다.");
         System.out.println("기존 행렬 : \n"+ test5Matrix);
         System.out.println("지정 행 : 3 , 지정 열 : 3");
@@ -538,6 +564,7 @@ public class Test {
         System.out.println(absOtherMatrix.toString().equals("[[3, 7, 0],\n [2, 9, 6],\n [1, 2, 4]]") ? "통과" : "실패");
         System.out.println();
 
+        // 38
         System.out.println("38. 행렬은 전치행렬을 구현해 줄 수 있다.");
         System.out.println("기존 행렬 : \n"+ test5Matrix);
         Matrix transposedMatrix = tMatrix.transpose();
@@ -552,6 +579,7 @@ public class Test {
                 "  [1, 2, 7, 4]]") ? "통과" : "실패");
         System.out.println();
 
+        // 39
         System.out.println("39. 행렬은 대각 요소의 합을 구해줄 수 있다.");
         System.out.println("기존 행렬 : \n"+ test5Matrix);
         Scalar oppositeScalar=test5Matrix.trace();
@@ -573,28 +601,33 @@ public class Test {
         Matrix identityTestMatrix = createUnitMatrix(3);
         Matrix zeroTestMatrix = createMatrixByTypeNum("0", 2, 2);
 
+        // 40
         System.out.println("40. 정사각 행렬 판별");
         System.out.println("  -> squareMatrix (2x2)는 정사각 행렬인가? " + squareMatrix.isSquare());
         System.out.println("  -> nonSquareMatrix (3x2)는 정사각 행렬인가? " + nonSquareMatrix.isSquare());
         System.out.println();
 
+        // 41
         System.out.println("41. 상삼각 행렬 판별");
         System.out.println("  -> upperTriMatrix는 상삼각 행렬인가? " + upperTriMatrix.isUpperTriangular());
         System.out.println("  -> lowerTriMatrix는 상삼각 행렬인가? " + lowerTriMatrix.isUpperTriangular());
         System.out.println("  -> squareMatrix는 상삼각 행렬인가? " + squareMatrix.isUpperTriangular());
         System.out.println();
 
+        // 42
         System.out.println("42. 하삼각 행렬 판별");
         System.out.println("  -> lowerTriMatrix는 하삼각 행렬인가? " + lowerTriMatrix.isLowerTriangular());
         System.out.println("  -> upperTriMatrix는 하삼각 행렬인가? " + upperTriMatrix.isLowerTriangular());
         System.out.println("  -> squareMatrix는 하삼각 행렬인가? " + squareMatrix.isLowerTriangular());
         System.out.println();
 
+        // 43
         System.out.println("43. 단위 행렬 판별");
         System.out.println("  -> identityTestMatrix는 단위 행렬인가? " + identityTestMatrix.isIdentity());
         System.out.println("  -> squareMatrix는 단위 행렬인가? " + squareMatrix.isIdentity());
         System.out.println();
 
+        // 44
         System.out.println("44. 영 행렬 판별");
         System.out.println("  -> zeroTestMatrix는 영 행렬인가? " + zeroTestMatrix.isZero());
         System.out.println("  -> identityTestMatrix는 영 행렬인가? " + identityTestMatrix.isZero());
@@ -602,6 +635,7 @@ public class Test {
 
         Matrix matrixForOps = createMatrixByCSV("11,12,13\n14,15,16\n17,18,19");
 
+        // 45
         System.out.println("45. 행 교환");
         Matrix aMatrixForOps = matrixForOps.clone();
         System.out.println("교환 전 (1행과 3행 교환): \n" + aMatrixForOps);
@@ -615,6 +649,7 @@ public class Test {
                 " [11, 12, 13]]") ? "통과" : "실패");
         System.out.println();
 
+        // 46
         System.out.println("46. 열 교환");
         Matrix bMatrixForOps = matrixForOps.clone();
         System.out.println("교환 전 (1열과 2열 교환): \n" + bMatrixForOps);
@@ -628,6 +663,7 @@ public class Test {
                 " [18, 17, 19]]") ? "통과" : "실패");
         System.out.println();
 
+        // 47
         System.out.println("47. 특정 행에 스칼라 곱");
         Matrix cMatrixForOps = matrixForOps.clone();
         System.out.println("연산 전 (3행에 스칼라 \"" + s2 + "\" 곱): \n" + cMatrixForOps);
@@ -641,6 +677,7 @@ public class Test {
                 " [34, 36, 38]]") ? "통과" : "실패");
         System.out.println();
 
+        // 48
         System.out.println("48. 특정 열에 스칼라 곱");
         Matrix dMatrixForOps = matrixForOps.clone();
         System.out.println("연산 전 (2열에 스칼라 \"" + s3 + "\" 곱) : \n" + dMatrixForOps);
@@ -654,6 +691,7 @@ public class Test {
                 " [17, 54, 19]]") ? "통과" : "실패");
         System.out.println();
 
+        // 49
         System.out.println("49. 특정 행에 다른 행의 상수배를 더하기");
         Matrix eMatrixForOps = matrixForOps.clone();
         System.out.println("연산 전 (1행 += 2행 * \"" + s2 + "\") : \n" + eMatrixForOps);
@@ -667,6 +705,7 @@ public class Test {
                 " [17, 18, 19]]") ? "통과" : "실패");
         System.out.println();
 
+        // 50
         System.out.println("50. 특정 열에 다른 열의 상수배를 더하기");
         Matrix fMatrixForOps = matrixForOps.clone();
         System.out.println("연산 전 (3열 += 1열 * \"" + s3 + "\") : \n" + fMatrixForOps);
@@ -680,6 +719,7 @@ public class Test {
                 " [17, 18, 70]]") ? "통과" : "실패");
         System.out.println();
 
+        // 51
         System.out.println("51. 행렬을 RREF 형태로 변환하기");
         Matrix rrefMatrix = matrixForOps.clone();
         System.out.println("연산 전 행렬: \n" + rrefMatrix);
@@ -693,6 +733,7 @@ public class Test {
                 " [0, 0, 0]]") ? "통과" : "실패");
         System.out.println();
 
+        // 52
         System.out.println("52. RREF 행렬인지 여부 판별");
         System.out.println("유효한 행렬: \n" + resultRREF);
         System.out.println("기댓 값 : true");
@@ -708,6 +749,8 @@ public class Test {
 
         String invFile = "1,2\n5,6";
         Matrix invMatrix = createMatrixByCSV(invFile);
+
+        // 53
         System.out.println("53. 자신의 행렬식 구하기");
         System.out.println("입력 행렬: \n" + invMatrix);
         System.out.println("기댓 값 : -4");  // 예: 직접 계산한 determinant 값
@@ -715,6 +758,7 @@ public class Test {
         System.out.println(invMatrix.determinant().equals("-4") ? "통과" : "실패");
         System.out.println();
 
+        // 54
         System.out.println("54. 자신의 역행렬 구하기");
         System.out.println("입력 행렬: \n" + invMatrix);
         Matrix resultInverse = invMatrix.inverse();
