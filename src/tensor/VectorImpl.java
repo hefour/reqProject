@@ -130,8 +130,9 @@ class VectorImpl implements Vector {
 
     @Override
     public Vector multiply(Scalar scalar){
-        return this;
+        return new VectorImpl(3,scalar.toString());
     }
+
     @Override
     public Vector clone(){
         return new VectorImpl(vectorList.toArray(new BigDecimal[vectorList.size()]));

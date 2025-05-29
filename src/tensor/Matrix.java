@@ -45,7 +45,7 @@ public interface Matrix {
     // 38. 전치 행렬 생성
     Matrix transpose();
 
-    // 39. 대각요소의 합
+    // 39. 대각 요소의 합
     Scalar trace();
 
     // 40. 정사각 행렬 판별

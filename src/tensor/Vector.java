@@ -22,13 +22,6 @@ public interface Vector {
 
     Vector multiply(Scalar scalar);
 
-    static Vector addTwoVector(Vector one, Vector other){
-        return one.add(other);
-    }
-    static Vector multiplyScalar(Vector vector, Scalar scalar){
-        return vector.multiply(scalar);
-    }
-
     Matrix toColumnMatrix();
 
     Matrix toRowMatrix();
