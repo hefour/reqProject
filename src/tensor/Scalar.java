@@ -1,4 +1,3 @@
-
 package tensor;
 
 import java.math.BigDecimal;

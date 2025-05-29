@@ -1,8 +1,5 @@
 package tensor;
 
-import java.math.BigDecimal;
-import java.rmi.MarshalException;
-
 public interface Matrix {
     // 11. 요소 지정/조회
     Scalar get(int rowIndex, int colIndex);

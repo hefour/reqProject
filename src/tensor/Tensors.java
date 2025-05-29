@@ -1,9 +1,4 @@
-
 package tensor;
-import tensor.Scalar;
-import tensor.Matrix;
-
-import java.math.BigDecimal;
 
 public class Tensors {
 
