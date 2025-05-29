@@ -24,16 +24,4 @@ public interface Scalar {
     //19
     void multiply(Scalar scalar);
     //24
-    static Scalar addTwoScalars(Scalar scalar1, Scalar scalar2){
-        return new ScalarImpl(scalar1.getBigDecimalValue().add(scalar2.getBigDecimalValue()).toPlainString());
-    };
-    //25
-    static Scalar multiplyTwoScalars(Scalar scalar1, Scalar scalar2){
-        return new ScalarImpl(scalar1.getBigDecimalValue().multiply(scalar2.getBigDecimalValue()).toPlainString());
-    };
-
-
-    void printScalar();
-    BigDecimal getBigDecimalValue();
-
 }
