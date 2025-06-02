@@ -31,11 +31,6 @@ class ScalarImpl implements Scalar,Comparable<Scalar>{
     }
 
     @Override
-    public void printScalar() {
-        System.out.println(scalar.toPlainString());
-    }
-
-    @Override
     public String toString() {
         return scalar.toPlainString();
     }
@@ -70,7 +65,7 @@ class ScalarImpl implements Scalar,Comparable<Scalar>{
     public void multiply(Scalar scalar) {
         this.scalar=this.scalar.multiply(scalar.getBigDecimalValue());
     }
-    // BigDecimal을 많이 쓸거같아서 인터페이스에 추가하고 public으로 수정했습니다. -장준하
+
     public BigDecimal getBigDecimalValue() {
         return scalar;
     }
