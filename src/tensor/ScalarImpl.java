@@ -9,8 +9,8 @@ class ScalarImpl implements Scalar,Comparable<Scalar>{
 
     private BigDecimal scalar;
 
-    ScalarImpl(String stringNum) {
-        this.scalar = new BigDecimal(stringNum);
+    ScalarImpl(String stringValue) {
+        this.scalar = new BigDecimal(stringValue);
     }
 
     ScalarImpl(int i, int j) {
@@ -18,56 +18,56 @@ class ScalarImpl implements Scalar,Comparable<Scalar>{
         double randomValue = i + random.nextDouble() * (j - i);
         this.scalar = BigDecimal.valueOf(randomValue).setScale(4, RoundingMode.HALF_UP);
     }
-// ==================================☢️공사 중☢️====================================
+
     @Override
     public String get() {
         return scalar.toString();
     }
 
     @Override
-    public void set(String stringValue) {
-        //예외 처리 필요
-        this.scalar = new BigDecimal(stringValue);
-    }
-    @Override
-    public String toString() {
-        return scalar.toPlainString();
-    }
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof ScalarImpl)) return false;
-        ScalarImpl other = (ScalarImpl) obj;
-        return scalar.compareTo(other.scalar) == 0;
-    }
-    @Override
-    public int hashCode() {
-        return Objects.hash(scalar.stripTrailingZeros());
+    public void set(String setValue) {
+        this.scalar = new BigDecimal(setValue);
     }
 
     @Override
-    public void add(Scalar scalar) {
-        this.scalar=this.scalar.add(scalar.getBigDecimalValue());
+    public String toString() {
+        return scalar.toString();
+    }
+
+    @Override
+    public boolean equals(Object compare) {
+        if (this == compare) return true;
+        if (!(compare instanceof ScalarImpl other)) return false;
+        return Objects.equals(this.scalar, other.scalar);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(scalar);
+    }
+
+    @Override
+    public void add(Scalar opScalar) {
+        this.scalar = this.scalar.add(opScalar.getBigDecimalValue());
     }
 
     //16번
     @Override
-    public int compareTo(Scalar other) {
-        return this.scalar.compareTo(other.getBigDecimalValue());
+    public int compareTo(Scalar opScalar) {
+        return this.scalar.compareTo(opScalar.getBigDecimalValue());
     }
+
     //17번
     @Override
     public Scalar clone(){
         return new ScalarImpl(this.get());
     }
 
-    public void multiply(Scalar scalar) {
-        this.scalar=this.scalar.multiply(scalar.getBigDecimalValue());
+    public void multiply(Scalar opScalar) {
+        this.scalar = this.scalar.multiply(opScalar.getBigDecimalValue());
     }
-    // BigDecimal을 많이 쓸거같아서 인터페이스에 추가하고 public으로 수정했습니다. -장준하
+
     public BigDecimal getBigDecimalValue() {
         return scalar;
     }
-
-
 }
