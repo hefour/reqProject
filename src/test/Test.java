@@ -20,7 +20,7 @@ public class Test {
         System.out.println("결과 값 : " + randomScalar);
         System.out.println("1, 2 사이의 실수 값이 출력되면 통과");
         System.out.println();
-/*
+
         System.out.println("03. 지정한 하나의 값을 모든 요소의 값으로 하는 차원 벡터를 생성할 수 있다.");
         Vector stringVector = createVectorByString(8,"3");  // 03.
         System.out.println("기댓 값 : [3, 3, 3, 3, 3, 3, 3, 3]");
@@ -98,18 +98,18 @@ public class Test {
 
         //10
         System.out.println("10. 단위 행렬을 생성할 수 있다.");
-        Matrix unitMatrix = createUnitMatrix(3);
+        Matrix unitMatrix = createUnitMatrix(2);
         System.out.println("기댓 값 : ");
         System.out.println(
                 "[[1, 0],\n" +
-                " [0, 1],");
+                " [0, 1]]");
         System.out.println("결과 값 : ");
         System.out.println(unitMatrix.toString());
         System.out.println(unitMatrix.toString().equals(
                 "[[1, 0],\n" +
-                " [0, 1],") ? "통과" : "실패" );
+                " [0, 1]]") ? "통과" : "실패" );
         System.out.println();
-
+/*
         // 11
         System.out.println("11v. 특정 위치의 요소를 지정조회할 수 있다.");
         int index = 3; // 0-based index (즉, 4번째 요소)

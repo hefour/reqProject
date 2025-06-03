@@ -7,103 +7,62 @@ import java.util.Objects;
 class MatrixImpl implements Matrix {
     private int rows;
     private int cols;
-    private List<Scalar> matrixList;
+    private List<Scalar> matrixList = new ArrayList<>();
 
     MatrixImpl(String stringValue, int m, int n) {
-        if (m < 0 || n < 0) {
-            throw new IllegalArgumentException("행렬의 차원(m, n)은 0 이상이어야 합니다.");
-        }
         this.rows = m;
         this.cols = n;
-        this.matrixList = new ArrayList<>(m * n);
-        for (int i = 0; i < m * n; i++) {
+
+        for (int s = 0; s < m * n; s++) {
             this.matrixList.add(new ScalarImpl(stringValue));
         }
     }
 
-    MatrixImpl(int minRandomVal, int maxRandomVal, int m, int n) {
-        if (m < 0 || n < 0) {
-            throw new IllegalArgumentException("행렬의 차원(m, n)은 0 이상이어야 합니다.");
-        }
+    MatrixImpl(int i, int j, int m, int n) {
         this.rows = m;
         this.cols = n;
-        this.matrixList = new ArrayList<>(m * n);
-        for (int k = 0; k < m * n; k++) {
-            this.matrixList.add(new ScalarImpl(minRandomVal, maxRandomVal));
+
+        for (int s = 0; s < m * n; s++) {
+            this.matrixList.add(new ScalarImpl(i, j));
         }
     }
 
-    MatrixImpl(String csvData) {
-        if (csvData == null) {
-            throw new IllegalArgumentException("CSV 데이터는 null일 수 없습니다.");
-        }
-        String data = csvData.strip();
-        if (data.isEmpty()) {
-            this.rows = 0;
-            this.cols = 0;
-            this.matrixList = new ArrayList<>(0);
-            return;
-        }
-        String[] rowsArr = data.split("\\n");
-            this.rows = rowsArr.length;
-            String[] firstCols = rowsArr[0].strip().split(",", -1);
-            this.cols = firstCols.length;
+    MatrixImpl(String csvValue) {
+        String[] rowsArr = csvValue.strip().split("\\n");
+        this.rows = rowsArr.length;
 
-            if (this.rows == 1 && this.cols == 1 && firstCols[0].isEmpty()) {
-                this.cols = 0;
-            }
-            this.matrixList = new ArrayList<>(this.rows * this.cols);
-            for (String rowStr : rowsArr) {
-                String[] colsArr = rowStr.strip().split(",", -1);
-                if (colsArr.length != this.cols) {
-                throw new IllegalArgumentException(
-                        "csv 데이터 열 개수가 일치하지 않습니다. 기대: " + this.cols + ", 실제: " + colsArr.length
-                );
-            }
-            if (this.cols == 0) continue;
-            for (String num : colsArr) {
-                this.matrixList.add(new ScalarImpl(num.strip()));
-            }
+        String[] firstRow = rowsArr[0].strip().split(",", -1);
+        this.cols = firstRow.length;
+
+        if (this.rows == 1 && this.cols == 1 && firstRow[0].isEmpty()) {
+            this.cols = 0;
         }
-        if (this.matrixList.size() != this.rows * this.cols) {
-            throw new IllegalArgumentException(
-                    "csv 데이터 크기가 일치하지 않습니다. 기대 크기: " + (this.rows * this.cols) + ", 실제 크기: " + this.matrixList.size()
-            );
+
+        for (int r = 0; r < rows; r++) {
+            String[] colsArr = rowsArr[r].strip().split(",", -1);
+            for (String value : colsArr) {
+                matrixList.add(new ScalarImpl(value.strip()));
+            }
         }
     }
 
-    MatrixImpl(Scalar[][] arr) {
-        if (arr == null) {
-            throw new IllegalArgumentException("입력 배열은 null일 수 없습니다.");
-        }
-        if (arr.length == 0) {
-            this.rows = 0;
-            this.cols = 0;
-            this.matrixList = new ArrayList<>(0);
-            return;
-        }
-        this.rows = arr.length;
-        this.cols = (arr[0] == null) ? 0 : arr[0].length;
-        this.matrixList = new ArrayList<>(rows * cols);
+    MatrixImpl(Scalar[][] arrValue) {
+        this.rows = arrValue.length;
+        this.cols = arrValue[0].length;
+
         for (int i = 0; i < rows; i++) {
-            if (arr[i] == null || arr[i].length != cols) {
-                throw new IllegalArgumentException("행별 열 개수가 일치해야 합니다.");
-            }
             for (int j = 0; j < cols; j++) {
-                this.matrixList.add(new ScalarImpl(String.valueOf(arr[i][j])));
+                this.matrixList.add(new ScalarImpl(arrValue[i][j].toString()));
             }
         }
     }
 
     MatrixImpl(int n) {
-        if (n < 0) {
-            throw new IllegalArgumentException("단위 행렬의 크기(n)는 0 이상이어야 합니다.");
-        }
         this.rows = n;
         this.cols = n;
-        this.matrixList = new ArrayList<>(n * n);
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
                 this.matrixList.add(new ScalarImpl(i == j ? "1" : "0"));
             }
         }

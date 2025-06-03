@@ -14,14 +14,14 @@ class ScalarImpl implements Scalar,Comparable<Scalar>{
     }
 
     ScalarImpl(int i, int j) {
-        Random rand = new Random();
-        double randomValue = i + rand.nextDouble() * (j - i);
+        Random random = new Random();
+        double randomValue = i + random.nextDouble() * (j - i);
         this.scalar = BigDecimal.valueOf(randomValue).setScale(4, RoundingMode.HALF_UP);
     }
 // ==================================☢️공사 중☢️====================================
     @Override
     public String get() {
-        return scalar.toPlainString();
+        return scalar.toString();
     }
 
     @Override

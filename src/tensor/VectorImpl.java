@@ -2,50 +2,30 @@ package tensor;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 class VectorImpl implements Vector {
 
-    private final List<BigDecimal> vector;
+    private List<BigDecimal> vector = new ArrayList<>();
 
-    VectorImpl(int dimension, String valueString) {
-        if (dimension < 0) {
-            throw new IllegalArgumentException("벡터의 차원(dimension)은 0 이상이어야 합니다.");
-        }
-        this.vector = new ArrayList<>(dimension);
-        ScalarImpl prototype = new ScalarImpl(valueString);
-        for (int i = 0; i < dimension; i++) {
-            BigDecimal base = prototype.getBigDecimalValue();
-            vector.add(base);
+    VectorImpl(int dimension, String stringValue) {
+        BigDecimal temp = new BigDecimal(stringValue);
+        for (int d = 0; d < dimension; d++) {
+            vector.add(temp);
         }
     }
 
-
-    VectorImpl(int dimension, int minBound, int maxBound) {
-        if (dimension < 0) {
-            throw new IllegalArgumentException("벡터의 차원(dimension)은 0 이상이어야 합니다.");
-        }
-        this.vector = new ArrayList<>(dimension);
-        for (int i = 0; i < dimension; i++) {
-            // ScalarImpl 로 랜덤 생성 후 BigDecimal 값만 보관
-            ScalarImpl rand = new ScalarImpl(minBound, maxBound);
-            vector.add(rand.getBigDecimalValue());
+    VectorImpl(int dimension, int i, int j) {
+        for (int d = 0; d < dimension; d++) {
+            ScalarImpl randomValue = new ScalarImpl(i, j);
+            vector.add(randomValue.getBigDecimalValue());
         }
     }
 
-    public VectorImpl(BigDecimal[] initialValueArray) {
-        if (initialValueArray == null) {
-            throw new IllegalArgumentException("입력 배열은 null일 수 없습니다.");
-        }
-
-        this.vector = new ArrayList<>();
-        for (BigDecimal bd : initialValueArray) {
-            if (bd == null) {
-                throw new IllegalArgumentException("입력 배열에 null 요소가 포함될 수 없습니다.");
-            }
-            this.vector.add(bd);
-        }
+    public VectorImpl(BigDecimal[] arrValue) {
+        this.vector.addAll(Arrays.asList(arrValue));
     }
 
     // ==================================☢️공사 중☢️====================================
