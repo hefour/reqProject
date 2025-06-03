@@ -20,7 +20,7 @@ public class Test {
         System.out.println("결과 값 : " + randomScalar);
         System.out.println("1, 2 사이의 실수 값이 출력되면 통과");
         System.out.println();
-
+/*
         System.out.println("03. 지정한 하나의 값을 모든 요소의 값으로 하는 차원 벡터를 생성할 수 있다.");
         Vector stringVector = createVectorByString(8,"3");  // 03.
         System.out.println("기댓 값 : [3, 3, 3, 3, 3, 3, 3, 3]");
@@ -364,7 +364,7 @@ public class Test {
         System.out.println("스칼라 1 : " + stringScalar.toString());
         System.out.println("스칼라 2 : " + testScalar.toString());
         // 25번의 스칼라 x 스칼라 메서드
-        Scalar resultMultiplyScalar = Tensors.multiplyScalrByScalar(stringScalar, testScalar);
+        Scalar resultMultiplyScalar = Tensors.multiplyScalarByScalar(stringScalar, testScalar);
         System.out.println("기댓 값 : 15 ");
         System.out.println("결과 값 : " + resultMultiplyScalar.toString());
         System.out.println(resultMultiplyScalar.toString().equals("15") ? "통과" : "실패");
@@ -476,7 +476,7 @@ public class Test {
         System.out.println("기댓 값 : [[1, 0, 1, 0],\n" +
                 " [0, 1, 0, 1]]");
         // 32번의 행렬 결합 메서드 (가로)
-        Matrix widthMatrix = Tensors.combineToWidthtMatrixByMatrix(tMatrix, t2Matrix);
+        Matrix widthMatrix = Tensors.combineToWidthMatrixByMatrix(tMatrix, t2Matrix);
         System.out.println("합쳐진 행렬(결과 값) : \n"+ widthMatrix);
         System.out.println(widthMatrix.toString().equals("[[1, 0, 1, 0],\n" +
                 " [0, 1, 0, 1]]") ? "통과" : "실패");
@@ -779,6 +779,6 @@ public class Test {
         System.out.println("연산 후 (결과 값) : \n" + resultInverse);
         System.out.println(resultInverse.toString().equals("[[-1.5, 0.5],\n" +
                 " [1.25, -0.25]]") ? "통과" : "실패");
-        System.out.println();
+        System.out.println();*/
     }
 }

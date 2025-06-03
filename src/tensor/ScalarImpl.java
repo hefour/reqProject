@@ -1,23 +1,24 @@
 package tensor;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.Random;
 
 class ScalarImpl implements Scalar,Comparable<Scalar>{
+
     private BigDecimal scalar;
 
-    ScalarImpl(String scalarStringValue) {
-        //예외 처리 필요
-        this.scalar = new BigDecimal(scalarStringValue);
+    ScalarImpl(String stringNum) {
+        this.scalar = new BigDecimal(stringNum);
     }
 
-    ScalarImpl(int minBound, int maxBound) {
-        //예외 처리 필요
-        double randomValue = minBound + (ThreadLocalRandom.current().nextDouble() * (maxBound - minBound));
-        this.scalar = BigDecimal.valueOf(randomValue);
+    ScalarImpl(int i, int j) {
+        Random rand = new Random();
+        double randomValue = i + rand.nextDouble() * (j - i);
+        this.scalar = BigDecimal.valueOf(randomValue).setScale(4, RoundingMode.HALF_UP);
     }
-
+// ==================================☢️공사 중☢️====================================
     @Override
     public String get() {
         return scalar.toPlainString();
