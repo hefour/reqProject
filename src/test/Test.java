@@ -109,7 +109,7 @@ public class Test {
                 "[[1, 0],\n" +
                 " [0, 1]]") ? "통과" : "실패" );
         System.out.println();
-/*
+
         // 11
         System.out.println("11v. 특정 위치의 요소를 지정조회할 수 있다.");
         int index = 3; // 0-based index (즉, 4번째 요소)
@@ -311,7 +311,7 @@ public class Test {
         System.out.println("결과 값 : " + addMultiplyScalarVector.toString());
         System.out.println(addMultiplyScalarVector.toString().equals("[6, 6, 6, 6, 6, 6, 6, 6]") ? "통과" : "실패");
         System.out.println();
-
+/*
         // 22
         System.out.println("22. 행렬은 다른 행렬과 덧셈이 가능하다.");
         Matrix addMultiplyMatrix = createMatrixByCSV("1,2,3\n4,5,6");
