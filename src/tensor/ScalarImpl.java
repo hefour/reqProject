@@ -51,6 +51,21 @@ class ScalarImpl implements Scalar,Comparable<Scalar>{
         this.scalar = this.scalar.add(opScalar.getBigDecimalValue());
     }
 
+    @Override
+    public void multiply(Scalar opScalar) {
+        this.scalar = this.scalar.multiply(opScalar.getBigDecimalValue());
+    }
+
+    public static Scalar add(Scalar s1, Scalar s2) {
+        BigDecimal result = s1.getBigDecimalValue().add(s2.getBigDecimalValue());
+        return new ScalarImpl(result.toPlainString());
+    }
+
+    public static Scalar multiply(Scalar s1, Scalar s2) {
+        BigDecimal result = s1.getBigDecimalValue().multiply(s2.getBigDecimalValue());
+        return new ScalarImpl(result.toPlainString());
+    }
+
     //16번
     @Override
     public int compareTo(Scalar opScalar) {
@@ -61,10 +76,6 @@ class ScalarImpl implements Scalar,Comparable<Scalar>{
     @Override
     public Scalar clone(){
         return new ScalarImpl(this.get());
-    }
-
-    public void multiply(Scalar opScalar) {
-        this.scalar = this.scalar.multiply(opScalar.getBigDecimalValue());
     }
 
     public BigDecimal getBigDecimalValue() {

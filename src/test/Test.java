@@ -299,7 +299,7 @@ public class Test {
         addMultiplyScalarVector.add(cloneVector);
         System.out.println("기댓 값 : [3, 3, 3, 3, 3, 3, 3, 3]");
         System.out.println("결과 값 : " + addMultiplyScalarVector.toString());
-        System.out.println(addMultiplyScalarVector.toString().equals("[3, 3, 3, 3, 3, 3, 3, 3") ? "통과" : "실패");
+        System.out.println(addMultiplyScalarVector.toString().equals("[3, 3, 3, 3, 3, 3, 3, 3]") ? "통과" : "실패");
         System.out.println();
 
         // 21
@@ -307,11 +307,11 @@ public class Test {
         System.out.println("기존 벡터 : " + addMultiplyScalarVector.toString());
         System.out.println("곱할 스칼라 : " + testScalar.toString());
         addMultiplyScalarVector.multiply(testScalar);
-        System.out.println("기댓 값 : [6, 6, 6, 6, 6, 6, 6, 6]");
+        System.out.println("기댓 값 : [9, 9, 9, 9, 9, 9, 9, 9]");
         System.out.println("결과 값 : " + addMultiplyScalarVector.toString());
-        System.out.println(addMultiplyScalarVector.toString().equals("[6, 6, 6, 6, 6, 6, 6, 6]") ? "통과" : "실패");
+        System.out.println(addMultiplyScalarVector.toString().equals("[9, 9, 9, 9, 9, 9, 9, 9]") ? "통과" : "실패");
         System.out.println();
-/*
+
         // 22
         System.out.println("22. 행렬은 다른 행렬과 덧셈이 가능하다.");
         Matrix addMultiplyMatrix = createMatrixByCSV("1,2,3\n4,5,6");
@@ -385,11 +385,11 @@ public class Test {
         System.out.println("27. 전달받은 스칼라와 벡터의 곱셈이 가능하다.(벡터의 모든 요소에 스칼라를 곱한다)");
         System.out.println("벡터 1 : " + stringVector.toString());
         System.out.println("스칼라 1 : " + stringScalar.toString());
-        System.out.println("기댓 값 : [15, 15, 15, 15, 15, 15, 15, 15]");
+        System.out.println("기댓 값 : [15, 15, 15, 20, 15, 15, 15, 15]");
         // 27번의 벡터 x 스칼라 메서드
         Vector resultMultiplyVectorByScalar = Tensors.multiplyVectorByScalar(stringVector, stringScalar);
         System.out.println("결과 값 : " + resultMultiplyVectorByScalar.toString());
-        System.out.println(resultMultiplyVectorByScalar.toString().equals("[15, 15, 15, 15, 15, 15, 15, 15]") ? "통과" : "실패");
+        System.out.println(resultMultiplyVectorByScalar.toString().equals("[15, 15, 15, 20, 15, 15, 15, 15]") ? "통과" : "실패");
         System.out.println();
 
         // 28
@@ -452,7 +452,7 @@ public class Test {
         System.out.println("벡터를 nx1으로 변형한 행렬(결과 값) : " + VectorToRowMatrix);
         System.out.println(VectorToRowMatrix.toString().equals("[[3, 3, 3, 4, 3, 3, 3, 3]]") ? "통과" : "실패");
         System.out.println();
-
+/*
         //행렬 생성
         Matrix tMatrix=createUnitMatrix(2);
         Matrix t2Matrix=createUnitMatrix(2);

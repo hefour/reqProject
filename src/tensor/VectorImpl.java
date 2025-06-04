@@ -71,12 +71,11 @@ class VectorImpl implements Vector {
 
     @Override
     public Vector add(Vector opVector) {
-        BigDecimal[] result = new BigDecimal[this.getDimensionCount()];
-        
         for (int i = 0; i < this.getDimensionCount(); i++) {
-            result[i] = this.get(i).getBigDecimalValue().add(opVector.get(i).getBigDecimalValue());
+            vector.set(i, vector.get(i).add(opVector.get(i).getBigDecimalValue()));
         }
-        return new VectorImpl(result);
+
+        return this;
     }
 
     @Override
@@ -88,6 +87,30 @@ class VectorImpl implements Vector {
         }
         
         return this;
+    }
+
+    public static Vector add(Vector v1, Vector v2) {
+        BigDecimal[] result = new BigDecimal[v1.getDimensionCount()];
+
+        for (int i = 0; i < v1.getDimensionCount(); i++) {
+            BigDecimal indexValue1 = new BigDecimal(v1.get(i).get());
+            BigDecimal indexValue2 = new BigDecimal(v2.get(i).get());
+            result[i] = indexValue1.add(indexValue2);
+        }
+
+        return new VectorImpl(result);
+    }
+
+    public static Vector multiply(Vector vector, Scalar opScalar) {
+        BigDecimal opValue = opScalar.getBigDecimalValue();
+        BigDecimal[] result = new BigDecimal[vector.getDimensionCount()];
+
+        for (int i = 0; i < vector.getDimensionCount(); i++) {
+            BigDecimal indexValue = new BigDecimal(vector.get(i).get());
+            result[i] = indexValue.multiply(opValue);
+        }
+
+        return new VectorImpl(result);
     }
 
     @Override
