@@ -27,10 +27,10 @@ public class Tensors {
     }
 
     public static Matrix combineToWidthMatrixByMatrix(Matrix m1, Matrix m2) {
-        return new MatrixImpl("3",2,3);   //더미 값
+        return MatrixImpl.widthPaste(m1,m2);
     }
 
     public static Matrix combineToHeightMatrixByMatrix(Matrix m1, Matrix m2) {
-        return new MatrixImpl("4",2,3);   //더미 값
+        return MatrixImpl.heightPaste(m1,m2);
     }
 }

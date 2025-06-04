@@ -200,12 +200,81 @@ class MatrixImpl implements Matrix {
         return new MatrixImpl(result);
     }
 
-    public Matrix widthPaste(Matrix matrix) {
+    @Override
+    public Matrix widthPaste(Matrix other) {
+        int originCols = this.cols;
+        int addedCols = other.getColumnCount();
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < addedCols; j++) {
+                Scalar value = other.get(i, j).clone();
+                matrix.add(i * originCols + j + i * addedCols, value);
+            }
+        }
+
+        this.cols += addedCols;
         return this;
     }
-    public Matrix heightPaste(Matrix matrix) {
+
+
+    @Override
+    public Matrix heightPaste(Matrix other) {
+        int addedRows = other.getRowCount();
+
+        for (int i = 0; i < addedRows; i++) {
+            for (int j = 0; j < cols; j++) {
+                Scalar value = other.get(i, j).clone();
+                matrix.add(value);
+            }
+        }
+
+        this.rows += addedRows;
         return this;
     }
+
+    public static Matrix widthPaste(Matrix m1, Matrix m2) {
+        int rows = m1.getRowCount();
+        int col1 = m1.getColumnCount();
+        int col2 = m2.getColumnCount();
+        int totalCol = col1 + col2;
+
+        Scalar[][] newData = new Scalar[rows][totalCol];
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < col1; j++) {
+                newData[i][j] = m1.get(i, j).clone();
+            }
+            for (int j = 0; j < col2; j++) {
+                newData[i][j + col1] = m2.get(i, j).clone();
+            }
+        }
+
+        return new MatrixImpl(newData);
+    }
+
+    public static Matrix heightPaste(Matrix m1, Matrix m2) {
+        int cols = m1.getColumnCount();
+        int row1 = m1.getRowCount();
+        int row2 = m2.getRowCount();
+        int totalRow = row1 + row2;
+
+        Scalar[][] newData = new Scalar[totalRow][cols];
+
+        for (int i = 0; i < row1; i++) {
+            for (int j = 0; j < cols; j++) {
+                newData[i][j] = m1.get(i, j).clone();
+            }
+        }
+
+        for (int i = 0; i < row2; i++) {
+            for (int j = 0; j < cols; j++) {
+                newData[i + row1][j] = m2.get(i, j).clone();
+            }
+        }
+
+        return new MatrixImpl(newData);
+    }
+
     public Vector rowVector(int rowIndex) {
         return new VectorImpl(3,"2");
     }

@@ -453,7 +453,7 @@ public class Test {
         System.out.println("벡터를 nx1으로 변형한 행렬(결과 값) : " + VectorToRowMatrix);
         System.out.println(VectorToRowMatrix.toString().equals("[[3, 3, 3, 4, 3, 3, 3, 3]]") ? "통과" : "실패");
         System.out.println();
-/*
+
         //행렬 생성
         Matrix tMatrix=createUnitMatrix(2);
         Matrix t2Matrix=createUnitMatrix(2);
@@ -463,7 +463,7 @@ public class Test {
         System.out.println("32. 행렬은 다른 행렬과 가로로 합쳐질 수 있다.");
         System.out.println("기존 행렬 : \n"+ tMatrix);
         System.out.println("추가할 행렬 : \n"+ t2Matrix);
-        System.out.println("기댓 값 :\n [[1, 0, 1, 0],\n" +
+        System.out.println("기댓 값 :\n[[1, 0, 1, 0],\n" +
                 " [0, 1, 0, 1]]");
         System.out.println("합쳐진 행렬(결과 값) : \n"+ tMatrix.widthPaste(t2Matrix));
         System.out.println(tMatrix.toString().equals("[[1, 0, 1, 0],\n" +
@@ -474,7 +474,7 @@ public class Test {
         System.out.println("32-1. 디폴트 static 메소드 호출");
         System.out.println("행렬 1 : \n"+ tMatrix);
         System.out.println("행렬 2 : \n"+ t2Matrix);
-        System.out.println("기댓 값 : [[1, 0, 1, 0],\n" +
+        System.out.println("기댓 값 : \n[[1, 0, 1, 0],\n" +
                 " [0, 1, 0, 1]]");
         // 32번의 행렬 결합 메서드 (가로)
         Matrix widthMatrix = Tensors.combineToWidthMatrixByMatrix(tMatrix, t2Matrix);
@@ -514,7 +514,7 @@ public class Test {
         System.out.println();
 
         Matrix test3Matrix = createMatrixByCSV("3,5\n2,3");
-
+/*
         // 34
         System.out.println("34. 행렬은 특정 행을 벡터 형태로 추출해 줄 수 있다.");
         System.out.println("기존 행렬 : \n"+ test3Matrix);
