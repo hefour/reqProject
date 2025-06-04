@@ -7,14 +7,14 @@ import java.util.Objects;
 class MatrixImpl implements Matrix {
     private int rows;
     private int cols;
-    private List<Scalar> matrixList = new ArrayList<>();
+    private List<Scalar> matrix = new ArrayList<>();
 
     MatrixImpl(String stringValue, int m, int n) {
         this.rows = m;
         this.cols = n;
 
         for (int s = 0; s < m * n; s++) {
-            this.matrixList.add(new ScalarImpl(stringValue));
+            this.matrix.add(new ScalarImpl(stringValue));
         }
     }
 
@@ -23,15 +23,15 @@ class MatrixImpl implements Matrix {
         this.cols = n;
 
         for (int s = 0; s < m * n; s++) {
-            this.matrixList.add(new ScalarImpl(i, j));
+            this.matrix.add(new ScalarImpl(i, j));
         }
     }
 
     MatrixImpl(String csvValue) {
-        String[] rowsArr = csvValue.strip().split("\\n");
-        this.rows = rowsArr.length;
+        String[] arrRow = csvValue.strip().split("\\n");
+        this.rows = arrRow.length;
 
-        String[] firstRow = rowsArr[0].strip().split(",", -1);
+        String[] firstRow = arrRow[0].strip().split(",", -1);
         this.cols = firstRow.length;
 
         if (this.rows == 1 && this.cols == 1 && firstRow[0].isEmpty()) {
@@ -39,9 +39,9 @@ class MatrixImpl implements Matrix {
         }
 
         for (int r = 0; r < rows; r++) {
-            String[] colsArr = rowsArr[r].strip().split(",", -1);
-            for (String value : colsArr) {
-                matrixList.add(new ScalarImpl(value.strip()));
+            String[] arrCol = arrRow[r].strip().split(",", -1);
+            for (String value : arrCol) {
+                matrix.add(new ScalarImpl(value.strip()));
             }
         }
     }
@@ -52,7 +52,7 @@ class MatrixImpl implements Matrix {
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                this.matrixList.add(new ScalarImpl(arrValue[i][j].toString()));
+                this.matrix.add(new ScalarImpl(arrValue[i][j].toString()));
             }
         }
     }
@@ -63,40 +63,19 @@ class MatrixImpl implements Matrix {
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                this.matrixList.add(new ScalarImpl(i == j ? "1" : "0"));
+                this.matrix.add(new ScalarImpl(i == j ? "1" : "0"));
             }
         }
     }
 
-// ==================================☢️공사 중☢️====================================
-
     @Override
     public Scalar get(int rowIndex, int colIndex) {
-        if (rowIndex < 0 || rowIndex >= rows || colIndex < 0 || colIndex >= cols) {
-            throw new IndexOutOfBoundsException(
-                    "인덱스 범위를 벗어났습니다: (" + rowIndex + ", " + colIndex + ")"
-            );
-        }
-        if (rows == 0 || cols == 0) {
-            throw new IndexOutOfBoundsException("비어 있는 행렬에서 요소를 가져올 수 없습니다.");
-        }
-        return matrixList.get(rowIndex * cols + colIndex);
+        return matrix.get(rowIndex * cols + colIndex);
     }
 
     @Override
-    public void set(int rowIndex, int colIndex, Scalar value) {
-        if (rowIndex < 0 || rowIndex >= rows || colIndex < 0 || colIndex >= cols) {
-            throw new IndexOutOfBoundsException(
-                    "인덱스 범위를 벗어났습니다: (" + rowIndex + ", " + colIndex + ")"
-            );
-        }
-        if (value == null) {
-            throw new IllegalArgumentException("설정할 값은 null일 수 없습니다.");
-        }
-        if (rows == 0 || cols == 0) {
-            throw new IndexOutOfBoundsException("비어 있는 행렬에 값을 설정할 수 없습니다.");
-        }
-        matrixList.set(rowIndex * cols + colIndex, value);
+    public void set(int rowIndex, int colIndex, Scalar setValue) {
+        matrix.set(rowIndex * cols + colIndex, setValue);
     }
 
     @Override
@@ -111,54 +90,115 @@ class MatrixImpl implements Matrix {
 
     @Override
     public String toString() {
-        if (rows == 0 && cols == 0) {
-            return "[[]]";
-        }
-        StringBuilder sb = new StringBuilder();
-        sb.append("[");
+        String[] rowString = new String[rows];
+
         for (int i = 0; i < rows; i++) {
-            if (i > 0) sb.append(",\n ");
-            sb.append("[");
+            String[] colString = new String[cols];
             for (int j = 0; j < cols; j++) {
-                sb.append(get(i, j).toString());
-                if (j < cols - 1) sb.append(", ");
+                colString[j] = get(i, j).toString();
             }
-            sb.append("]");
+            rowString[i] = "[" + String.join(", ", colString) + "]";
         }
-        sb.append("]");
-        return sb.toString();
+
+        return "[" + String.join(",\n ", rowString) + "]";
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof MatrixImpl)) return false;
-        MatrixImpl other = (MatrixImpl) obj;
+    public boolean equals(Object compare) {
+        if (this == compare) return true;
+        if (!(compare instanceof MatrixImpl other)) return false;
         if (rows != other.rows || cols != other.cols) return false;
-        return Objects.equals(matrixList, other.matrixList);
+
+        return Objects.equals(matrix, other.matrix);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(rows, cols, matrixList);
+        return Objects.hash(rows, cols, matrix);
     }
 
     @Override
     public Matrix clone() {
-        Scalar[][] copyScalar = new Scalar[rows][cols];
+        Scalar[][] copyArr = new Scalar[rows][cols];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                copyScalar[i][j] = matrixList.get(i);
-            }
+                copyArr[i][j] = this.get(i, j).clone();            }
         }
-        return this;
+        return new MatrixImpl(copyArr);
     }
 
     @Override
-    public void add(Matrix other) {}
+    public void add(Matrix other) {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                this.get(i, j).add(other.get(i, j));
+            }
+        }
+    }
+
+    public static Matrix add(Matrix m1, Matrix m2) {
+
+        int rows = m1.getRowCount();
+        int cols = m2.getColumnCount();
+        Scalar[][] result = new Scalar[rows][cols];
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                result[i][j] = ScalarImpl.add(m1.get(i, j), m2.get(i, j));
+            }
+        }
+
+        return new MatrixImpl(result);
+    }
 
     @Override
-    public void multiply(Matrix other) {}
+    public void multiply(Matrix other) {
+        int newRow = this.rows;
+        int newCol = other.getColumnCount();
+        Scalar[][] result = new Scalar[newRow][newCol];
+
+        for (int i = 0; i < newRow; i++) {
+            for (int j = 0; j < newCol; j++) {
+                Scalar sum = new ScalarImpl("0");
+                for (int k = 0; k < this.cols; k++) {
+                    Scalar temp1 = this.get(i, k);
+                    Scalar temp2 = other.get(k, j);
+                    Scalar midResult = ScalarImpl.multiply(temp1, temp2);
+                    sum = ScalarImpl.add(sum, midResult);
+                }
+                result[i][j] = sum;
+            }
+        }
+
+        this.rows = newRow;
+        this.cols = newCol;
+        this.matrix.clear();
+        for (int i = 0; i < newRow; i++) {
+            for (int j = 0; j < newCol; j++) {
+                this.matrix.add(result[i][j]);
+            }
+        }
+    }
+
+    public static Matrix multiply(Matrix m1, Matrix m2) {
+
+        int row = m1.getRowCount();
+        int col = m2.getColumnCount();
+        Scalar[][] result = new Scalar[row][col];
+
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                Scalar sum = new ScalarImpl("0");
+                for (int k = 0; k < m1.getColumnCount(); k++) {
+                    Scalar product = ScalarImpl.multiply(m1.get(i, k), m2.get(k, j));
+                    sum = ScalarImpl.add(sum, product);
+                }
+                result[i][j] = sum;
+            }
+        }
+
+        return new MatrixImpl(result);
+    }
 
     public Matrix widthPaste(Matrix matrix) {
         return this;

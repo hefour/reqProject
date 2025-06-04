@@ -127,19 +127,20 @@ public class Test {
         System.out.println("11m. 행렬의 특정 위치의 요소를 지정/조회할 수 있다.");
         int rowIndex = 1;
         int columnIndex = 1;
-        System.out.println("8번에서 만든 \n" + "[[1, 2, 3],\n" +
-                " [4, 5, 6]] 행렬의 \n"+"2행 2열 요소를 지정, 조회한다.");
+        Scalar tempScalar = createScalarByString("2");
+        System.out.println("8번에서 만든 \n" + "[[1, 4, 3],\n" +
+                " [7, 5, 6]] 행렬의 \n"+"2행 2열 요소를 지정, 조회한다.");
         System.out.println("기댓 값 : 5");
         System.out.println("결과 값 : " + csvMatrix.get(rowIndex, columnIndex));
         System.out.println("2행 2열 요소를 2로 변경한다.");
-        csvMatrix.set(rowIndex, columnIndex, temp1Scalar);
+        csvMatrix.set(rowIndex, columnIndex, tempScalar);
         System.out.println("기댓 값 : ");
-        System.out.println("[[1, 2, 3],\n" +
-                " [4, 2, 6]]");
+        System.out.println("[[1, 4, 3],\n" +
+                " [7, 2, 6]]");
         System.out.println("결과 값 : ");
         System.out.println(csvMatrix.toString());
-        System.out.println(csvMatrix.toString().equals("[[1, 2, 3],\n" +
-                " [4, 2, 6]]") ? "통과" : "실패");
+        System.out.println(csvMatrix.toString().equals("[[1, 4, 3],\n" +
+                " [7, 2, 6]]") ? "통과" : "실패");
         System.out.println();
 
         // 12
@@ -410,7 +411,7 @@ public class Test {
         System.out.println("29. 전달받은 두 행렬의 곱셈이 가능하다.");
         System.out.println("행렬 1 : \n" + test1Matrix.toString());
         System.out.println("행렬 2 : \n" + test2Matrix.toString());
-        System.out.println("기댓 값 : [[11,20],\n" +
+        System.out.println("기댓 값 : \n[[11,20],\n" +
                 " [22, 37]]");
         // 29번의 행렬 x 행렬 메서드
         Matrix resultMultiplyMatrix = Tensors.multiplyMatrixByMatrix(test1Matrix, test2Matrix);

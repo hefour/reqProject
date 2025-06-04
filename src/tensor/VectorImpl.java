@@ -48,11 +48,11 @@ class VectorImpl implements Vector {
     @Override
     public String toString() {
         String[] parts = new String[vector.size()];
-        
+
         for (int i = 0; i < vector.size(); i++) {
             parts[i] = vector.get(i).toString();
         }
-        
+
         return "[" + String.join(", ", parts) + "]";
     }
 
@@ -115,11 +115,11 @@ class VectorImpl implements Vector {
 
     @Override
     public Vector clone() {
-        BigDecimal[] copyArray = new BigDecimal[this.getDimensionCount()];
+        BigDecimal[] copyArr = new BigDecimal[this.getDimensionCount()];
         for (int i = 0; i < this.getDimensionCount(); i++) {
-            copyArray[i] = vector.get(i);
+            copyArr[i] = vector.get(i);
         }
-        return new VectorImpl(copyArray);
+        return new VectorImpl(copyArr);
     }
 
     @Override

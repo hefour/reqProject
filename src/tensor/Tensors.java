@@ -19,11 +19,11 @@ public class Tensors {
     }
 
     public static Matrix addMatrixByMatrix(Matrix m1, Matrix m2) {
-        return new MatrixImpl("3",2,3);   //더미 값
+        return MatrixImpl.add(m1,m2); //더미 값
     }
 
     public static Matrix multiplyMatrixByMatrix(Matrix m1, Matrix m2) {
-        return new MatrixImpl("8",2,3);   //더미 값
+        return MatrixImpl.multiply(m1,m2); //더미 값
     }
 
     public static Matrix combineToWidthMatrixByMatrix(Matrix m1, Matrix m2) {
