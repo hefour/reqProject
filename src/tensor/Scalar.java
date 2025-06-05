@@ -25,5 +25,4 @@ public interface Scalar {
     void multiply(Scalar scalar);
 
     BigDecimal getBigDecimalValue();
-    //24
 }

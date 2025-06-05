@@ -15,7 +15,7 @@ class ScalarImpl implements Scalar,Comparable<Scalar>{
 
     ScalarImpl(int minBound, int maxBound) {
         //예외 처리 필요
-        double randomValue = minBound + (ThreadLocalRandom.current().nextDouble() * (maxBound - minBound));
+        double randomValue = ThreadLocalRandom.current().nextDouble(minBound,maxBound);
         this.scalar = BigDecimal.valueOf(randomValue);
     }
 
@@ -37,7 +37,7 @@ class ScalarImpl implements Scalar,Comparable<Scalar>{
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (!(obj instanceof ScalarImpl)) return false;
+        if (obj==null || getClass()!=obj.getClass()) return false;
         ScalarImpl other = (ScalarImpl) obj;
         return scalar.compareTo(other.scalar) == 0;
     }

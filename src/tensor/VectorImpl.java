@@ -2,7 +2,6 @@ package tensor;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -67,12 +66,7 @@ class VectorImpl implements Vector {
             throw new IllegalArgumentException("설정하려는 Scalar 값은 null일 수 없습니다.");
         }
         // Scalar → BigDecimal
-        BigDecimal bd;
-        if (value instanceof ScalarImpl) {
-            bd = ((ScalarImpl) value).getBigDecimalValue();
-        } else {
-            bd = new BigDecimal(value.get());
-        }
+        BigDecimal bd = value.getBigDecimalValue();
         vectorList.set(index, bd);
     }
 
