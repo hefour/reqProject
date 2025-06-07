@@ -1,7 +1,7 @@
 package tensor;
 
-import javax.swing.*;
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -312,77 +312,200 @@ class MatrixImpl implements Matrix {
         return new VectorImpl(col);
     }
     public Matrix getSubMatrix(int beginRow, int endRow, int beginCol, int endCol){
-        return this;
+        int getRow=endRow-beginRow;
+        int getCol=endCol-beginCol;
+        Scalar[][] sub=new Scalar[getRow][getCol];
+        for (int i = 0; i < getRow; i++) {
+            for (int j = 0; j < getCol; j++) {
+                sub[i][j]=get(beginRow+i,beginCol+j);
+            }
+        }
+        return new MatrixImpl(sub);
     }
     public Matrix getMinor(int rowIndex, int colIndex){
-        return this;
+        int row=getRowCount();
+        int col=getColumnCount();
+        Scalar[][] minor=new Scalar[row-1][col-1];
+        int mr=0;
+        for (int i = 0; i < row; i++) {
+            if (i==rowIndex) continue;
+            int mc=0;
+            for (int j = 0; j < col; j++) {
+                if(j==colIndex) continue;
+                minor[mr][mc]=get(i,j);
+                mc++;
+            }
+            mr++;
+        }
+        return new MatrixImpl(minor);
     }
     public Matrix transpose(){
-        return this;
+        Scalar[][] transpose=new Scalar[getRowCount()][getColumnCount()];
+        for (int i = 0; i < getRowCount(); i++) {
+            for (int j = 0; j < getColumnCount(); j++) {
+                transpose[j][i]=get(i,j);
+            }
+        }
+        return new MatrixImpl(transpose);
     }
     public Scalar trace(){
-        return new ScalarImpl("3");
+        BigDecimal trace=new BigDecimal("0");
+        for (int i=0;i<getRowCount();i++){
+            for (int j=0;j<getColumnCount();j++){
+                if(i==j){
+                    trace=trace.add(get(i,j).getBigDecimalValue());
+                }
+            }
+        }
+        return new ScalarImpl(trace.toPlainString());
     }
 
     @Override
     public boolean isSquare() {
-        return false;
+        return getRowCount() == getColumnCount();
     }
 
     @Override
     public boolean isUpperTriangular() {
-        return false;
+        if(!isSquare()) return false;
+        for (int i = 1; i < getRowCount(); i++) {
+            for (int j = 0; j < i; j++) {
+                if(get(i,j).getBigDecimalValue().compareTo(BigDecimal.ZERO)!=0) return false;
+            }
+        }
+        return true;
     }
 
     @Override
     public boolean isLowerTriangular() {
-        return false;
+        if(!isSquare()) return false;
+        for (int i = 0; i < getRowCount(); i++) {
+            for (int j = i+1; j < getRowCount(); j++) {
+                if(get(i,j).getBigDecimalValue().compareTo(BigDecimal.ZERO)!=0) return false;
+            }
+        }
+        return true;
     }
 
     @Override
     public boolean isIdentity() {
-        return false;
+        if(!isSquare()) return false;
+        BigDecimal one=new BigDecimal("1");
+        for(int i = 0; i < getRowCount(); i++) {
+            for(int j = 0; j < getColumnCount(); j++) {
+                if(i==j) {
+                    if (get(i, j).getBigDecimalValue().compareTo(one) != 0) return false;
+                }else if(get(i,j).getBigDecimalValue().compareTo(BigDecimal.ZERO)!=0) return false;
+            }
+        }
+        return true;
     }
 
     @Override
     public boolean isZero() {
-        return false;
+        for (int i = 0; i < getRowCount(); i++) {
+            for (int j = 0; j < getColumnCount(); j++) {
+                if(get(i,j).getBigDecimalValue().compareTo(BigDecimal.ZERO)!=0) return false;
+            }
+        }
+        return true;
     }
 
     @Override
     public void swapRows(int row1, int row2) {
-        System.out.println("두 행을 스왑함");
+        for (int i = 0; i < getRowCount(); i++) {
+            Scalar temp=get(row1,i);
+            set(row1,i,get(row2,i));
+            set(row2,i,temp);
+        }
     }
 
     @Override
     public void swapColumns(int col1, int col2) {
-        System.out.println("두 열을 스왑함");
+        for (int i = 0; i < getRowCount(); i++) {
+            Scalar temp=get(i,col1);
+            set(i,col1,get(i,col2));
+            set(i,col2,temp);
+        }
     }
 
     @Override
     public void scaleRow(int rowIndex, Scalar scalar) {
-        System.out.println("한 행에 스칼라 곱함");
+        for (int i = 0; i < getColumnCount(); i++) {
+            get(rowIndex,i).multiply(scalar);
+        }
     }
 
     @Override
     public void scaleColumn(int colIndex, Scalar scalar) {
-        System.out.println("한 열에 스칼라 곱함");
+        for (int i = 0; i < getRowCount(); i++) {
+            get(i,colIndex).multiply(scalar);
+        }
     }
 
     @Override
     public void addRowMultiple(int targetRow, int sourceRow, Scalar scalar) {
-        System.out.println("한 행에 스칼라 더하기");
+       for (int i = 0; i < getColumnCount(); i++) {
+            Scalar as=get(sourceRow,i).clone();
+            as.multiply(scalar);
+            Scalar ts=get(targetRow,i).clone();
+            ts.add(as);
+            set(targetRow,i,ts);
+       }
     }
 
     @Override
     public void addColumnMultiple(int targetCol, int sourceCol, Scalar scalar) {
-        System.out.println("한 열에 스칼라 더하기");
+        for (int i = 0; i < getRowCount(); i++) {
+            Scalar ss = get(i, sourceCol).clone();
+            ss.multiply(scalar);
+            Scalar ts = get(i, targetCol).clone();
+            ts.add(ss);
+            set(i, targetCol, ts);
+        }
     }
 
     @Override
     public Matrix getRREF() {
-        return this;
+        MatrixImpl rref = (MatrixImpl) this.clone();
+        int lead = 0;
+        int rowCount = rref.getRowCount();
+        int colCount = rref.getColumnCount();
+        for (int r = 0; r < rowCount; r++) {
+            if (lead >= colCount) break;
+            int pivotRow = r;
+            while (pivotRow < rowCount && rref.get(pivotRow, lead).getBigDecimalValue().compareTo(BigDecimal.ZERO) == 0) {
+                pivotRow++;
+            }
+            if (pivotRow == rowCount) {
+                lead++;
+                r--;
+                continue;
+            }
+            rref.swapRows(pivotRow, r);
+            Scalar pivot = rref.get(r, lead);
+            if (pivot.getBigDecimalValue().compareTo(BigDecimal.ZERO) != 0) {
+                BigDecimal reciprocal = BigDecimal.ONE.divide(pivot.getBigDecimalValue(),MathContext.DECIMAL32);
+                Scalar invPivot = new ScalarImpl(reciprocal.stripTrailingZeros().toPlainString());
+                rref.scaleRow(r, invPivot);
+            }
+            for (int i = 0; i < rowCount; i++) {
+                if (i != r) {
+                    Scalar factor = rref.get(i, lead).clone();
+                    if (factor.getBigDecimalValue().compareTo(BigDecimal.ZERO) != 0) {
+                        Scalar nFactor = new ScalarImpl("-1");
+                        nFactor.multiply(factor);
+                        rref.addRowMultiple(i, r, nFactor);
+                    }
+                }
+            }
+            lead++;
+        }
+        return rref;
     }
+
+
+
 
     @Override
     public boolean isRREF() {
@@ -396,8 +519,10 @@ class MatrixImpl implements Matrix {
 
     @Override
     public Matrix inverse() {
-        return this;
+        Matrix i = new MatrixImpl(getRowCount());
+        Matrix inverse=widthPaste(i);
+        inverse=inverse.getRREF();
+        return inverse.getSubMatrix(0,getRowCount(),getRowCount(),2*getColumnCount());
     }
 
-    ;
 }

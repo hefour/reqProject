@@ -523,12 +523,12 @@ public class Test {
         // 36. 행렬은 특정 범위의 부분 행렬을 추출해 줄 수 있다.
         System.out.println("36. 행렬은 시작 행과 끝 행 인덱스로 특정 범위의 부분 행렬을 추출해 줄 수 있다.");
         System.out.println("기존 행렬 : \n"+ t3Matrix);
-        System.out.println("시작 행 인덱스 : 0 , 끝 행 인덱스 : 1");
+        System.out.println("시작 행 인덱스 : 1 , 끝 행 인덱스 : 2");
         System.out.println("시작 열 인덱스 : 1 , 끝 열 인덱스 : 2");
-        Matrix absMatrix=t3Matrix.getSubMatrix(0,1,1,2);
-        System.out.println("기댓 값 : \n[[0, 0],\n [1,0]]");
+        Matrix absMatrix=t3Matrix.getSubMatrix(0,2,0,2);
+        System.out.println("기댓 값 : \n[[1, 0],\n [0, 1]]");
         System.out.println("추출한 행렬(결과 값) : \n" + absMatrix);
-        System.out.println(absMatrix.toString().equals("[[0,0],\n"+"[1, 0]]") ? "통과" : "실패");
+        System.out.println(absMatrix.toString().equals("[[1, 0],\n "+"[0, 1]]") ? "통과" : "실패");
         System.out.println();
 
         // 37. 행렬은 특정 범위의 부분 행렬을 추출해 줄 수 있다.
@@ -538,7 +538,7 @@ public class Test {
         Matrix minorMatrix=t3Matrix.getMinor(0,0);
         System.out.println("기댓 값 : \n[[1, 0],\n [0, 1]]");
         System.out.println("추출한 행렬(결과 값) : \n"+ minorMatrix);
-        System.out.println(minorMatrix.toString().equals("[[1,0],\n"+"[0, 1]]") ? "통과" : "실패");
+        System.out.println(minorMatrix.toString().equals("[[1, 0],\n "+"[0, 1]]") ? "통과" : "실패");
         System.out.println();
 
         // 38. 행렬은 전치행렬을 새로 생성하여 반환할 수 있다.
@@ -547,7 +547,7 @@ public class Test {
         Matrix tpMatrix = equalMatrix.transpose();
         System.out.println("기댓 값 : \n[[1.2, 1.2],\n [3, 1.2]]");
         System.out.println("전치 행렬(결과 값) : \n"+ tpMatrix);
-        System.out.println(tpMatrix.toString().equals("[[1.2, 1.2],\n"+"[3, 1.2]]") ? "통과" : "실패");
+        System.out.println(tpMatrix.toString().equals("[[1.2, 1.2],\n "+"[3, 1.2]]") ? "통과" : "실패");
         System.out.println();
 
         // 39. 행렬은 대각 요소의 합을 구해줄 수 있다.
@@ -555,7 +555,7 @@ public class Test {
         System.out.println("기존 행렬 : \n"+ t3Matrix);
         Scalar trace =t3Matrix.trace();
         System.out.println("기댓 값 : 3");
-        System.out.println("대각 요소의 합(결과 값) : \n"+ trace);
+        System.out.println("대각 요소의 합(결과 값) : "+ trace);
         System.out.println(trace.toString().equals("3") ? "통과" : "실패");
         System.out.println();
 
@@ -614,7 +614,7 @@ public class Test {
         aCalmatrix.swapRows(0, 1);
         System.out.println("기댓 값 : \n[[2, 5, 2],\n [1, 2, 1],\n [1, 2, 2]");
         System.out.println("교환 후(결과 값): \n" + aCalmatrix);
-        System.out.println(aCalmatrix.toString().equals("[[2, 5, 2],\n"+"[1, 2, 1],\n"+"[1, 2, 2]]") ? "통과" : "실패");
+        System.out.println(aCalmatrix.toString().equals("[[2, 5, 2],\n "+"[1, 2, 1],\n "+"[1, 2, 2]]") ? "통과" : "실패");
         System.out.println();
 
         // 46. 행렬은 특정 두 열의 위치를 맞교환할 수 있다.
@@ -624,7 +624,7 @@ public class Test {
         bCalmatrix.swapColumns(1, 2);
         System.out.println("기댓 값 : \n[[1, 1, 2],\n [2, 2, 5],\n [1, 2, 2]]");
         System.out.println("교환 후 (결과 값) : \n" + bCalmatrix);
-        System.out.println(bCalmatrix.toString().equals("[[1, 1, 2],\n"+"[2, 2, 5],\n"+"[1, 2, 2]]") ? "통과" : "실패");
+        System.out.println(bCalmatrix.toString().equals("[[1, 1, 2],\n "+"[2, 2, 5],\n "+"[1, 2, 2]]") ? "통과" : "실패");
         System.out.println();
 
         // 47. 행렬은 특정 행에 상수배를 할 수 있다.
@@ -634,7 +634,7 @@ public class Test {
         cCalmatrix.scaleRow(2, s3);
         System.out.println("기댓 값 : \n[[1, 2, 1],\n [2, 5, 2],\n [3, 6, 6]]");
         System.out.println("연산 후 (결과 값) : \n" + cCalmatrix);
-        System.out.println(cCalmatrix.toString().equals("[[1, 2, 1],\n"+"[2, 5, 2],\n"+"[3, 6, 6]]") ? "통과" : "실패");
+        System.out.println(cCalmatrix.toString().equals("[[1, 2, 1],\n "+"[2, 5, 2],\n "+"[3, 6, 6]]") ? "통과" : "실패");
         System.out.println();
 
         // 48. 행렬은 특정 열에 상수배를 할 수 있다.
@@ -644,7 +644,7 @@ public class Test {
         dCalmatrix.scaleColumn(0, s2);
         System.out.println("기댓 값 : \n[[2, 2, 1],\n [4, 5, 2],\n [2, 2, 2]]");
         System.out.println("연산 후 (결과 값) : \n" + dCalmatrix);
-        System.out.println(dCalmatrix.toString().equals("[[2, 2, 1],\n"+"[4, 5, 2],\n"+"[2, 2, 2]]") ? "통과" : "실패");
+        System.out.println(dCalmatrix.toString().equals("[[2, 2, 1],\n "+"[4, 5, 2],\n "+"[2, 2, 2]]") ? "통과" : "실패");
         System.out.println();
 
         // 49. 행렬은 특정 행에 다른 행의 상수배를 더할 수 있다.
@@ -654,7 +654,7 @@ public class Test {
         eCalmatrix.addRowMultiple(0, 2, s3);
         System.out.println("기댓 값 : \n[[4, 8, 7],\n [2, 5, 2],\n [1, 2, 2]]");
         System.out.println("연산 후 (결과 값) : \n" + eCalmatrix);
-        System.out.println(eCalmatrix.toString().equals("[[4, 8, 7],\n"+"[2, 5, 2],\n"+"[1, 2, 2]]") ? "통과" : "실패");
+        System.out.println(eCalmatrix.toString().equals("[[4, 8, 7],\n "+"[2, 5, 2],\n "+"[1, 2, 2]]") ? "통과" : "실패");
         System.out.println();
 
         // 50. 행렬은 특정 열에 다른 열의 상수배를 더할 수 있다.
@@ -662,9 +662,9 @@ public class Test {
         Matrix fCalmatrix = calmatrix.clone();
         System.out.println("연산 전 (1열 += 2열 * \"" + s2 + "\") : \n" + fCalmatrix);
         fCalmatrix.addColumnMultiple(0, 1, s2);
-        System.out.println("기댓 값 : \n[[5, 12, 5],\n [2, 5, 2,],\n [1, 2, 2]]");
+        System.out.println("기댓 값 : \n[[5, 2, 1],\n [12, 5, 2],\n [5, 2, 2]]");
         System.out.println("연산 후 (결과 값) : \n" + fCalmatrix);
-        System.out.println(fCalmatrix.toString().equals("[[5, 12, 5],\n"+"[2, 5, 2],\n"+"[1, 2, 2]]") ? "통과" : "실패");
+        System.out.println(fCalmatrix.toString().equals("[[5, 2, 1],\n "+"[12, 5, 2],\n "+"[5, 2, 2]]") ? "통과" : "실패");
         System.out.println();
 
         // 51. 행렬은 자신으로부터 RREF 행렬을 구해서 반환해 줄 수 있다.
@@ -674,7 +674,7 @@ public class Test {
         Matrix rref = rrefMatrix.getRREF();
         System.out.println("기댓 값 : \n[[1, 0, 0],\n [0, 1, 0],\n [0, 0, 1]]");
         System.out.println("연산 후 (결과 값) : \n" + rref);
-        System.out.println(rref.toString().equals("[[1, 0, 0],\n"+"[0, 1, 0],\n"+"[0, 0, 1]]") ? "통과" : "실패");
+        System.out.println(rref.toString().equals("[[1, 0, 0],\n "+"[0, 1, 0],\n "+"[0, 0, 1]]") ? "통과" : "실패");
         System.out.println();
 
         // 52. 행렬은 자신이 RREF 행렬인지 여부를 판별해 줄 수 있다
@@ -703,7 +703,7 @@ public class Test {
         Matrix inverseMatrix = invMatrix.inverse();
         System.out.println("기댓 값 : \n[[6, -2, -1],\n [-2, 1, 0],\n [-1, 0, 1]]");
         System.out.println("연산 후 (결과 값) : \n" + inverseMatrix);
-        System.out.println(inverseMatrix.toString().equals("[[6, -2, -1],\n"+"[-2, 1, 0],\n"+"[-1, 0, 1]]") ? "통과" : "실패");
+        System.out.println(inverseMatrix.toString().equals("[[6, -2, -1],\n "+"[-2, 1, 0],\n "+"[-1, 0, 1]]") ? "통과" : "실패");
         System.out.println();
     }
 }
