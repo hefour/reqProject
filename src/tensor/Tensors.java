@@ -3,19 +3,19 @@ package tensor;
 public class Tensors {
 
     public static Scalar addScalarByScalar(Scalar scalar1, Scalar scalar2) {
-        return new ScalarImpl("1");         //더미 값
+        return ScalarImpl.add(scalar1, scalar2);
     }
 
     public static Scalar multiplyScalarByScalar(Scalar scalar1, Scalar scalar2) {
-        return new ScalarImpl("4");         //더미 값
+        return ScalarImpl.multiply(scalar1,scalar2);
     }
 
     public static Vector addVectorByVector(Vector stringVector, Vector cloneVector) {
-        return new VectorImpl(8,"4");  //더미 값
+        return VectorImpl.add(stringVector,cloneVector);
     }
 
     public static Vector multiplyVectorByScalar(Vector stringVector, Scalar stringScalar) {
-        return new VectorImpl(8, "9");  //더미 값
+        return VectorImpl.multiply(stringVector, stringScalar);
     }
 
     public static Matrix addMatrixByMatrix(Matrix m1, Matrix m2) {

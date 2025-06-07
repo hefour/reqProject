@@ -188,11 +188,12 @@ class MatrixImpl implements Matrix {
         Scalar[][] copyScalar = new Scalar[rows][cols];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                copyScalar[i][j] = matrixList.get(i);
+                copyScalar[i][j] = get(i, j);
             }
         }
-        return this;
+        return new MatrixImpl(copyScalar);
     }
+
 
     @Override
     public void add(Matrix other) {

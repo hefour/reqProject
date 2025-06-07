@@ -13,7 +13,7 @@ class VectorImpl implements Vector {
         if (dimension < 0) {
             throw new IllegalArgumentException("벡터의 차원(dimension)은 0 이상이어야 합니다.");
         }
-        this.vectorList = new ArrayList<>(dimension);
+        vectorList = new ArrayList<>(dimension);
         ScalarImpl basement = new ScalarImpl(valueString);
         for (int i = 0; i < dimension; i++) {
             BigDecimal num = basement.getBigDecimalValue();
@@ -26,7 +26,7 @@ class VectorImpl implements Vector {
         if (dimension < 0) {
             throw new IllegalArgumentException("벡터의 차원(dimension)은 0 이상이어야 합니다.");
         }
-        this.vectorList = new ArrayList<>(dimension);
+        vectorList = new ArrayList<>(dimension);
         for (int i = 0; i < dimension; i++) {
             ScalarImpl random = new ScalarImpl(minBound, maxBound);
             vectorList.add(random.getBigDecimalValue());
@@ -39,16 +39,16 @@ class VectorImpl implements Vector {
         }
 
         vectorList = new ArrayList<>(initialValueArray.length);
-        for (BigDecimal bd : initialValueArray) {
-            if (bd == null) {
+        for (BigDecimal v : initialValueArray) {
+            if (v == null) {
                 throw new IllegalArgumentException("입력 배열에 null 요소가 포함될 수 없습니다.");
             }
-            this.vectorList.add(bd);
+            this.vectorList.add(v);
         }
     }
     @Override
     public Scalar get(int index) {
-        if (index >= vectorList.size() || index < 0 ) {
+        if ( index < 0  || index >= vectorList.size()) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + vectorList.size());
         }
         return new ScalarImpl(vectorList.get(index).toPlainString());
@@ -56,14 +56,13 @@ class VectorImpl implements Vector {
 
     @Override
     public void set(int index, Scalar value) {
-        if (index >= vectorList.size() || index < 0) {
+        if ( index < 0  || index >= vectorList.size()) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + vectorList.size());
         }
         if (value == null) {
             throw new IllegalArgumentException("설정하려는 Scalar 값은 null일 수 없습니다.");
         }
-        BigDecimal bd = value.getBigDecimalValue();
-        vectorList.set(index, bd);
+        vectorList.set(index, value.getBigDecimalValue());
     }
 
     @Override
@@ -73,11 +72,10 @@ class VectorImpl implements Vector {
 
     @Override
     public String toString() {
-        StringBuilder bui = new StringBuilder();
-        bui.append("[");
+        StringBuilder bui = new StringBuilder("[");
         for (int i = 0; i < vectorList.size(); i++) {
-            bui.append(vectorList.get(i).toPlainString());
-            if (i < vectorList.size() - 1) {
+            bui.append(vectorList.get(i).stripTrailingZeros().toPlainString());
+            if (i != vectorList.size() - 1) {
                 bui.append(", ");
             }
         }
@@ -100,49 +98,74 @@ class VectorImpl implements Vector {
 
     @Override
     public Vector add(Vector other) {
-        if (this.getDimensionCount() != other.getDimensionCount()) {
+        int n=getDimensionCount();
+        if (n != other.getDimensionCount()) {
             throw new IllegalArgumentException("두 벡터의 길이가 다릅니다.");
         }
-
-        BigDecimal[] result = new BigDecimal[this.getDimensionCount()];
-        for (int i = 0; i < this.getDimensionCount(); i++) {
-            BigDecimal a = vectorList.get(i);
-            BigDecimal b = other.get(i).getBigDecimalValue();
-            result[i] = a.add(b);
+        for (int i = 0; i < n; i++) {
+            BigDecimal sum = vectorList.get(i).add(other.get(i).getBigDecimalValue());
+            vectorList.set(i, sum);
         }
-        return new VectorImpl(result);
+        return this;
     }
 
     @Override
     public Vector multiply(Scalar scalar){
-        BigDecimal scalarValue = scalar.getBigDecimalValue();
-        BigDecimal[] result = new BigDecimal[getDimensionCount()];
-        for (int i = 0; i < this.getDimensionCount(); i++) {
-            result[i] = vectorList.get(i).multiply(scalarValue);
+        BigDecimal sv = scalar.getBigDecimalValue();
+        int n=getDimensionCount();
+        for (int i = 0; i < n; i++) {
+            BigDecimal mul = vectorList.get(i).multiply(sv);
+            vectorList.set(i, mul);
         }
-        return new VectorImpl(result);
+        return this;
     }
     @Override
     public Vector clone(){
-        return new VectorImpl(vectorList.toArray(new BigDecimal[vectorList.size()]));
+        BigDecimal[] copy = vectorList.toArray(new BigDecimal[0]);
+        return new VectorImpl(copy);
     }
 
     @Override
     public Matrix toColumnMatrix() {
-        Scalar[][] data = new Scalar[this.getDimensionCount()][1];
-        for (int i = 0; i < this.getDimensionCount(); i++) {
-            data[i][0] = new ScalarImpl(vectorList.get(i).toPlainString());
+        int n=getDimensionCount();
+        Scalar[][] column = new Scalar[n][1];
+        for (int i = 0; i < n; i++) {
+            column[i][0] = new ScalarImpl(vectorList.get(i).toPlainString());
         }
-        return new MatrixImpl(data);
+        return new MatrixImpl(column);
     }
 
     @Override
     public Matrix toRowMatrix() {
-        Scalar[][] data = new Scalar[1][this.getDimensionCount()];
-        for (int i = 0; i < this.getDimensionCount(); i++) {
-            data[0][i] = new ScalarImpl(vectorList.get(i).toPlainString());
+        int n=getDimensionCount();
+        Scalar[][] row = new Scalar[1][n];
+        for (int i = 0; i < n; i++) {
+            row[0][i] = new ScalarImpl(vectorList.get(i).toPlainString());
         }
-        return new MatrixImpl(data);
+        return new MatrixImpl(row);
     }
 
+    static Vector add(Vector v1, Vector v2) {
+        int n=v1.getDimensionCount();
+        if (n != v2.getDimensionCount()) {
+            throw new IllegalArgumentException("두 벡터의 길이가 다릅니다.");
+        }
+        BigDecimal[] res=new BigDecimal[n];
+        for (int i = 0; i < n; i++) {
+            BigDecimal sum = v1.get(i).getBigDecimalValue().add(v2.get(i).getBigDecimalValue());
+            res[i] = sum;
+        }
+        return new VectorImpl(res);
+    }
+
+    static Vector multiply(Vector v1, Scalar s1) {
+        int n=v1.getDimensionCount();
+        BigDecimal sv=s1.getBigDecimalValue();
+        BigDecimal[] res=new BigDecimal[n];
+        for (int i = 0; i < n; i++) {
+            BigDecimal mul = v1.get(i).getBigDecimalValue().multiply(sv);
+            res[i] = mul;
+        }
+        return new VectorImpl(res);
+    }
 }

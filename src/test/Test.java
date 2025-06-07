@@ -444,16 +444,16 @@ public class Test {
         System.out.println("기댓 값 :\n[[7],\n [1]]");
         System.out.println("벡터를 nx1으로 변형한 행렬(결과 값) : ");
         System.out.println(VectorToColumnMatrix);
-        System.out.println(VectorToColumnMatrix.toString().equals("[[7],\n"+"[1]]") ? "통과" : "실패");
+        System.out.println(VectorToColumnMatrix.toString().equals("[[7],\n "+"[1]]") ? "통과" : "실패");
         System.out.println();
 
         // 31. n-차원 벡터 객체는 자신으로부터 1xn 행렬을 생성하여 반환할 수 있다.
         System.out.println("31. n-차원 벡터 객체는 자신으로부터 1xn 행렬을 생성하여 반환할 수 있다.");
         System.out.println("반환할 벡터 : " + stringVector.toString());
         Matrix VectorToRowMatrix = stringVector.toRowMatrix();
-        System.out.println("기댓 값 : [[7], [1]]");
+        System.out.println("기댓 값 : [[7, 1]]");
         System.out.println("벡터를 nx1으로 변형한 행렬(결과 값) : " + VectorToRowMatrix);
-        System.out.println(VectorToRowMatrix.toString().equals("[[7], [1]]") ? "통과" : "실패");
+        System.out.println(VectorToRowMatrix.toString().equals("[[7, 1]]") ? "통과" : "실패");
         System.out.println();
 
         Matrix tMatrix=createUnitMatrix(2);

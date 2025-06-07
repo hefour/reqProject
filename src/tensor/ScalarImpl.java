@@ -32,7 +32,7 @@ class ScalarImpl implements Scalar,Comparable<Scalar>{
 
     @Override
     public String toString() {
-        return scalar.toPlainString();
+        return scalar.stripTrailingZeros().toPlainString();
     }
     @Override
     public boolean equals(Object obj) {
@@ -68,6 +68,18 @@ class ScalarImpl implements Scalar,Comparable<Scalar>{
 
     public BigDecimal getBigDecimalValue() {
         return scalar;
+    }
+
+    static Scalar add(Scalar scalar1, Scalar scalar2) {
+        BigDecimal s1=scalar1.getBigDecimalValue();
+        BigDecimal s2=scalar2.getBigDecimalValue();
+        return new ScalarImpl(s1.add(s2).toPlainString());
+    }
+
+    static Scalar multiply(Scalar scalar1, Scalar scalar2) {
+        BigDecimal s1=scalar1.getBigDecimalValue();
+        BigDecimal s2=scalar2.getBigDecimalValue();
+        return new ScalarImpl(s1.multiply(s2).toPlainString());
     }
 
 
