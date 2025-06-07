@@ -6,7 +6,7 @@ public class Tensors {
         return ScalarImpl.add(scalar1, scalar2);     //더미 값
     }
 
-    public static Scalar multiplyScalarByScalar(Scalar scalar1, Scalar scalar2) {
+    public static Scalar multiplyScalrByScalar(Scalar scalar1, Scalar scalar2) {
         return ScalarImpl.multiply(scalar1, scalar2);    //더미 값
     }
 
@@ -26,7 +26,7 @@ public class Tensors {
         return MatrixImpl.multiply(m1,m2); //더미 값
     }
 
-    public static Matrix combineToWidthMatrixByMatrix(Matrix m1, Matrix m2) {
+    public static Matrix combineToWidthtMatrixByMatrix(Matrix m1, Matrix m2) {
         return MatrixImpl.widthPaste(m1,m2);
     }
 
