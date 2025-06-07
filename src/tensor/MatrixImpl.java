@@ -1,5 +1,6 @@
 package tensor;
 
+import javax.swing.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -197,24 +198,119 @@ class MatrixImpl implements Matrix {
 
     @Override
     public void add(Matrix other) {
-
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                Scalar cScalar = get(i, j);
+                Scalar oScalar=other.get(i, j);
+                cScalar.add(oScalar);
+                set(i, j, cScalar);
+            }
+        }
     }
 
     @Override
     public void multiply(Matrix other) {
+        int oCols = other.getColumnCount();
+        Scalar[][] copyScalar = new Scalar[rows][oCols];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < oCols; j++) {
+                Scalar sum=new ScalarImpl("0");
+                for (int k = 0; k < cols; k++) {
+                    Scalar mul=get(i,k).clone();
+                    mul.multiply(other.get(k,j));
+                    sum.add(mul);
+                }
+                copyScalar[i][j]=sum;
+            }
+        }
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < oCols; j++) {
+                set(i, j, copyScalar[i][j]);
+            }
+        }
+        this.cols = oCols;  // 열 개수 갱신
 
+    }
+    static Matrix add(Matrix m1, Matrix m2) {
+        Scalar[][] res = new Scalar[m1.getRowCount()][m1.getColumnCount()];
+        for (int i = 0; i < m1.getRowCount(); i++) {
+            for (int j = 0; j < m1.getColumnCount(); j++) {
+                Scalar cScalar = m1.get(i, j).clone();
+                Scalar oScalar = m2.get(i, j);
+                cScalar.add(oScalar);
+                res[i][j]=cScalar;
+            }
+        }
+        return new MatrixImpl(res);
+    }
+    static Matrix multiply(Matrix m1, Matrix m2) {
+        int c1=m1.getColumnCount();
+        int r1=m1.getRowCount();
+        int c2=m2.getColumnCount();
+        Scalar[][] result = new Scalar[r1][c2];
+        for (int i = 0; i < r1; i++) {
+            for (int j = 0; j < c2; j++) {
+                Scalar sum = new ScalarImpl("0");
+                for (int k = 0; k < c1; k++) {
+                    Scalar a = m1.get(i, k).clone();  // 원본 보존
+                    Scalar b = m2.get(k, j);
+                    a.multiply(b);
+                    sum.add(a);
+                }
+                result[i][j] = sum;
+            }
+        }
+        return new MatrixImpl(result);
     }
 
     public Matrix widthPaste(Matrix matrix) {
-        return this;
+        int mCols = matrix.getColumnCount();
+        Scalar[][] res = new Scalar[getRowCount()][getColumnCount()+mCols];
+        for (int i = 0; i < getRowCount(); i++) {
+            for (int j = 0; j < getColumnCount(); j++) {
+                res[i][j] = get(i, j);
+            }
+            for (int j=0; j<mCols; j++) {
+                res[i][j+getColumnCount()]=matrix.get(i,j);
+            }
+        }
+        return new MatrixImpl(res);
+    }
+    static Matrix widthPaste(Matrix m1, Matrix m2) {
+        return m1.widthPaste(m2);
     }
     public Matrix heightPaste(Matrix matrix) {
-        return this;
+        int mRows = matrix.getRowCount();
+        Scalar[][] res = new Scalar[getRowCount()+mRows][getColumnCount()];
+        for (int i = 0; i < getRowCount(); i++) {
+            for (int j = 0; j < getColumnCount(); j++) {
+                res[i][j] = get(i, j);
+            }
+        }
+        for (int i = 0; i < mRows; i++) {
+            for (int j = 0; j < cols; j++) {
+                res[getRowCount() + i][j] = matrix.get(i, j);
+            }
+        }
+        return new MatrixImpl(res);
+    }
+    static Matrix heightPaste(Matrix m1, Matrix m2) {
+        return m1.heightPaste(m2);
     }
     public Vector rowVector(int rowIndex) {
-        return new VectorImpl(3,"2");
+        BigDecimal[] row=new BigDecimal[getColumnCount()];
+        for (int i = 0; i < getColumnCount(); i++) {
+            row[i]=get(rowIndex,i).getBigDecimalValue();
+        }
+        return new VectorImpl(row);
     }
-    public Vector colVector(int colIndex) {return new VectorImpl(3,"2"); }
+    public Vector colVector(int colIndex) {
+        BigDecimal[] col=new BigDecimal[getRowCount()];
+        for (int i = 0; i < getRowCount(); i++) {
+            col[i]=get(i,colIndex).getBigDecimalValue();
+        }
+        return new VectorImpl(col);
+    }
     public Matrix getSubMatrix(int beginRow, int endRow, int beginCol, int endCol){
         return this;
     }

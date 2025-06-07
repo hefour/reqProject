@@ -354,7 +354,7 @@ public class Test {
                 " [6, 6]]");
         System.out.println("결과 값 : ");
         System.out.println(exMatrix.toString());
-        System.out.println(exMatrix.toString().equals("[[6, 6],\n"+"[6, 6]]") ? "통과" : "실패");
+        System.out.println(exMatrix.toString().equals("[[6, 6],\n "+"[6, 6]]") ? "통과" : "실패");
 
         System.out.println();
 
@@ -370,7 +370,7 @@ public class Test {
                 " [36, 36]]");
         System.out.println("결과 값 : ");
         System.out.println(exMatrix.toString());
-        System.out.println(exMatrix.toString().equals("[[36, 36],\n"+"[36, 36]]") ? "통과" : "실패");
+        System.out.println(exMatrix.toString().equals("[[36, 36],\n "+"[36, 36]]") ? "통과" : "실패");
         System.out.println();
 
         // 24. 입력받은 두 스칼라의 덧셈이 가능하다
@@ -423,7 +423,7 @@ public class Test {
         Matrix resAddMatrix = Tensors.addMatrixByMatrix(test1Matrix, test2Matrix);
         System.out.println("결과 값 : ");
         System.out.println(resAddMatrix.toString());
-        System.out.println(resAddMatrix.toString().equals("[[4, 3],\n"+"[3,4]]") ? "통과" : "실패");
+        System.out.println(resAddMatrix.toString().equals("[[4, 3],\n "+"[3, 4]]") ? "통과" : "실패");
         System.out.println();
 
         // 29. 입력받은 두 행렬의 곱셈이 가능하다.
@@ -434,7 +434,7 @@ public class Test {
         Matrix resMultiplyMatrix = Tensors.multiplyMatrixByMatrix(test1Matrix, test2Matrix);
         System.out.println("결과 값 : ");
         System.out.println(resMultiplyMatrix.toString());
-        System.out.println(resMultiplyMatrix.toString().equals("[[3, 3],\n"+"[3, 3]]") ? "통과" : "실패");
+        System.out.println(resMultiplyMatrix.toString().equals("[[3, 3],\n "+"[3, 3]]") ? "통과" : "실패");
         System.out.println();
 
         // 30. n-차원 벡터 객체는 자신으로부터 nx1 행렬을 생성하여 반환할 수 있다.
@@ -466,7 +466,8 @@ public class Test {
         System.out.println("추가할 행렬 : \n"+ t2Matrix);
         System.out.println("기댓 값 :\n[[1, 0, 2, 2],\n [0, 1, 2, 2]]");
         System.out.println("합쳐진 행렬(결과 값) : \n"+ tMatrix.widthPaste(t2Matrix));
-        System.out.println(tMatrix.toString().equals("[[1, 0, 2, 2],\n"+"[0, 1, 2, 2]]") ? "통과" : "실패");
+        Matrix combined=tMatrix.widthPaste(t2Matrix);
+        System.out.println(combined.toString().equals("[[1, 0, 2, 2],\n "+"[0, 1, 2, 2]]") ? "통과" : "실패");
         tMatrix=createUnitMatrix(2);
         System.out.println();
 
@@ -476,7 +477,7 @@ public class Test {
         System.out.println("기댓 값 :\n[[1, 0, 2, 2],\n [0, 1, 2, 2]]");
         Matrix widthMatrix = Tensors.combineToWidthMatrixByMatrix(tMatrix, t2Matrix);
         System.out.println("합쳐진 행렬(결과 값) : \n"+ widthMatrix);
-        System.out.println(widthMatrix.toString().equals("[[1, 0, 2, 2],\n"+"[0, 1, 2, 2]]") ? "통과" : "실패");
+        System.out.println(widthMatrix.toString().equals("[[1, 0, 2, 2],\n "+"[0, 1, 2, 2]]") ? "통과" : "실패");
         System.out.println();
 
         // 33. 행렬은 다른 행렬과 세로로 합칠 수 있다.
@@ -485,7 +486,8 @@ public class Test {
         System.out.println("추가할 행렬 : \n"+ t2Matrix);
         System.out.println("기댓 값 :\n[[1, 0],\n [0, 1],\n [2, 2],\n [2, 2]]");
         System.out.println("합쳐진 행렬(결과 값) : \n" + tMatrix.heightPaste(t2Matrix));
-        System.out.println(tMatrix.toString().equals("[[1, 0],\n"+"[0, 1],\n"+"[2, 2],\n"+"[2, 2]]") ? "통과" : "실패");
+        combined=tMatrix.heightPaste(t2Matrix);
+        System.out.println(combined.toString().equals("[[1, 0],\n "+"[0, 1],\n "+"[2, 2],\n "+"[2, 2]]") ? "통과" : "실패");
         tMatrix=createUnitMatrix(2);
         System.out.println();
 
@@ -495,7 +497,7 @@ public class Test {
         Matrix heightMatrix = Tensors.combineToHeightMatrixByMatrix(tMatrix, t2Matrix);
         System.out.println("기댓 값 : \n[[1, 0],\n [0, 1],\n [2, 2],\n [2, 2]]");
         System.out.println("합쳐진 행렬(결과 값) : \n" + heightMatrix);
-        System.out.println(heightMatrix.toString().equals("[[1, 0],\n"+"[0, 1],\n"+"[2, 2],\n"+"[2, 2]]") ? "통과" : "실패");
+        System.out.println(heightMatrix.toString().equals("[[1, 0],\n "+"[0, 1],\n "+"[2, 2],\n "+"[2, 2]]") ? "통과" : "실패");
         System.out.println();
 
         // 34. 행렬은 특정 행을 벡터 형태로 추출해 줄 수 있다.
