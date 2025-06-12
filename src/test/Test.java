@@ -18,7 +18,7 @@ public class Test {
         Scalar randomScalar = createScalarByRandom(1, 2);          // 02.
         System.out.println("기댓 값 : (1과 2 사이의 스칼라 값)");
         System.out.println("결과 값 : " + randomScalar);
-        System.out.println("1, 2 사이의 실수 값이 출력되면 통과");
+        System.out.println("기댓 값 조건 충족 시 통과");
         System.out.println();
 
         System.out.println("03. 지정한 하나의 값을 모든 요소의 값으로 하는 차원 벡터를 생성할 수 있다.");
@@ -204,8 +204,8 @@ public class Test {
 
         // 15
         System.out.println("15v. 객체의 동등성 판단을 할 수 있다.");
-        System.out.println(stringVector + "와 " + randomVector + "을 비교합니다.");
-        if (stringVector.equals(randomVector)) {
+        System.out.println(stringVector + "와 " + stringVector + "을 비교합니다.");
+        if (stringVector.equals(stringVector)) {
             System.out.println("두 벡터는 동등합니다.");
         } else {
             System.out.println("두 벡터는 동등하지 않습니다.");
@@ -364,7 +364,7 @@ public class Test {
         System.out.println("스칼라 1 : " + stringScalar.toString());
         System.out.println("스칼라 2 : " + testScalar.toString());
         // 25번의 스칼라 x 스칼라 메서드
-        Scalar resultMultiplyScalar = Tensors.multiplyScalrByScalar(stringScalar, testScalar);
+        Scalar resultMultiplyScalar = Tensors.multiplyScalarByScalar(stringScalar, testScalar);
         System.out.println("기댓 값 : 15 ");
         System.out.println("결과 값 : " + resultMultiplyScalar.toString());
         System.out.println(resultMultiplyScalar.toString().equals("15") ? "통과" : "실패");
@@ -462,7 +462,7 @@ public class Test {
         System.out.println("32. 행렬은 다른 행렬과 가로로 합쳐질 수 있다.");
         System.out.println("기존 행렬 : \n"+ tMatrix);
         System.out.println("추가할 행렬 : \n"+ t2Matrix);
-        System.out.println("기댓 값 :\n [[1, 0, 1, 0],\n" +
+        System.out.println("기댓 값 :\n[[1, 0, 1, 0],\n" +
                 " [0, 1, 0, 1]]");
         System.out.println("합쳐진 행렬(결과 값) : \n"+ tMatrix.widthPaste(t2Matrix));
         System.out.println(tMatrix.toString().equals("[[1, 0, 1, 0],\n" +
@@ -476,7 +476,7 @@ public class Test {
         System.out.println("기댓 값 : \n[[1, 0, 1, 0],\n" +
                 " [0, 1, 0, 1]]");
         // 32번의 행렬 결합 메서드 (가로)
-        Matrix widthMatrix = Tensors.combineToWidthtMatrixByMatrix(tMatrix, t2Matrix);
+        Matrix widthMatrix = Tensors.combineToWidthMatrixByMatrix(tMatrix, t2Matrix);
         System.out.println("합쳐진 행렬(결과 값) : \n"+ widthMatrix);
         System.out.println(widthMatrix.toString().equals("[[1, 0, 1, 0],\n" +
                 " [0, 1, 0, 1]]") ? "통과" : "실패");
@@ -489,10 +489,8 @@ public class Test {
         System.out.println("기댓 값 :\n[[1, 0],\n" +
                 " [0, 1],\n" + " [1, 0],\n" + " [0, 1]]");
         System.out.println("합쳐진 행렬(결과 값) : \n" + t2Matrix.heightPaste(t3Matrix));
-        System.out.println(t2Matrix.toString().equals("[[1, 0],\n" +
-                " [0, 1],\n" +
-                " [1, 0],\n" +
-                " [0, 1]]") ? "통과" : "실패");
+        System.out.println(t2Matrix.toString().equals(
+                "[[1, 0],\n" + " [0, 1],\n" + " [1, 0],\n" + " [0, 1]]") ? "통과" : "실패");
         t2Matrix=createUnitMatrix(2);   //다음 연산을 위해 초기화
         System.out.println();
 

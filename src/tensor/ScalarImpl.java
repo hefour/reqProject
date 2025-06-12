@@ -78,6 +78,7 @@ class ScalarImpl implements Scalar,Comparable<Scalar>{
         return new ScalarImpl(this.get());
     }
 
+    @Override
     public BigDecimal getBigDecimalValue() {
         return scalar;
     }

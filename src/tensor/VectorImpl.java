@@ -124,19 +124,19 @@ class VectorImpl implements Vector {
 
     @Override
     public Matrix toColumnMatrix() {
-        Scalar[][] thisData = new Scalar[this.getDimensionCount()][1];
+        Scalar[][] tempArr = new Scalar[this.getDimensionCount()][1];
         for (int i = 0; i < this.getDimensionCount(); i++) {
-            thisData[i][0] = this.get(i);
+            tempArr[i][0] = this.get(i);
         }
-        return new MatrixImpl(thisData);
+        return new MatrixImpl(tempArr);
     }
 
     @Override
     public Matrix toRowMatrix() {
-        Scalar[][] thisData = new Scalar[1][this.getDimensionCount()];
+        Scalar[][] tempArr = new Scalar[1][this.getDimensionCount()];
         for (int i = 0; i < this.getDimensionCount(); i++) {
-            thisData[0][i] = this.get(i);
+            tempArr[0][i] = this.get(i);
         }
-        return new MatrixImpl(thisData);
+        return new MatrixImpl(tempArr);
     }
 }

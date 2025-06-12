@@ -3,6 +3,7 @@ package tensor;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -176,9 +177,7 @@ class MatrixImpl implements Matrix {
         this.cols = newCol;
         this.matrix.clear();
         for (int i = 0; i < newRow; i++) {
-            for (int j = 0; j < newCol; j++) {
-                this.matrix.add(result[i][j]);
-            }
+            this.matrix.addAll(Arrays.asList(result[i]).subList(0, newCol));
         }
     }
 
@@ -204,17 +203,17 @@ class MatrixImpl implements Matrix {
 
     @Override
     public Matrix widthPaste(Matrix other) {
-        int originCols = this.cols;
-        int addedCols = other.getColumnCount();
+        int originCol = this.cols;
+        int addedCol = other.getColumnCount();
 
         for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < addedCols; j++) {
+            for (int j = 0; j < addedCol; j++) {
                 Scalar value = other.get(i, j).clone();
-                matrix.add(i * originCols + j + i * addedCols, value);
+                matrix.add(i * originCol + j + i * addedCol, value);
             }
         }
 
-        this.cols += addedCols;
+        this.cols += addedCol;
         return this;
     }
 
