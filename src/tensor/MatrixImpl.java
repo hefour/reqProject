@@ -302,8 +302,8 @@ class MatrixImpl implements Matrix {
     }
 
     public Matrix getSubMatrix(int beginRow, int endRow, int beginCol, int endCol) {
-        int subRow = endRow - beginRow + 1;
-        int subCol = endCol - beginCol + 1;
+        int subRow = endRow - beginRow;
+        int subCol = endCol - beginCol;
         Scalar[][] subMatrixArray = new Scalar[subRow][subCol];
 
         for (int r = 0; r < subRow; r++) {

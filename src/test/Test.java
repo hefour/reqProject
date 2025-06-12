@@ -544,7 +544,7 @@ public class Test {
         System.out.println("기존 행렬 : \n"+ test5Matrix);
         System.out.println("시작 행 인덱스 : 1 , 끝 행 인덱스 : 2");
         System.out.println("시작 열 인덱스 : 2 , 끝 열 인덱스 : 3");
-        Matrix absMatrix = test5Matrix.getSubMatrix(0,1,1,2);
+        Matrix absMatrix = test5Matrix.getSubMatrix(0,2,1,3);
         System.out.println("기댓 값 : \n[[7, 1]\n [9, 4]]");
         System.out.println("추출한 행렬(결과 값) : \n" + absMatrix);
         System.out.println(absMatrix.toString().equals("[[7, 1],\n [9, 4]]") ? "통과" : "실패");
