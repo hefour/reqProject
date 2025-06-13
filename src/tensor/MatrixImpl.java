@@ -509,12 +509,82 @@ class MatrixImpl implements Matrix {
 
     @Override
     public boolean isRREF() {
-        return false;
+        int rCount = getRowCount();
+        int cCount = getColumnCount();
+        int prevLeadCol = -1;
+        boolean zeroRow = false;
+        for (int i = 0; i < rCount; i++) {
+            int leadCol = -1;
+            for (int j = 0; j < cCount; j++) {
+                if (get(i, j).getBigDecimalValue().compareTo(BigDecimal.ZERO) != 0) {
+                    leadCol = j;
+                    break;
+                }
+            }
+            if (leadCol == -1) {
+                zeroRow = true;
+                continue;
+            } else if (zeroRow) {
+                return false;
+            }
+            if (get(i, leadCol).getBigDecimalValue().compareTo(BigDecimal.ONE) != 0) {
+                return false;
+            }
+            for (int k = 0; k < rCount; k++) {
+                if (k != i && get(k, leadCol).getBigDecimalValue().compareTo(BigDecimal.ZERO) != 0) {
+                    return false;
+                }
+            }
+            if (leadCol <= prevLeadCol) {
+                return false;
+            }
+            prevLeadCol = leadCol;
+        }
+        return true;
     }
 
     @Override
     public String determinant() {
-        return "";
+        if (!isSquare()) {
+            throw new IllegalStateException("정사각행렬이 아닙니다.");
+        }
+        int n = getRowCount();
+        BigDecimal[][] mat = new BigDecimal[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                mat[i][j] = get(i, j).getBigDecimalValue();
+            }
+        }
+        int swapCount = 0;
+        MathContext mc = new MathContext(20); // 정밀도 설정
+        for (int k = 0; k < n; k++) {
+            int maxRow = k;
+            for (int i = k + 1; i < n; i++) {
+                if (mat[i][k].abs().compareTo(mat[maxRow][k].abs()) > 0) {
+                    maxRow = i;
+                }
+            }
+            if (maxRow != k) {
+                BigDecimal[] temp = mat[k];
+                mat[k] = mat[maxRow];
+                mat[maxRow] = temp;
+                swapCount++;
+            }
+            for (int i = k + 1; i < n; i++) {
+                BigDecimal factor = mat[i][k].divide(mat[k][k], mc);
+                for (int j = k; j < n; j++) {
+                    mat[i][j] = mat[i][j].subtract(factor.multiply(mat[k][j], mc), mc);
+                }
+            }
+        }
+        BigDecimal det = BigDecimal.ONE;
+        for (int i = 0; i < n; i++) {
+            det = det.multiply(mat[i][i], mc);
+        }
+        if (swapCount % 2 == 1) {
+            det = det.negate();
+        }
+        return det.stripTrailingZeros().toPlainString();
     }
 
     @Override

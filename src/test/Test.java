@@ -83,14 +83,14 @@ public class Test {
         isValid=true;
         for(int i=0; i<2; i++) {
             for(int j=0; j<3; j++) {
-            if (randomMatrix.get(i, j).getBigDecimalValue().compareTo(new BigDecimal("1")) < 0 ||
-                    randomMatrix.get(i, j).getBigDecimalValue().compareTo(new BigDecimal("2")) >= 0) {
-                System.out.println(i + "행 "+ j + "열 요소가 조건을 만족하지 않습니다.");
-                isValid = false;
-                break;
-            }
-            if (!isValid)
-                break;
+                if (randomMatrix.get(i, j).getBigDecimalValue().compareTo(new BigDecimal("1")) < 0 ||
+                        randomMatrix.get(i, j).getBigDecimalValue().compareTo(new BigDecimal("2")) >= 0) {
+                    System.out.println(i + "행 "+ j + "열 요소가 조건을 만족하지 않습니다.");
+                    isValid = false;
+                    break;
+                }
+                if (!isValid)
+                    break;
             }
         }
         System.out.println(isValid ? "통과" : "실패");
