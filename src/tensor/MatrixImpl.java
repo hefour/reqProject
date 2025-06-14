@@ -339,14 +339,15 @@ class MatrixImpl implements Matrix {
         }
         return new MatrixImpl(minor);
     }
-    public Matrix transpose(){
-        Scalar[][] transpose=new Scalar[getRowCount()][getColumnCount()];
-        for (int i = 0; i < getRowCount(); i++) {
-            for (int j = 0; j < getColumnCount(); j++) {
-                transpose[j][i]=get(i,j);
+    @Override
+    public Matrix transpose() {
+        Scalar[][] transposed = new Scalar[cols][rows];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                transposed[j][i] = get(i, j).clone(); // 올바른 인덱스 접근
             }
         }
-        return new MatrixImpl(transpose);
+        return new MatrixImpl(transposed);
     }
     public Scalar trace(){
         BigDecimal trace=new BigDecimal("0");
