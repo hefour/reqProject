@@ -464,8 +464,9 @@ public class Test {
         System.out.println("추가할 행렬 : \n"+ t2Matrix);
         System.out.println("기댓 값 :\n[[1, 0, 1, 0],\n" +
                 " [0, 1, 0, 1]]");
-        System.out.println("합쳐진 행렬(결과 값) : \n"+ tMatrix.widthPaste(t2Matrix));
-        System.out.println(tMatrix.toString().equals("[[1, 0, 1, 0],\n" +
+        Matrix combinedMatrix2 = tMatrix.widthPaste(t2Matrix);
+        System.out.println("합쳐진 행렬(결과 값) : \n"+ combinedMatrix2);
+        System.out.println(combinedMatrix2.toString().equals("[[1, 0, 1, 0],\n" +
                 " [0, 1, 0, 1]]") ? "통과" : "실패");
         tMatrix=createUnitMatrix(2); //다음 연산을 위해 초기화
         System.out.println();
@@ -488,8 +489,9 @@ public class Test {
         System.out.println("추가할 행렬 : \n"+ t2Matrix);
         System.out.println("기댓 값 :\n[[1, 0],\n" +
                 " [0, 1],\n" + " [1, 0],\n" + " [0, 1]]");
-        System.out.println("합쳐진 행렬(결과 값) : \n" + t2Matrix.heightPaste(t3Matrix));
-        System.out.println(t2Matrix.toString().equals(
+        Matrix combinedMatrix1 = t2Matrix.heightPaste(t3Matrix);
+        System.out.println("합쳐진 행렬(결과 값) : \n" + combinedMatrix1);
+        System.out.println(combinedMatrix1.toString().equals(
                 "[[1, 0],\n" + " [0, 1],\n" + " [1, 0],\n" + " [0, 1]]") ? "통과" : "실패");
         t2Matrix=createUnitMatrix(2);   //다음 연산을 위해 초기화
         System.out.println();
