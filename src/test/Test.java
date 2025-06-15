@@ -486,21 +486,21 @@ public class Test {
         // 33
         System.out.println("33. 행렬은 다른 행렬과 세로로 합쳐질 수 있다.");
         System.out.println("기존 행렬 : \n"+ tMatrix);
-        System.out.println("추가할 행렬 : \n"+ t2Matrix);
+        System.out.println("추가할 행렬 : \n"+ resultMultiplyMatrix);
         System.out.println("기댓 값 :\n[[1, 0],\n" +
                 " [0, 1],\n" + " [1, 0],\n" + " [0, 1]]");
-        Matrix combinedMatrix1 = t2Matrix.heightPaste(t3Matrix);
+        Matrix combinedMatrix1 = tMatrix.heightPaste(resultMultiplyMatrix);
         System.out.println("합쳐진 행렬(결과 값) : \n" + combinedMatrix1);
         System.out.println(combinedMatrix1.toString().equals(
-                "[[1, 0],\n" + " [0, 1],\n" + " [1, 0],\n" + " [0, 1]]") ? "통과" : "실패");
+                "[[1, 0],\n" + " [0, 1],\n" + " [11, 20],\n" + " [22, 37]]") ? "통과" : "실패");
         t2Matrix=createUnitMatrix(2);   //다음 연산을 위해 초기화
         System.out.println();
 
         System.out.println("33-1. 디폴트 static 메소드 호출");
         System.out.println("기존 행렬 : \n"+ tMatrix);
-        System.out.println("추가할 행렬 : \n"+ t2Matrix);
+        System.out.println("추가할 행렬 : \n"+ resultMultiplyMatrix);
         // 33-1 두 행렬 결합 메서드 (세로)
-        Matrix heightMatrix = Tensors.combineToHeightMatrixByMatrix(tMatrix, t2Matrix);
+        Matrix heightMatrix = Tensors.combineToHeightMatrixByMatrix(tMatrix, resultMultiplyMatrix);
         System.out.println("기댓 값 : \n[[1, 0],\n" +
                 " [0, 1],\n" +
                 " [1, 0],\n" +
@@ -508,8 +508,8 @@ public class Test {
         System.out.println("합쳐진 행렬(결과 값) : \n" + heightMatrix);
         System.out.println(heightMatrix.toString().equals("[[1, 0],\n" +
                 " [0, 1],\n" +
-                " [1, 0],\n" +
-                " [0, 1]]") ? "통과" : "실패");
+                " [11, 20],\n" +
+                " [22, 37]]") ? "통과" : "실패");
         System.out.println();
 
         Matrix test3Matrix = createMatrixByCSV("3,5\n2,3");

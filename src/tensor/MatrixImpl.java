@@ -203,35 +203,47 @@ class MatrixImpl implements Matrix {
 
     @Override
     public Matrix widthPaste(Matrix other) {
-        int originCol = this.cols;
-        int addedCol = other.getColumnCount();
+        int rowCount = this.getRowCount();
+        int col1 = this.getColumnCount();
+        int col2 = other.getColumnCount();
 
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < addedCol; j++) {
-                Scalar value = other.get(i, j).clone();
-                matrix.add(i * (originCol + addedCol) + originCol + j, value);
+        Scalar[][] newData = new Scalar[rowCount][col1 + col2];
+
+        for (int i = 0; i < rowCount; i++) {
+            for (int j = 0; j < col1; j++) {
+                newData[i][j] = this.get(i, j).clone();
+            }
+            for (int j = 0; j < col2; j++) {
+                newData[i][j + col1] = other.get(i, j).clone();
             }
         }
 
-        this.cols += addedCol;
-        return this;
+        return new MatrixImpl(newData);
     }
 
 
 
     @Override
     public Matrix heightPaste(Matrix other) {
-        int addedRows = other.getRowCount();
+        int row1 = this.getRowCount();
+        int row2 = other.getRowCount();
+        int cols = this.getColumnCount();
 
-        for (int i = 0; i < addedRows; i++) {
+        Scalar[][] newData = new Scalar[row1 + row2][cols];
+
+        for (int i = 0; i < row1; i++) {
             for (int j = 0; j < cols; j++) {
-                Scalar value = other.get(i, j).clone();
-                matrix.add(value);
+                newData[i][j] = this.get(i, j).clone();
             }
         }
 
-        this.rows += addedRows;
-        return this;
+        for (int i = 0; i < row2; i++) {
+            for (int j = 0; j < cols; j++) {
+                newData[i + row1][j] = other.get(i, j).clone();
+            }
+        }
+
+        return new MatrixImpl(newData);
     }
 
     public static Matrix widthPaste(Matrix m1, Matrix m2) {
