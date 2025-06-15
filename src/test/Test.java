@@ -461,26 +461,26 @@ public class Test {
         // 32
         System.out.println("32. 행렬은 다른 행렬과 가로로 합쳐질 수 있다.");
         System.out.println("기존 행렬 : \n"+ tMatrix);
-        System.out.println("추가할 행렬 : \n"+ t2Matrix);
-        System.out.println("기댓 값 :\n[[1, 0, 1, 0],\n" +
-                " [0, 1, 0, 1]]");
-        Matrix combinedMatrix2 = tMatrix.widthPaste(t2Matrix);
+        System.out.println("추가할 행렬 : \n"+ resultMultiplyMatrix);
+        System.out.println("기댓 값 :\n[[1, 0, 11, 20],\n" +
+                " [0, 1, 22, 37]]");
+        Matrix combinedMatrix2 = tMatrix.widthPaste(resultMultiplyMatrix);
         System.out.println("합쳐진 행렬(결과 값) : \n"+ combinedMatrix2);
-        System.out.println(combinedMatrix2.toString().equals("[[1, 0, 1, 0],\n" +
-                " [0, 1, 0, 1]]") ? "통과" : "실패");
+        System.out.println(combinedMatrix2.toString().equals("[[1, 0, 11, 20],\n" +
+                " [0, 1, 22, 37]]") ? "통과" : "실패");
         tMatrix=createUnitMatrix(2); //다음 연산을 위해 초기화
         System.out.println();
 
         System.out.println("32-1. 디폴트 static 메소드 호출");
         System.out.println("행렬 1 : \n"+ tMatrix);
-        System.out.println("행렬 2 : \n"+ t2Matrix);
-        System.out.println("기댓 값 : \n[[1, 0, 1, 0],\n" +
-                " [0, 1, 0, 1]]");
+        System.out.println("행렬 2 : \n"+ resultMultiplyMatrix);
+        System.out.println("기댓 값 : \n[[1, 0, 11, 20],\n" +
+                " [0, 1, 22, 37]]");
         // 32번의 행렬 결합 메서드 (가로)
-        Matrix widthMatrix = Tensors.combineToWidthMatrixByMatrix(tMatrix, t2Matrix);
+        Matrix widthMatrix = Tensors.combineToWidthMatrixByMatrix(tMatrix, resultMultiplyMatrix);
         System.out.println("합쳐진 행렬(결과 값) : \n"+ widthMatrix);
-        System.out.println(widthMatrix.toString().equals("[[1, 0, 1, 0],\n" +
-                " [0, 1, 0, 1]]") ? "통과" : "실패");
+        System.out.println(widthMatrix.toString().equals("[[1, 0, 11, 20],\n" +
+                " [0, 1, 22, 37]]") ? "통과" : "실패");
         System.out.println();
 
         // 33

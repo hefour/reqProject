@@ -209,13 +209,14 @@ class MatrixImpl implements Matrix {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < addedCol; j++) {
                 Scalar value = other.get(i, j).clone();
-                matrix.add(i * originCol + j + i * addedCol, value);
+                matrix.add(i * (originCol + addedCol) + originCol + j, value);
             }
         }
 
         this.cols += addedCol;
         return this;
     }
+
 
 
     @Override
